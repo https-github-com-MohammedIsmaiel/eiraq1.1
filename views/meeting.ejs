@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/meeting.css">
+    <link rel="icon"
+        href="https://cdn2.iconfinder.com/data/icons/communication-blue-line/64/Contact_Communication_Message_Talk-07-512.png" />
+    <title>Join Meeting</title>
+</head>
+
+<body>
+    <header></header>
+    <div class="login-box">
+        <h1>Login
+            <span class="span1"></span>
+        </h1>
+        <form method="POST" action="/room">
+            <div class="text-box">
+                <i class="fa fa-meetup" aria-hidden="true"></i>
+                <input type="text" name="meetingid" value="<%=meetingid%>" placeholder="Enter Meeting ID">
+                <span class="span2"></span>
+                <% if(typeof validationErrors!='undefined' ){%>
+                    <% let meetingidError=validationErrors.find(err=> err.param === 'meetingid') %>
+                        <% if (meetingidError ) { %>
+                            <span class="span5">
+                                <%= meetingidError.msg %>
+                            </span>
+                            <% } %>
+                                <% if (authError ) { %>
+                                    <span class="span5">
+                                        <%= authError%>
+                                    </span>
+                                    <% } %>
+                                        <% } %>
+            </div>
+            <div class="text-box">
+                <i class="fa fa-user"></i>
+                <input type="text" name="clientname" placeholder="Enter Your Name">
+                <span class="span3"></span>
+                <% if(typeof validationErrors!='undefined' ){%>
+                    <% let clientnameError=validationErrors.find(err=> err.param ===
+                        'clientname') %>
+                        <% if (clientnameError) { %>
+                            <span class="span4">
+                                <%= clientnameError.msg %>
+                            </span>
+                            <% } %>
+                                <% } %>
+            </div>
+            <div class="btn-box">
+                <input class="btn btn1" type="submit" name="btn" value="Join now">
+                <a class="btn btn2" type="submit" href="back" name="btn">Cancel</a>
+
+
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

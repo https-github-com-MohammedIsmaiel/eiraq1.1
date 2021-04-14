@@ -1,0 +1,74 @@
+header, .mainrightside, footer,.breakrooms{
+    background-color:#EEEEEE;
+    color: #444;
+}
+header span{
+    color: #444;
+}
+i{
+    color: rgb(65, 63, 63);
+}
+.mainrightside button {
+    border: 1px solid white;
+}
+.footbtn button {
+    border: 1px solid rgb(255, 255, 255);;
+}
+footer button i{
+    color: #444;
+}
+.breakrooms{
+    background: white;
+    border: 1px solid #080;
+    color: white;
+}
+.breakrooms .text{
+    border-color: #444;
+    color: #444;
+}
+ .h44 ul{
+     background-color: #EEEEEE;
+     color: #444;
+ }
+
+button i{
+    transition: all .4s ease-in-out;
+}
+button:hover{
+    border: 1px solid black;
+}
+ button i:hover{
+     color: black;
+ }
+ .breakrooms .h44,
+ .mesage .headname,
+ .friends .headname,
+ .mesage .fotmsg ,
+ .friends .fotmsg{
+     background-color: #EEEEEE;
+     color: #444;
+ }
+ .userfriend{
+    background-color: #E8E8F1;
+    border-color: #292929;
+}
+.mesage ,.friends{
+    border-color:rgb(255, 255, 255);
+}
+.hostmessage{
+    background-color: #E8E8F1;
+    border-color:rgb(233, 230, 230) ;
+}
+.particmessage{
+    background-color: #168bf8;
+    border-color:rgb(235, 232, 232) ;
+    color: white;
+}
+
+
+
+
+
+
+
+

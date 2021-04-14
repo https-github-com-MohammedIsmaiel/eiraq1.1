@@ -39,6 +39,8 @@
 
 # # Dependency directories
 node_modules/
+*.idea
+*.vscode
 # jspm_packages/
 
 # # TypeScript v1 declaration files

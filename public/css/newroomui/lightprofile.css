@@ -8,11 +8,17 @@ header span{
 i{
     color: rgb(65, 63, 63);
 }
+.logo .block{
+    background: #e91e63;
+}
 .mainrightside button {
     border: 1px solid white;
 }
 .footbtn button {
     border: 1px solid rgb(255, 255, 255);;
+}
+.text-speech p{
+    color: black;
 }
 footer button i{
     color: #444;

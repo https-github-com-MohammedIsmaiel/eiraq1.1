@@ -1,6 +1,25 @@
 header, .mainrightside, footer,.breakrooms{
+    border: 1px solid;
     background-color:#2b2b2b;
     color: #444;
+}
+header{
+    border-radius: 0px 0px 20px 20px;
+}
+footer{
+    border-radius: 20px 20px 0px 0px;
+}
+.cont{
+    background-color:rgb(255, 192, 20);
+}
+.mainrightside{
+    border: none;
+}
+.logo p{
+    color: rgb(255, 192, 20);
+}
+.logo h1{
+    color: white;
 }
 header span{
     color: rgb(238, 238, 238);
@@ -15,7 +34,7 @@ i{
     border: 1px solid rgb(65, 64, 64);;
 }
 footer button i{
-    color: rgb(90, 89, 89);
+    color: rgb(190, 188, 188);;
 }
 .breakrooms{
     background: #2b2b2b;
@@ -27,7 +46,7 @@ footer button i{
 }
 .breakrooms .text{
     border-color: #444;
-    color: #444;
+    color: rgb(190, 188, 188);
 }
  .h44 ul{
      background-color: #2b2b2b;
@@ -36,10 +55,11 @@ footer button i{
 
 button i{
     transition: all .4s ease-in-out;
+    color: rgb(190, 188, 188);;
 }
 
  button i:hover{
-     color: rgb(214, 214, 214);
+     color: rgb(255, 255, 255);
  }
  .breakrooms .h44,
  .mesage .headname,

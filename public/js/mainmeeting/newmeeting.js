@@ -5,9 +5,8 @@ const shareContainer = document.querySelector('#shareContainer')
 const logedInUser = document.querySelector('#logedInUser')
 const audioControl = document.querySelector('#audioControl')
 const videoControl = document.querySelector('#videoControl')
-var localStream
-
-
+let localStream;
+let videoid;
 //init connection
 var connection = new RTCMultiConnection()
 connection.socketURL = '/'
@@ -167,7 +166,7 @@ connection.onstream = (event) => {
     }, 5000);
 
     video.id = event.streamid;
-
+    videoid = event.streamid;
     // to keep room-id in cache
     localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
 };
@@ -216,10 +215,10 @@ videoControl.addEventListener('click', (e) => {
         local: true
     }).stream;
     if (connection.extra.isVideoMuted === false) {
-        connection.extra.isVideoMuted = true
-        firstLocalStream.mute('video');
-        videoControl.innerHTML = `<i class="fas fa-video-slash"></i>`
-    } else {
+		connection.extra.isVideoMuted = true;
+		firstLocalStream.mute('video');
+		videoControl.innerHTML = `<i class="fas fa-video-slash"></i>`;
+	} else {
         connection.extra.isVideoMuted = false
         firstLocalStream.unmute('video');
         videoControl.innerHTML = `<i class="fas fa-video"></i>`

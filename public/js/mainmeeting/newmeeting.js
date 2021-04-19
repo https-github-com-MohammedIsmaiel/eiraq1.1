@@ -5,6 +5,7 @@ const shareContainer = document.querySelector('#shareContainer')
 const logedInUser = document.querySelector('#logedInUser')
 const audioControl = document.querySelector('#audioControl')
 const videoControl = document.querySelector('#videoControl')
+const muteAll = document.querySelector('#muteAll')
 var localStream
 var localStreamId
 
@@ -244,3 +245,13 @@ connection.onmute = function (e) {
     e.mediaElement.srcObject = null;
     e.mediaElement.setAttribute('poster', connection.extra.img);
 };
+
+//mute all
+muteAll.addEventListener('click', () => {
+    connection.getAllParticipants().forEach(function (participantId) {
+        let user = connection.peers[participantId];
+        let remoteStream = user.peer.getRemoteStreams();
+        remoteStream.mute('audio')
+        user.extra.isAudioMuted = true;
+    });
+})

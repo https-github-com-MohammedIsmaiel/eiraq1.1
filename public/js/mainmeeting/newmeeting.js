@@ -6,6 +6,7 @@ const logedInUser = document.querySelector('#logedInUser')
 const audioControl = document.querySelector('#audioControl')
 const videoControl = document.querySelector('#videoControl')
 var localStream
+var localStreamId
 
 
 //init connection
@@ -167,6 +168,7 @@ connection.onstream = (event) => {
     }, 5000);
 
     video.id = event.streamid;
+    localStreamId = event.streamid
 
     // to keep room-id in cache
     localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
@@ -219,15 +221,24 @@ videoControl.addEventListener('click', (e) => {
         connection.extra.isVideoMuted = true
         firstLocalStream.mute('video');
         videoControl.innerHTML = `<i class="fas fa-video-slash"></i>`
+        connection.attachStreams[0].getVideoTracks().forEach(function (track) {
+            track.stop(); // turn off cam
+        });
     } else {
         connection.extra.isVideoMuted = false
         firstLocalStream.unmute('video');
         videoControl.innerHTML = `<i class="fas fa-video"></i>`
+        navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+        navigator.getUserMedia({ video: true }, function (videoStream) {
+            connection.attachStreams[0].addTrack(videoStream.getVideoTracks()[0]); // enable video again
+            connection.renegotiate();  // share again with all users
+        }, function () { });
     }
 })
 
 //handle on mute
-// connection.onmute = function (e) {
-//     e.mediaElement.srcObject = null;
-//     e.mediaElement.setAttribute('poster', connection.extra.img);
-// };
+connection.onmute = function (e) {
+    $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
+    e.mediaElement.srcObject = null;
+    e.mediaElement.setAttribute('poster', connection.extra.img);
+};

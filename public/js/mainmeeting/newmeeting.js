@@ -14,8 +14,9 @@ var localStreamId
 var connection = new RTCMultiConnection()
 connection.socketURL = '/'
 connection.session = {
-    Audio: true,
-    video: true,
+    Audio: false,
+    video: false,
+    data: true
     // screen:true
 }
 
@@ -64,11 +65,32 @@ if (resolutions == 'Ultra-HD') {
         frameRate: 30
     };
 }
+//detect if there is mice or webcam
+connection.DetectRTC.load(function () {
+    if (connection.DetectRTC.hasMicrophone === true) {
+        // enable microphone
+        connection.mediaConstraints.audio = true;
+        connection.session.audio = true;
+    }
 
-connection.mediaConstraints = {
-    video: videoConstraints,
-    audio: true
-};
+    if (connection.DetectRTC.hasWebcam === true) {
+        // enable camera
+        connection.mediaConstraints.video = true;
+        connection.session.video = true;
+    }
+
+    if (connection.DetectRTC.hasMicrophone === false &&
+        connection.DetectRTC.hasWebcam === false) {
+        // he do not have microphone or camera
+        // so, ignore capturing his devices
+        connection.dontCaptureUserMedia = true;
+    }
+})
+
+// connection.mediaConstraints = {
+//     video: videoConstraints,
+//     audio: true
+//};
 
 var CodecsHandler = connection.CodecsHandler;
 

@@ -13,10 +13,14 @@ function rooms() {
 
     s3.classList.contains('breakroomsdisplayed') ?
         setTimeout(() => {     
-            document.getElementById('btnroom').innerHTML = '<i class="fad fa-angle-double-left"></i>'
+            let x = document.getElementById('btnroom');
+			x.innerHTML = '<i class="fad fa-angle-double-left"></i>';
+			x.classList.remove('yellow');
         }, 500) :
         setTimeout(() => {
-            document.getElementById('btnroom').innerHTML = '<i class="fad fa-angle-double-right"></i>'
+            let x = document.getElementById('btnroom');
+			x.innerHTML = '<i class="fad fa-angle-double-right"></i>';
+			x.classList.add('yellow');
         }, 500)
 }
 

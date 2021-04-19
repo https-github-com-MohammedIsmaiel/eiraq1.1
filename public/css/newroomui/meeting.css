@@ -68,25 +68,6 @@
 	font-size: 50px;
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.logo > span {
-	border-bottom: 2px solid;
-	border-top: 2px solid;
-}
-.logo > span:first-child {
-	color: #080;
-}
-.logo > span:nth-child(2) {
-	color: red;
-}
-.logo > span:nth-child(3) {
-	color: blue;
-}
-.logo > span:last-child {
-	color: red;
-}
-.logo > span:nth-child(4) {
-	color: #080;
-}
 .username span {
 	font-size: 20px;
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -704,9 +685,14 @@ body{
 }
 .disp{
    width:250px;
+   right: 0px;
+}
+.yellow{
+    color: yellow;
 }
 .hide{
     width: 0px;
+    right: -999px;
 }
 .width{
     width: calc(100% - 250px);

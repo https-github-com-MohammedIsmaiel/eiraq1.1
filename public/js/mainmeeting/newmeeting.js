@@ -221,18 +221,20 @@ videoControl.addEventListener('click', (e) => {
         connection.extra.isVideoMuted = true
         firstLocalStream.mute('video');
         videoControl.innerHTML = `<i class="fas fa-video-slash"></i>`
-        connection.attachStreams[0].getVideoTracks().forEach(function (track) {
-            track.stop(); // turn off cam
-        });
+        //uncomment this when using different devices
+        // connection.attachStreams[0].getVideoTracks().forEach(function (track) {
+        //     track.stop(); // turn off cam
+        // });
     } else {
         connection.extra.isVideoMuted = false
         firstLocalStream.unmute('video');
         videoControl.innerHTML = `<i class="fas fa-video"></i>`
-        navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
-        navigator.getUserMedia({ video: true }, function (videoStream) {
-            connection.attachStreams[0].addTrack(videoStream.getVideoTracks()[0]); // enable video again
-            connection.renegotiate();  // share again with all users
-        }, function () { });
+        //uncomment this when using different devices
+        // navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+        // navigator.getUserMedia({ video: true }, function (videoStream) {
+        //     connection.attachStreams[0].addTrack(videoStream.getVideoTracks()[0]); // enable video again
+        //     connection.renegotiate();  // share again with all users
+        // }, function () { });
     }
 })
 

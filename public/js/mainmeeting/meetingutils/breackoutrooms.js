@@ -1,4 +1,3 @@
-
 const shareScreen = document.querySelector('#shareScreen')
 const videoContainer = document.querySelector('#allUser')
 const shareContainer = document.querySelector('#shareContainer')
@@ -204,7 +203,7 @@ connection.onstreamended = function (event) {
     }
 };
 
-connection.checkPresence(ROOM_ID, (isRoomExist, ROOM_ID) => {
+connection.checkPresence(ROOM_ID + 'sub_room_1', (isRoomExist, ROOM_ID) => {
     console.log('hello')
     if (isRoomExist === true) {
         connection.join(ROOM_ID);

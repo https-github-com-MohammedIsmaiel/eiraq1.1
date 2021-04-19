@@ -29,11 +29,12 @@
             <header class="container-fluid boxedit head">
                 <div class="username">
                     <% if (typeof pro_img=='undefined' ) { %>
-                        <img src="/upload_images/default.png" width="50px" alt="user image" srcset="">
+                        <img id="profileImg" src="/upload_images/default.png" width="50px" alt="user image" srcset="">
 
 
                         <% } else { %>
-                            <img src="/upload_images/<%=pro_img%>" width="50px" alt="user image" srcset="">
+                            <img id="profileImg" src="/upload_images/<%=pro_img%>" width="50px" alt="user image"
+                                srcset="">
 
                             <% } %>
                                 <% if (isHost) { %>
@@ -97,7 +98,7 @@
                 </button>
                 <!-- ismael mute all -->
                 <% if (isHost) { %>
-                    <button id="users" onclick="" class="btn">
+                    <button id="muteAll" class="btn">
                         <i class="fas fa-microphone-alt"></i>
                     </button>
                     <% }%>

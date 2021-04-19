@@ -25,7 +25,7 @@ connection.extra = {
     raiseHand: false,
     isAudioMuted: false,
     isVideoMuted: false,
-    // img: document.querySelector('#profileImg').src
+    img: document.querySelector('#profileImg').src
 }
 //joining room
 socket.emit('join-room', ROOM_ID)
@@ -211,6 +211,12 @@ audioControl.addEventListener('click', (e) => {
         localStream.unmute('audio');
         audioControl.innerHTML = `<i class=" fas fa-microphone"></i>`
         connection.streamEvents.selectFirst('local').mediaElement.muted = true;
+        //uncomment this when using different devices
+        navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+        navigator.getUserMedia({ audio: true }, function (audioStream) {
+            connection.attachStreams[0].addTrack(audioStream.getAudioTracks()[0]); // enable audio again
+            connection.renegotiate();  // share again with all users
+        }, function () { });
     }
 })
 
@@ -238,20 +244,32 @@ videoControl.addEventListener('click', (e) => {
         // }, function () { });
     }
 })
-
+//handle on mute
+connection.onunmute = function (e) {
+    // $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
+    // e.mediaElement.srcObject = null;
+    // e.mediaElement.setAttribute('poster', connection.extra.img);
+    console.log('unmuting');
+};
 //handle on mute
 connection.onmute = function (e) {
-    $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
-    e.mediaElement.srcObject = null;
-    e.mediaElement.setAttribute('poster', connection.extra.img);
+    // $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
+    // e.mediaElement.srcObject = null;
+    // e.mediaElement.setAttribute('poster', connection.extra.img);
+    console.log('muting');
 };
 
 //mute all
 muteAll.addEventListener('click', () => {
-    connection.getAllParticipants().forEach(function (participantId) {
-        let user = connection.peers[participantId];
-        let remoteStream = user.peer.getRemoteStreams();
-        remoteStream.mute('audio')
-        user.extra.isAudioMuted = true;
-    });
+    // Object.keys(connection.streamEvents).forEach(function (streamid) {
+    //     connection.streamEvents[streamid].stream.mute('audio');
+    // });
+    connection.streamEvents.selectAll({
+        local: true,
+        isAudio: true
+    }).forEach(function (localAudioStreamEvent) {
+        localAudioStreamEvent.stream.getAudioTracks().forEach(function (track) {
+            track.stop();
+        });
+    })
 })

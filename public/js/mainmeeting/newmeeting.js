@@ -240,6 +240,8 @@ audioControl.addEventListener('click', (e) => {
             connection.renegotiate();  // share again with all users
         }, function () { });
     }
+    connection.updateExtraData();
+    renderUsers()
 })
 
 videoControl.addEventListener('click', (e) => {
@@ -265,6 +267,8 @@ videoControl.addEventListener('click', (e) => {
         //     connection.renegotiate();  // share again with all users
         // }, function () { });
     }
+    connection.updateExtraData();
+    renderUsers()
 })
 //handle on mute
 connection.onunmute = function (e) {

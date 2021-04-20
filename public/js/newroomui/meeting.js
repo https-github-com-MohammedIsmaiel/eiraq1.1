@@ -50,6 +50,8 @@ let video = document.getElementById('vid')
 let mesage = document.querySelector('.mesage');
 let friends = document.querySelector('.friends');
 
+
+
 // open / close chat window
 document.getElementById('msg').addEventListener("click", () => {
     if (mesage.classList.contains("disp")) {

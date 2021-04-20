@@ -1,6 +1,6 @@
 const attendence = document.getElementById('attendence')
 const raiseHand_btn = document.getElementById("raiseHand_btn");
-
+const usersList = document.getElementById('users_list')
 var raiseHandFlag = false
 
 attendence.addEventListener('click', () => {
@@ -33,39 +33,65 @@ connection.onExtraDataUpdated = function (event) {
     renderUsers()
 };
 
+
+
 const renderUsers = () => {
     console.log('renderingusers');
     let par = connection.getAllParticipants()
-    usersList.innerHTML = `<div class="userdesign row justify-content-around align-items-center m-0 my-2 w-100">
-    <div class="col-3 ">
-    <img class="pic "
-        src="https://jizaladv.com/catalog/view/theme/default/image/avatar.jpg "
-        width="50px " />
-    </div>
-    <div class="col ">${logedInUser.innerText} <!--raise hand-->
-    <i style="display:${connection.extra.raiseHand ? "" : "none"}" id="raiseHand" class="fas fa-hand-paper"></i>
-    <i style="display:${connection.extra.isAudioMuted ? "" : "none"}" class=" fas fa-microphone-slash"></i>
-    <i style="display:${connection.extra.isVideoMuted ? "" : "none"}" class="fas fa-video-slash"></i>
-
-    </div>
+    usersList.innerHTML = `
+    <div class="userfriend">
+        <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
+            width="50px" alt="" />
+        <label>${logedInUser.innerText}</label>
+        <i style="display:${connection.extra.raiseHand ? "" : "none"}" id="raiseHand" class="fas fa-hand-paper"></i>
+        <i style="display:${connection.extra.isAudioMuted ? "" : "none"}" class=" fas fa-microphone-slash"></i>
+        <i style="display:${connection.extra.isVideoMuted ? "" : "none"}" class="fas fa-video-slash"></i>
+    
     </div>`
+    
+    // `<div class="userdesign row justify-content-around align-items-center m-0 my-2 w-100">
+    // <div class="col-3 ">
+    // <img class="pic "
+    //     src="https://jizaladv.com/catalog/view/theme/default/image/avatar.jpg "
+    //     width="50px " />
+    // </div>
+    // <div class="col ">${logedInUser.innerText} <!--raise hand-->
+    // <i style="display:${connection.extra.raiseHand ? "" : "none"}" id="raiseHand" class="fas fa-hand-paper"></i>
+    // <i style="display:${connection.extra.isAudioMuted ? "" : "none"}" class=" fas fa-microphone-slash"></i>
+    // <i style="display:${connection.extra.isVideoMuted ? "" : "none"}" class="fas fa-video-slash"></i>
+
+    // </div>
+    // </div>`
     for (let i = 0; i < par.length; i++) {
         var user = connection.getExtraData(par[i]);
-        // console.log(user.raiseHand)
-        usersList.innerHTML += `<div class="userdesign row justify-content-around align-items-center m-0 my-2 w-100">
-        <div class="col-3 ">
-            <img class="pic "
-                src="https://jizaladv.com/catalog/view/theme/default/image/avatar.jpg "
-                width="50px " />
-        </div>
-        <div class="col ">${user.username} <i style="display:${user.raiseHand ? "" : "none"}"
-        id="raiseHand" class="fas fa-hand-paper"></i>
-        <i style="display:${user.isAudioMuted ? "" : "none"}" class=" fas fa-microphone-slash"></i>
-        <i style="display:${user.isVideoMuted ? "" : "none"}" class="fas fa-video-slash"></i>
-        </div>
+        console.log(user.raiseHand)
+        usersList.innerHTML += `
+        <div class="userfriend">
+            <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
+                width="50px" alt="" />
+            <label>${user.username}</label>
+            <i style="display:${user.raiseHand ? "" : "none"}"
+            id="raiseHand" class="fas fa-hand-paper"></i>
+            <i style="display:${user.isAudioMuted ? "" : "none"}" class=" fas fa-microphone-slash"></i>
+            <i style="display:${user.isVideoMuted ? "" : "none"}" class="fas fa-video-slash"></i>
+            
         </div>`
+        
+        // `<div class="userdesign row justify-content-around align-items-center m-0 my-2 w-100">
+        // <div class="col-3 ">
+        //     <img class="pic "
+        //         src="https://jizaladv.com/catalog/view/theme/default/image/avatar.jpg "
+        //         width="50px " />
+        // </div>
+        // <div class="col ">${user.username} <i style="display:${user.raiseHand ? "" : "none"}"
+        // id="raiseHand" class="fas fa-hand-paper"></i>
+        // <i style="display:${user.isAudioMuted ? "" : "none"}" class=" fas fa-microphone-slash"></i>
+        // <i style="display:${user.isVideoMuted ? "" : "none"}" class="fas fa-video-slash"></i>
+        // </div>
+        // </div>`
     }
 }
 
 
 
+renderUsers()

@@ -306,7 +306,6 @@ muteAll.addEventListener('click', () => {
     let parts = connection.getAllParticipants()
     for (let i = 0; i < par.length; i++) {
         var username = connection.getExtraData(parts[i]);
-        allUsers.push(username.username)
     }
     connection.streamEvents.selectAll({
         local: true,

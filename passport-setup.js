@@ -2,6 +2,7 @@
 
 const passport = require('passport');
 const connection = require('./models/init_database').connection;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 function createUser(name, email, profileImg) {
 	return new Promise((res, rej) => {
@@ -76,3 +77,33 @@ passport.use(
 	),
 );
 
+
+// facebook login
+
+passport.use(new FacebookStrategy({
+  clientID: "914008132698883",
+  clientSecret: "4ee9d53d12d4e3613861f21addf94c0c",
+  callbackURL: "http://localhost:3000/auth/facebook/callback",
+  profileFields: ['id', 'displayName', 'photos', 'email']
+}, async function (accessToken, refreshToken, profile, done) {
+	/*
+ use the profile info (mainly profile id) to check if the user is registerd in ur db
+ If yes select the user and pass him to the done callback
+ If not create the user and then select him and pass to callback
+*/
+	const id = profile.id;
+	const name = profile.displayName;
+	const profileImg = profile.photos[0].value;
+
+	createUser(name, id, profileImg)
+		.then((obj) => {
+			profile.appId = obj.id;
+			profile.profileimg = obj.profileimg;
+		})
+		.then(() => {
+			done(null, profile);
+		})
+		.catch((e) => {});
+},
+)
+);

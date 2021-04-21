@@ -1,4 +1,4 @@
-/* 
+/*
  * Required External Modules
  */
 const RTCMultiConnectionServer = require('rtcmulticonnection-server')
@@ -21,6 +21,7 @@ const loginRoutes = require('./routes/login.route')
 const profileRoutes = require('./routes/profile.route')
 const roomRoutes = require('./routes/room.route')
 const googleRoutes = require("./routes/google.route");
+const facebookRoutes = require("./routes/facebook.router");
 const fs = require('fs');
 const logger = require('morgan');
 const flash = require("connect-flash");
@@ -58,7 +59,7 @@ app.use(express.static(__dirname + '/views'));
 app.use('/upload_images', express.static(__dirname + "public/upload_images"));
 
 app.use('/uploads', express.static('uploads'));
-app.use(busboy()); 
+app.use(busboy());
 
 
 const KnexSessionStore = require('connect-session-knex')(session);
@@ -112,12 +113,12 @@ app.use('/', roomRoutes)
 
 const connection = require('./models/init_database').connection
 
-// connect to database 
+// connect to database
 connection.connect(async function (err) {
 	if (err) throw err;
 	console.log('Connected!');
 	await connection.query(
-		"CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY,username VARCHAR(255), Email VARCHAR(255), password VARCHAR(255),img_url VARCHAR(255) DEFAULT 'default.png', type VARCHAR(20) DEFAULT 'normal')"
+		"CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY,username VARCHAR(255), Email VARCHAR(255), password VARCHAR(255),img_url VARCHAR(350) DEFAULT 'default.png', type VARCHAR(20) DEFAULT 'normal')"
 	);
 	await connection.query(
 		'CREATE TABLE IF NOT EXISTS meetingInfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN)'
@@ -140,6 +141,7 @@ require("./passport-setup");
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/", googleRoutes);
+app.use("/", facebookRoutes);
 
 /* End of Google authentication */
 
@@ -254,7 +256,7 @@ io.on("connection", (socket) => {
         socket.on("disconnect", () => {
         });
     });
-    
+
 });
 
 /**

@@ -29,11 +29,12 @@
             <header class="container-fluid boxedit head">
                 <div class="username">
                     <% if (typeof pro_img=='undefined' ) { %>
-                        <img src="/upload_images/default.png" width="50px" alt="user image" srcset="">
+                        <img id="profileImg" src="/upload_images/default.png" width="50px" alt="user image" srcset="">
 
 
                         <% } else { %>
-                            <img src="/upload_images/<%=pro_img%>" width="50px" alt="user image" srcset="">
+                            <img id="profileImg" src="/upload_images/<%=pro_img%>" width="50px" alt="user image"
+                                srcset="">
 
                             <% } %>
                                 <% if (isHost) { %>
@@ -76,11 +77,11 @@
                     <i class="fad fa-angle-double-right"></i>
                 </button>
                 <!--mohammed gamal -->
-                <button class="btn">
+                <button class="btn" id="attendence">
                     <i class="far fa-file-alt"></i>
                 </button>
                 <!-- mohammed gamal -->
-                <button class="btn">
+                <button class="btn" id="speech_to_text">
                     <i class="fas fa-closed-captioning"></i>
                 </button>
                 <!-- mohammed ismael -->
@@ -97,7 +98,7 @@
                 </button>
                 <!-- ismael mute all -->
                 <% if (isHost) { %>
-                    <button id="users" onclick="" class="btn">
+                    <button id="muteAll" class="btn">
                         <i class="fas fa-microphone-alt"></i>
                     </button>
                     <% }%>
@@ -116,7 +117,7 @@
                 <!-- mohammed ismael -->
                 <div class="breakrooms">
                     <div class="text">
-                        BreakOut Room
+                        BreakOut Rooms
                     </div>
                     <div class="h44">
                         <h4 onclick="slideMain()">main room</h4>
@@ -193,19 +194,8 @@
                             <!-- <button><i class="fas fa-microphone"></i></button> -->
                             <!-- </div> -->
                             <!-- mohamed gamal -->
-                            <div class="text-speech">
-                                <p>Lorem ipsum dolor sit amet
-                                    consectetur
-                                    adipisicing elit. Perspiciatis magni
-                                    doloribus
-                                    tempora nisi
-                                    non aliquam iste, aliquid, tempore sapiente
-                                    eius,
-                                    enim amet
-                                    culpa necessitatibus eos. Sint repellendus
-                                    tempore
-                                    dolor
-                                    animi.
+                            <div class="text-speech" id="stt_container">
+                                <p>
                                 </p>
                             </div>
                         </div>
@@ -277,67 +267,13 @@
                         <div class="friends">
                             <div class="headname">Friends</div>
                             <!-- mohammed ismael and mohammed bakr -->
-                            <div class="msgbody">
+                            <div class="msgbody" id="users_list">
                                 <div class="userfriend">
                                     <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
                                         width="50px" alt="" />
                                     <label>Name</label>
                                 </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
+
                             </div>
                             <div class="fotmsg"></div>
                         </div>
@@ -359,9 +295,11 @@
                     <!-- khiry -->
                     <button class="btn btns"><i class="icons fas fa-bullseye"></i></button>
                     <!-- gamal -->
-                    <button class="btn btns"><i class="icons fas fa-hand-paper"></i></button>
+                    <button class="btn btns" id="raiseHand_btn"><i class="icons fas fa-hand-paper"></i></button>
                 </div>
+                //todo #1
                 <div class="footbtn">
+
                     <button onclick="openOPtion()" type="submit" class="btn btns btn-danger"><i
                         class="col icons fas fa-sign-out-alt"></i></button>
                 </div>
@@ -370,7 +308,16 @@
                     <button type="submit" class="btn btns btn-outline-dark">Leave Meeting</button>
                     </form>
                     <button type="submit" class="btn btns btn-outline-danger">End Meetiing</button>
+                    <button id="leave" class="btn btns btn-danger"><i
+                            class="col icons fas fa-sign-out-alt"></i></button>
                 </div>
+
+                <!-- <div class="footbtn">
+                    <% if (isHost) { %>
+                        <button id="endForAll" class="btn btns btn-danger"><i
+                                class="col icons fas fa-sign-out-alt"></i>end for all</button>
+                        <% }%>
+                </div> -->
             </footer>
             <!----------------- End Footer ------------------->
         </div>
@@ -384,7 +331,11 @@
             crossorigin="anonymous "></script>
         <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
         <script src="/js/mainmeeting/newmeeting.js"></script>
+        <script src="/js/mainmeeting/leave.js"></script>
         <script src="/js/newroomui/meeting.js"></script>
+        <!-- <script src="/js/speech_to_text/speech_to_text.js"></script> -->
+        <script src="/js/attendance&participants/attendence.js"></script>
+
     </body>
 
     </html>

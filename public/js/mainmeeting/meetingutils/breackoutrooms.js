@@ -1,4 +1,3 @@
-
 const shareScreen = document.querySelector('#shareScreen')
 const videoContainer = document.querySelector('#allUser')
 const shareContainer = document.querySelector('#shareContainer')
@@ -14,9 +13,9 @@ var localStreamId
 var connection = new RTCMultiConnection()
 connection.socketURL = '/'
 connection.session = {
-    Audio: true,
-    video: true,
-    // data: true
+    Audio: false,
+    video: false,
+    data: true
     // screen:true
 }
 
@@ -65,32 +64,32 @@ if (resolutions == 'Ultra-HD') {
         frameRate: 30
     };
 }
-// //detect if there is mice or webcam
-// connection.DetectRTC.load(function () {
-//     if (connection.DetectRTC.hasMicrophone === true) {
-//         // enable microphone
-//         connection.mediaConstraints.audio = true;
-//         connection.session.audio = true;
-//     }
+//detect if there is mice or webcam
+connection.DetectRTC.load(function () {
+    if (connection.DetectRTC.hasMicrophone === true) {
+        // enable microphone
+        connection.mediaConstraints.audio = true;
+        connection.session.audio = true;
+    }
 
-//     if (connection.DetectRTC.hasWebcam === true) {
-//         // enable camera
-//         connection.mediaConstraints.video = true;
-//         connection.session.video = true;
-//     }
+    if (connection.DetectRTC.hasWebcam === true) {
+        // enable camera
+        connection.mediaConstraints.video = true;
+        connection.session.video = true;
+    }
 
-//     if (connection.DetectRTC.hasMicrophone === false &&
-//         connection.DetectRTC.hasWebcam === false) {
-//         // he do not have microphone or camera
-//         // so, ignore capturing his devices
-//         connection.dontCaptureUserMedia = true;
-//     }
-// })
+    if (connection.DetectRTC.hasMicrophone === false &&
+        connection.DetectRTC.hasWebcam === false) {
+        // he do not have microphone or camera
+        // so, ignore capturing his devices
+        connection.dontCaptureUserMedia = true;
+    }
+})
 
-connection.mediaConstraints = {
-    video: videoConstraints,
-    audio: true
-};
+// connection.mediaConstraints = {
+//     video: videoConstraints,
+//     audio: true
+//};
 
 var CodecsHandler = connection.CodecsHandler;
 
@@ -204,7 +203,7 @@ connection.onstreamended = function (event) {
     }
 };
 
-connection.checkPresence(ROOM_ID, (isRoomExist, ROOM_ID) => {
+connection.checkPresence(ROOM_ID + 'sub_room_1', (isRoomExist, ROOM_ID) => {
     console.log('hello')
     if (isRoomExist === true) {
         connection.join(ROOM_ID);
@@ -240,8 +239,6 @@ audioControl.addEventListener('click', (e) => {
             connection.renegotiate();  // share again with all users
         }, function () { });
     }
-    connection.updateExtraData();
-    renderUsers()
 })
 
 videoControl.addEventListener('click', (e) => {
@@ -267,8 +264,6 @@ videoControl.addEventListener('click', (e) => {
         //     connection.renegotiate();  // share again with all users
         // }, function () { });
     }
-    connection.updateExtraData();
-    renderUsers()
 })
 //handle on mute
 connection.onunmute = function (e) {

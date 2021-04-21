@@ -83,7 +83,7 @@ passport.use(
 passport.use(new FacebookStrategy({
   clientID: "914008132698883",
   clientSecret: "4ee9d53d12d4e3613861f21addf94c0c",
-  callbackURL: "http://localhost:3000/auth/facebook/callback",
+  callbackURL: "https://eiraq.herokuapp.com/auth/facebook/callback",
   profileFields: ['id', 'displayName', 'photos', 'email']
 }, async function (accessToken, refreshToken, profile, done) {
 	/*

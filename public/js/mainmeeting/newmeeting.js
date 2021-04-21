@@ -2,6 +2,8 @@
 const shareScreen = document.querySelector('#shareScreen')
 const videoContainer = document.querySelector('#allUser')
 const shareContainer = document.querySelector('#shareContainer')
+const mainVideo = document.querySelector('#mainVideo')
+// const userVideo = document.querySelector('.uservideo')
 const logedInUser = document.querySelector('#logedInUser')
 const audioControl = document.querySelector('#audioControl')
 const videoControl = document.querySelector('#videoControl')
@@ -14,12 +16,19 @@ var localStreamId
 var connection = new RTCMultiConnection()
 connection.socketURL = '/'
 connection.session = {
-    Audio: true,
+    Audio: {
+        mandatory: {
+            echoCancellation: false,
+            googAutoGainControl: true,
+            googNoiseSuppression: true,
+            googHighpassFilter: true,
+            googTypingNoiseDetection: true,
+        }
+    },
     video: true,
     // data: true
     // screen:true
 }
-
 //connection extra data
 connection.extra = {
     username: logedInUser.innerText,
@@ -192,7 +201,11 @@ connection.onstream = (event) => {
 
     video.id = event.streamid;
     localStreamId = event.streamid
-
+    video.addEventListener('click', (e) => {
+        console.log('clicked');
+        mainVideo.srcObject = e.target.srcObject
+        // userGrid.removeChild(e.target)
+    })
     // to keep room-id in cache
     localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
 };
@@ -290,6 +303,10 @@ muteAll.addEventListener('click', () => {
     // Object.keys(connection.streamEvents).forEach(function (streamid) {
     //     connection.streamEvents[streamid].stream.mute('audio');
     // });
+    let parts = connection.getAllParticipants()
+    for (let i = 0; i < par.length; i++) {
+        var username = connection.getExtraData(parts[i]);
+    }
     connection.streamEvents.selectAll({
         local: true,
         isAudio: true

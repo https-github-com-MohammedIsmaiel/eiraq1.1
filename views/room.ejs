@@ -4,7 +4,7 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://www.webrtc-experiment.com/common.js"></script>
+    <!-- <script src="https://www.webrtc-experiment.com/common.js"></script> -->
 
     <script>
         const ROOM_ID = "<%= roomid %>";
@@ -187,6 +187,8 @@
                             <button onclick="scrollMembers(-1)"><i class="fad fa-angle-double-left"></i></button>
                         </div>
                         <div class="uservideo">
+                            <!-- TODO@Eng-Muhammed-Samy #2 edit this style for this element only -->
+                            <video muted id="mainVideo" autoplay style="width: 100%;"></video>
                             <!-- <div class="user"> -->
                             <div id="shareContainer" class="v-black"></div>
                             <!-- <video autoplay muted src="./videos/salah.mp4"></video> -->
@@ -301,27 +303,13 @@
                 <div class="footbtn">
 
                     <button onclick="openOPtion()" type="submit" class="btn btns btn-danger"><i
-                        class="col icons fas fa-sign-out-alt"></i></button>
-                </div>
-                <div class="selectOptiion dspnoneopt">
-                    <form action="/leavemeeting" method="POST">
-                    <button type="submit" class="btn btns btn-outline-dark">Leave Meeting</button>
-                    </form>
-
-                    <% if (isHost) { %>
-                    <button id="endForAll" class="btn btns btn-outline-danger">End For All</button>
-                    <% }%>
-                    
-                </div>
-                <!-- //todo #1
-                <div class="footbtn">
-                    <button id="leave" class="btn btns btn-danger"><i
                             class="col icons fas fa-sign-out-alt"></i></button>
                 </div>
-                <div class="footbtn">
+                <div class="selectOptiion dspnoneopt">
+
+                    <button id="leave" class="btn btns btn-outline-dark">Leave Meeting</button>
                     <% if (isHost) { %>
-                        <button id="endForAll" class="btn btns btn-danger"><i
-                                class="col icons fas fa-sign-out-alt"></i>end for all</button>
+                        <button id="endForAll" class="btn btns btn-outline-danger">End Meetiing</button>
                         <% }%>
                 </div> -->
             </footer>
@@ -335,7 +323,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js "
             integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW "
             crossorigin="anonymous "></script>
-        <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
+        <!-- <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script> -->
         <script src="/js/mainmeeting/newmeeting.js"></script>
         <script src="/js/mainmeeting/leave.js"></script>
         <script src="/js/newroomui/meeting.js"></script>

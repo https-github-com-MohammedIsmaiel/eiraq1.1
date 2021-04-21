@@ -859,6 +859,23 @@ video {
     overflow: hidden;
 }
 
+.selectOptiion{
+    position: absolute;
+    top: -14vh;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #cecece;
+    padding: 5px 10px;
+    background-color: #EEEEEE;
+}
+.selectOptiion button{
+    margin-bottom: 5px;
+}
+.dspnoneopt{
+    display: none;
+}
+
 @media (max-width: 540px) {
     .logo>span {
         font-size: 45px;

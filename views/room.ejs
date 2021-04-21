@@ -297,11 +297,16 @@
                     <!-- gamal -->
                     <button class="btn btns" id="raiseHand_btn"><i class="icons fas fa-hand-paper"></i></button>
                 </div>
+                //todo #1
                 <div class="footbtn">
-                    <form action="/leavemeeting" method="POST">
-                        <button type="submit" class="btn btns btn-danger"><i
-                                class="col icons fas fa-sign-out-alt"></i></button>
-                    </form>
+                    <button id="leave" class="btn btns btn-danger"><i
+                            class="col icons fas fa-sign-out-alt"></i></button>
+                </div>
+                <div class="footbtn">
+                    <% if (isHost) { %>
+                        <button id="endForAll" class="btn btns btn-danger"><i
+                                class="col icons fas fa-sign-out-alt"></i>end for all</button>
+                        <% }%>
                 </div>
             </footer>
             <!----------------- End Footer ------------------->
@@ -316,6 +321,7 @@
             crossorigin="anonymous "></script>
         <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
         <script src="/js/mainmeeting/newmeeting.js"></script>
+        <script src="/js/mainmeeting/leave.js"></script>
         <script src="/js/newroomui/meeting.js"></script>
         <!-- <script src="/js/speech_to_text/speech_to_text.js"></script> -->
         <script src="/js/attendance&participants/attendence.js"></script>

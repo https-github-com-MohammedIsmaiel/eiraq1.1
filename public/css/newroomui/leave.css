@@ -1,0 +1,9 @@
+.drop-content {
+    display: none;
+    position: absolute;
+    bottom: 70px;
+}
+
+.call-controls-set.more:hover .drop-content {
+    display: block;
+}

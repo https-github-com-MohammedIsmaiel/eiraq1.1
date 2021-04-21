@@ -14,12 +14,19 @@ var localStreamId
 var connection = new RTCMultiConnection()
 connection.socketURL = '/'
 connection.session = {
-    Audio: true,
+    Audio: {
+        mandatory: {
+            echoCancellation: false,
+            googAutoGainControl: true,
+            googNoiseSuppression: true,
+            googHighpassFilter: true,
+            googTypingNoiseDetection: true,
+        }
+    },
     video: true,
     // data: true
     // screen:true
 }
-
 //connection extra data
 connection.extra = {
     username: logedInUser.innerText,

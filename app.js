@@ -58,7 +58,7 @@ app.use(express.static(__dirname + '/views'));
 app.use('/upload_images', express.static(__dirname + "public/upload_images"));
 
 app.use('/uploads', express.static('uploads'));
-app.use(busboy()); 
+app.use(busboy());
 
 
 const KnexSessionStore = require('connect-session-knex')(session);
@@ -66,8 +66,8 @@ const KnexSessionStore = require('connect-session-knex')(session);
 const Knex = require('knex');
 
 const knex = Knex({
-	client: 'pg',
-	connection: {
+    client: 'pg',
+    connection: {
         host: 'ec2-3-91-127-228.compute-1.amazonaws.com',
         user: 'ykpkcybaauradp',
         password:
@@ -81,21 +81,21 @@ const knex = Knex({
 });
 
 const store = new KnexSessionStore({
-  knex,
-  tablename: 'sessions', // optional. Defaults to 'sessions'
+    knex,
+    tablename: 'sessions', // optional. Defaults to 'sessions'
 });
 
 app.use(
-  session({
-    secret: 'keyboard cat',
-    cookie: {
-        maxAge: 365 * 24 * 60 * 60 * 1000,
-     expires: false,// ten seconds, for testing
-      resave: false,
-              saveUninitialized: true,
-    },
-    store,
-  }),
+    session({
+        secret: 'keyboard cat',
+        cookie: {
+            maxAge: 365 * 24 * 60 * 60 * 1000,
+            expires: false,// ten seconds, for testing
+            resave: false,
+            saveUninitialized: true,
+        },
+        store,
+    }),
 );
 
 
@@ -114,16 +114,16 @@ const connection = require('./models/init_database').connection
 
 // connect to database 
 connection.connect(async function (err) {
-	if (err) throw err;
-	console.log('Connected!');
-	await connection.query(
-		"CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY,username VARCHAR(255), Email VARCHAR(255), password VARCHAR(255),img_url VARCHAR(255) DEFAULT 'default.png', type VARCHAR(20) DEFAULT 'normal')"
-	);
-	await connection.query(
-		'CREATE TABLE IF NOT EXISTS meetingInfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN)'
+    if (err) throw err;
+    console.log('Connected!');
+    await connection.query(
+        "CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY,username VARCHAR(255), Email VARCHAR(255), password VARCHAR(255),img_url VARCHAR(255) DEFAULT 'default.png', type VARCHAR(20) DEFAULT 'normal')"
     );
     await connection.query(
-		'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT, CONSTRAINT fk_owner FOREIGN KEY(owner_id) REFERENCES accounts(id))'
+        'CREATE TABLE IF NOT EXISTS meetingInfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN)'
+    );
+    await connection.query(
+        'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT, CONSTRAINT fk_owner FOREIGN KEY(owner_id) REFERENCES accounts(id))'
     );
     console.log('tables created')
 });
@@ -194,6 +194,7 @@ app.use(cors());
 io.on("connection", (socket) => {
     RTCMultiConnectionServer.addSocket(socket)
     socket.on("join-room", (roomid) => {
+        socket.on('endForAll', d => io.to(roomid).emit('endForAll'))
 
         socket.join(roomid);
 
@@ -201,8 +202,8 @@ io.on("connection", (socket) => {
             io.to(roomid).emit('participants', data)
         })
         io.to(roomid).emit('update')
-        socket.on("message", (message,messagewriter) => {
-            io.to(roomid).emit("createMessage", message,messagewriter);
+        socket.on("message", (message, messagewriter) => {
+            io.to(roomid).emit("createMessage", message, messagewriter);
         });
         socket.on('newVote', (question, gender, option1, option2, option3) => {
             newVote.question = question
@@ -221,9 +222,9 @@ io.on("connection", (socket) => {
 
         })
         //FileUploading
-        socket.on('file', (f,messagewriter) => {
-           console.log(`File by: ${messagewriter}`);
-           io.to(roomid).emit('file', f);
+        socket.on('file', (f, messagewriter) => {
+            console.log(`File by: ${messagewriter}`);
+            io.to(roomid).emit('file', f);
         });
 
         socket.on('votting', (value) => {
@@ -254,7 +255,7 @@ io.on("connection", (socket) => {
         socket.on("disconnect", () => {
         });
     });
-    
+
 });
 
 /**

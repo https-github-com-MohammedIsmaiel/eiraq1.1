@@ -134,3 +134,8 @@ function dispMeetingInfo() {
         icon.classList.add('coloryello')
     }
 }
+
+function openOPtion(){
+ let d = document.querySelector('.selectOptiion');
+ d.classList.toggle('dspnoneopt')
+}

@@ -204,6 +204,7 @@ connection.onstream = (event) => {
     video.addEventListener('click', (e) => {
         console.log('clicked');
         mainVideo.srcObject = e.target.srcObject
+        mainVideo.setAttribute('height', '80vh')
         // userGrid.removeChild(e.target)
     })
     // to keep room-id in cache

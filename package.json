@@ -51,7 +51,7 @@
   },
   "scripts": {
     "dev": "node ./app.js",
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",

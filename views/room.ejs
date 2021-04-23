@@ -26,7 +26,7 @@
         <div class="cont">
 
             <!----------------- Start header ------------------->
-            <header class="container-fluid boxedit head">
+            <header class="container-fluid boxedit head" style=" padding: 0; margin: 0;">
                 <div class="username">
                     <% if (typeof pro_img=='undefined' ) { %>
                         <img id="profileImg" src="/upload_images/default.png" width="50px" alt="user image" srcset="">
@@ -72,13 +72,18 @@
             <div class="mainrightside">
                 <!-- fatma khaled -->
                 <div class="meeting-info meeting-d-none">
-                    <label>Meeting Id: <input type="text" value=" <%= meetinginfo.meetingid%>" style="background-color: #EEE; border:none;"></label>
+                    <label>Meeting Id:</label><span>
+                        <%= meetinginfo.meetingid%>
+                    </span>
                     <br>
-                    <label>Host Name: <input type="text" value="<%= meetinginfo.hostname%>" style="background-color: #EEE; border:none;"> </label>
+                    <label>Host Name: <input type="text" value="<%= meetinginfo.hostname%>"
+                            style="background-color: #EEE; border:none;"> </label>
                     <br>
-                    <label>Passcode:  <input type="text" value="<%= meetinginfo.password%>" style="background-color: #EEE; border:none;"></label>
+                    <label>Passcode: <input type="text" value="<%= meetinginfo.password%>"
+                            style="background-color: #EEE; border:none;"></label>
                     <br>
-                    <label>Url: <input id="Url" value="<%= meetinginfo.meetingurl%>" type="text" class=" border-0 ">  
+                    <label>Url: <input id="Url" value="<%= meetinginfo.meetingurl%>" type="text"
+                            class=" border-0 ">
                         <button class=" Copy far fa-copy border-0 border-color:#EEE " onclick="copy();" ></button></span></label><span>
                         </div>
                 <!-- mohammed ismael -->

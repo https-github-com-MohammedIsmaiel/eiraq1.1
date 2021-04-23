@@ -933,9 +933,7 @@ video {
 
 .meeting-info {
     position: absolute;
-    /* width: 250px; */
-    top: 30px;
-    height: 200px;
+    margin: 0px 70px;
     background-color: #EEE;
     z-index: 3;
     display: grid;

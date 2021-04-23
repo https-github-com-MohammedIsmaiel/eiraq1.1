@@ -72,6 +72,7 @@
             <div class="mainrightside">
                 <!-- fatma khaled -->
                 <div class="meeting-info meeting-d-none">
+                    <% if(typeof meetinginfo!='undefined' ) { %>
                     <label>Meeting Id: <input type="text" value=" <%= meetinginfo.meetingid%>" style="background-color: #EEE; border:none;"></label>
                     <br>
                     <label>Host Name: <input type="text" value="<%= meetinginfo.hostname%>" style="background-color: #EEE; border:none;"> </label>
@@ -80,7 +81,10 @@
                     <br>
                     <label>Url: <input id="Url" value="<%= meetinginfo.meetingurl%>" type="text" class=" border-0 ">  
                         <button class=" Copy far fa-copy border-0 border-color:#EEE " onclick="copy();" ></button></span></label><span>
-                        </div>
+                    <% } %>
+                    </div>
+                    <!-- fatma khaled -->
+                <button id="meet-inf" onclick="dispMeetingInfo()"><i class="x far fa-lightbulb"></i></button>
                 <!-- mohammed ismael -->
                 <button id="btnroom" class="btn" onclick="rooms()">
                     <i class="fad fa-angle-double-right"></i>

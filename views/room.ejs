@@ -37,25 +37,27 @@
                 style=" padding: 0; margin: 0;">
                 <div class="username">
                     <% if (typeof pro_img=='undefined' ) { %>
-                        <img id="profileImg" src="/upload_images/default.png"
-                            width="50px" alt="user image" srcset="">
+                        <img src="/upload_images/default.png" width="50px"
+                            alt="user image" srcset="">
 
+                        <% } else if (pro_img.startsWith("https")) { %>
 
-                        <% } else { %>
-                            <img id="profileImg"
-                                src="/upload_images/<%=pro_img%>" width="50px"
+                            <img src="<%=pro_img%>" width="50px"
                                 alt="user image" srcset="">
+                            <% } else { %>
+                                <img src="/upload_images/<%=pro_img%>"
+                                    width="50px" alt="user image" srcset="">
 
-                            <% } %>
-                                <% if (isHost) { %>
-                                    <span id="logedInUser">
-                                        <%= loggedinuser+" (host)"%>
-                                    </span>
-                                    <% } else { %>
+                                <% } %>
+                                    <% if (isHost) { %>
                                         <span id="logedInUser">
-                                            <%= loggedinuser%>
+                                            <%= loggedinuser+" (host)"%>
                                         </span>
-                                        <% } %>
+                                        <% } else { %>
+                                            <span id="logedInUser">
+                                                <%= loggedinuser%>
+                                            </span>
+                                            <% } %>
                 </div>
                 <div class="logo">
                     <div class="contain">

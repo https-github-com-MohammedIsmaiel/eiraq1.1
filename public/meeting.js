@@ -132,3 +132,4 @@ function dispMeetingInfo() {
         icon.classList.add('coloryello')
     }
 }
+

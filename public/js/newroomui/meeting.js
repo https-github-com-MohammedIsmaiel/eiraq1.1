@@ -155,3 +155,8 @@ copyTextareaBtn.addEventListener('click', function (event) {
 		console.log('Oops, unable to copy');
 	}
 });
+
+function showEmojies() {
+	let imo = document.getElementById('imo');
+	imo.classList.toggle('hide-imo');
+}

@@ -79,7 +79,7 @@
                 <% if(typeof meetinginfo!='undefined' ) { %>
                 <table class="table table-hover table-borderless">
                     <tr>
-                        <td><label>Meeting Id</label></td>
+                        <td><i class="fas fa-id-card-alt"></i></td>
                         <td>
                             <span>
                                 <%= meetinginfo.meetingid%>
@@ -87,7 +87,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Host Name</label></td>
+                        <td><i class="fas fa-user"></i></td>
                         <td>
                             <span>
                                 <%= meetinginfo.hostname%>
@@ -95,7 +95,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Passcode</td>
+                        <td><i class="fas fa-key"></i></td>
                         <td>
                             <span>
                                 <%= meetinginfo.password%>
@@ -103,19 +103,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>URL</td>
+                        <td><i class="fas fa-link"></i></td>
                         <td>
-                            <input class="form-control" type="text" name="copyUrl"
+                            <input class="form-control" style="border: none; outline: none;" type="text"
+                                name="copyUrl"
                                 value="<%= meetinginfo.meetingurl%>" id="Url">
                             <button id="copy"
-                            class=" Copy far fa-copy border-0 border-color:#EEE "
+                            class="Copy far fa-copy border-0 border-color:#EEE "
                             ></button>
                         </td>
                     </tr>
                 </table>
                  <% } %>
                 </div>
-            
                 <!-- mohammed ismael -->
                 <button id="btnroom" class="btn" onclick="rooms()">
                     <i class="fad fa-angle-double-right"></i>

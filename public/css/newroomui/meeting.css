@@ -1057,6 +1057,9 @@ video {
     }
 }
 
+table i{
+    font-size: 16px;
+}
 @media (max-width : 320px) {
     .logo>span {
         font-size: 20px;

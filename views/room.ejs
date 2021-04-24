@@ -33,8 +33,7 @@
         <div class="cont">
 
             <!----------------- Start header ------------------->
-            <header class="container-fluid boxedit head"
-                style=" padding: 0; margin: 0;">
+            <header class="container-fluid boxedit head">
                 <div class="username">
                     <% if (typeof pro_img=='undefined' ) { %>
                         <img src="/upload_images/default.png" width="50px"
@@ -87,44 +86,26 @@
                 <!-- fatma khaled -->
                 <div class="meeting-info meeting-d-none">
                     <% if(typeof meetinginfo!='undefined' ) { %>
-                        <table class="table table-hover table-borderless">
-                            <tr>
-                                <td><label><i class="far fa-id-badge"></i></label></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.meetingid%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label><i class="fas fa-user"></i></label></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.hostname%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label><i class="fas fa-key"></i></label></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.password%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label><i class="fas fa-link"></i></label></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.meetingurl%>
-                                    </span>
-                                    <button
-                                    class=" Copy far fa-copy border-0 border-color:#EEE "
-                                    onclick="copy();"></button>
-                                </td>
-                            </tr>
-                        </table>
-                        <% } %>
+                        <label>Meeting Id: <input type="text"
+                                value=" <%= meetinginfo.meetingid%>"
+                                style="background-color: #EEE; border:none;"></label>
+                        <br>
+                        <label>Host Name: <input type="text"
+                                value="<%= meetinginfo.hostname%>"
+                                style="background-color: #EEE; border:none;">
+                        </label>
+                        <br>
+                        <label>Passcode: <input type="text"
+                                value="<%= meetinginfo.password%>"
+                                style="background-color: #EEE; border:none;"></label>
+                        <br>
+                        <label>Url: <input id="Url"
+                                value="<%= meetinginfo.meetingurl%>" type="text"
+                                class=" border-0 ">
+                            <button
+                                class=" Copy far fa-copy border-0 border-color:#EEE "
+                                onclick="copy();"></button></span></label><span>
+                            <% } %>
                 </div>
                 <!-- fatma khaled -->
                 <button id="meet-inf" onclick="dispMeetingInfo()"><i
@@ -295,46 +276,23 @@
                         <div class="mesage">
                             <div class="headname">Message</div>
                             <div class="msgbody">
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
+                                <ul id="chat">
+                                    <li>
+
+                                    </li>
+
+                                </ul>
                             </div>
                             <div class="fotmsg">
                                 <!-- alaa ibrahim -->
                                 <div class="uploadFilePers">file name ..100%
                                 </div>
                                 <div class="msgActions">
-                                    <input type="text" name="" id="msg">
+
+                                    <input class="room-chat" type="text "
+                                        placeholder="Type message... " name=" "
+                                        id="msg">
+
                                     <!-- alaa ibrahim -->
                                     <button><i
                                             class="fas fa-plus-square"></i></button>
@@ -415,6 +373,8 @@
         <script src="/js/mainmeeting/newmeeting.js"></script>
         <script src="/js/mainmeeting/leave.js"></script>
         <script src="/js/newroomui/meeting.js"></script>
+        <script src="/js/meetingChat.js"></script>
+
         <!-- <script src="/js/speech_to_text/speech_to_text.js"></script> -->
         <script src="/js/attendance&participants/attendence.js"></script>
 

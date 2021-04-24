@@ -140,14 +140,6 @@ function openOPtion(){
  d.classList.toggle('dspnoneopt')
 }
 
-// function copy() {
-// 	var copyText = document.querySelector('#input');
-// 	let x = copyText.select();
-// 	console.log(x);
-// 	document.execCommand('copy');
-// }
-
-// document.querySelector('#copy').addEventListener('click', copy);
 
 var copyTextareaBtn = document.querySelector('#copy');
 

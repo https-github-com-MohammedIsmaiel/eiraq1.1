@@ -2,6 +2,8 @@ const attendence = document.getElementById('attendence')
 const raiseHand_btn = document.getElementById("raiseHand_btn");
 const usersList = document.getElementById('users_list')
 var raiseHandFlag = false
+const profile_img = document.getElementById('profile_img').src;
+console.log(profile_img)
 
 attendence.addEventListener('click', () => {
     var allUsers = []
@@ -40,7 +42,7 @@ const renderUsers = () => {
     let par = connection.getAllParticipants()
     usersList.innerHTML = `
     <div class="userfriend">
-        <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
+        <img src="${profile_img}"
             width="50px" alt="" />
         <label>${logedInUser.innerText}</label>
         <i style="display:${connection.extra.raiseHand ? "" : "none"}" id="raiseHand" class="fas fa-hand-paper"></i>
@@ -67,7 +69,7 @@ const renderUsers = () => {
         console.log(user.raiseHand)
         usersList.innerHTML += `
         <div class="userfriend">
-            <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
+            <img src="${profile_img}"
                 width="50px" alt="" />
             <label>${user.username}</label>
             <i style="display:${user.raiseHand ? "" : "none"}"

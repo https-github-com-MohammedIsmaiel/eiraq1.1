@@ -1,24 +1,17 @@
 <%- include('parts/header')%>
     <title>Room Meeting</title>
-    <link rel="stylesheet"
-        href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-        crossorigin="anonymous" />
-    <script
-        src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <!-- <script src="https://www.webrtc-experiment.com/common.js"></script> -->
 
     <script>
         const ROOM_ID = "<%= roomid %>";
     </script>
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-        crossorigin="anonymous">
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
     <link rel="stylesheet" href="/css/newroomui/meeting.css">
     <link rel="stylesheet" href="/css/newroomui/logo.css">
     <link rel="stylesheet" id="light" href="/css/newroomui/lightprofile.css">
@@ -33,11 +26,9 @@
         <div class="cont">
 
             <!----------------- Start header ------------------->
-            <header class="container-fluid boxedit head"
-                style=" padding: 0; margin: 0;">
+            <header class="container-fluid boxedit head">
                 <div class="username">
                     <% if (typeof pro_img=='undefined' ) { %>
-<<<<<<< HEAD
                         <img  src="/upload_images/default.png" width="50px" alt="user image" srcset="">
                        
                     <% } else if (pro_img.startsWith("https")) { %>      
@@ -52,33 +43,10 @@
                                         <%= loggedinuser+" (host)"%>
                                     </span>
                                 <% } else { %>
-=======
-                        <img src="/upload_images/default.png" width="50px"
-                            alt="user image" srcset="">
-
-                        <% } else if (pro_img.startsWith("https")) { %>
-
-                            <img src="<%=pro_img%>" width="50px"
-                                alt="user image" srcset="">
-                            <% } else { %>
-                                <img src="/upload_images/<%=pro_img%>"
-                                    width="50px" alt="user image" srcset="">
-
-                                <% } %>
-                                    <% if (isHost) { %>
->>>>>>> f2419ddf023c28559fbd0a290fc607727dabc488
                                         <span id="logedInUser">
-                                            <%= loggedinuser+" (host)"%>
+                                            <%= loggedinuser%>
                                         </span>
-<<<<<<< HEAD
                                  <% } %>
-=======
-                                        <% } else { %>
-                                            <span id="logedInUser">
-                                                <%= loggedinuser%>
-                                            </span>
-                                            <% } %>
->>>>>>> f2419ddf023c28559fbd0a290fc607727dabc488
                 </div>
                 <div class="logo">
                     <div class="contain">
@@ -95,10 +63,8 @@
                     </div>
                 </div>
                 <div class="display">
-                    <button onclick="changeseem()" class="btn"><i
-                            class="fas fa-th-large"></i></button>
-                    <button onclick="blackmoon()" class="btn"><i id="black"
-                            class="fas fa-adjust"></i></button>
+                    <button onclick="changeseem()" class="btn"><i class="fas fa-th-large"></i></button>
+                    <button onclick="blackmoon()" class="btn"><i id="black" class="fas fa-adjust"></i></button>
                 </div>
             </header>
             <!----------------- End header ------------------->
@@ -108,52 +74,18 @@
                 <!-- fatma khaled -->
                 <div class="meeting-info meeting-d-none">
                     <% if(typeof meetinginfo!='undefined' ) { %>
-                        <table class="table table-hover table-borderless">
-                            <tr>
-                                <td><label>Meeting Id</label></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.meetingid%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>Host Name</label></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.hostname%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>Passcode</label></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.password%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>Url</label></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.meetingurl%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <button
-                                        class=" Copy far fa-copy border-0 border-color:#EEE "
-                                        onclick="copy();"></button>
-                                </td>
-                            </tr>
-                        </table>
-                        <% } %>
-                </div>
-                <!-- fatma khaled -->
-                <button id="meet-inf" onclick="dispMeetingInfo()"><i
-                        class="x far fa-lightbulb"></i></button>
+                    <label>Meeting Id: <input type="text" value=" <%= meetinginfo.meetingid%>" style="background-color: #EEE; border:none;"></label>
+                    <br>
+                    <label>Host Name: <input type="text" value="<%= meetinginfo.hostname%>" style="background-color: #EEE; border:none;"> </label>
+                    <br>
+                    <label>Passcode:  <input type="text" value="<%= meetinginfo.password%>" style="background-color: #EEE; border:none;"></label>
+                    <br>
+                    <label>Url: <input id="Url" value="<%= meetinginfo.meetingurl%>" type="text" class=" border-0 ">  
+                        <button class=" Copy far fa-copy border-0 border-color:#EEE " onclick="copy();" ></button></span></label><span>
+                    <% } %>
+                    </div>
+                    <!-- fatma khaled -->
+                <button id="meet-inf" onclick="dispMeetingInfo()"><i class="x far fa-lightbulb"></i></button>
                 <!-- mohammed ismael -->
                 <button id="btnroom" class="btn" onclick="rooms()">
                     <i class="fad fa-angle-double-right"></i>
@@ -231,48 +163,32 @@
                                 <input type="text" name="" id="">
                             </div>
                             <div class="chosse">
-                                <div><input type="checkbox" name=""
-                                        id=""><label>question 1</label></div>
-                                <div><input type="checkbox" name=""
-                                        id=""><label>question 2</label></div>
-                                <div><input type="checkbox" name=""
-                                        id=""><label>question 3</label></div>
+                                <div><input type="checkbox" name="" id=""><label>question 1</label></div>
+                                <div><input type="checkbox" name="" id=""><label>question 2</label></div>
+                                <div><input type="checkbox" name="" id=""><label>question 3</label></div>
                             </div>
                             <div class="action">
                                 <input type="submit" value="Submit">
-                                <input onclick="rotate()" type="submit"
-                                    value="Result">
+                                <input onclick="rotate()" type="submit" value="Result">
                             </div>
                         </div>
                         <div class="c back">
                             <h4 class="res">Graph Resalt</h4>
-                            <button class="backs" onclick="rotatex()"><i
-                                    class="fad fa-angle-double-left"></i></button>
+                            <button class="backs" onclick="rotatex()"><i class="fad fa-angle-double-left"></i></button>
                             <div class="ress">
-                                <span
-                                    style="background-color: rgb(255, 166, 0);;">v
+                                <span style="background-color: rgb(255, 166, 0);;">v
                                     1</span>
-                                <span
-                                    style="background-color: rgba(6, 122, 216, 0.753);">v
+                                <span style="background-color: rgba(6, 122, 216, 0.753);">v
                                     2</span>
-                                <span
-                                    style="background-color: rgb(235, 90, 46);">v
+                                <span style="background-color: rgb(235, 90, 46);">v
                                     3</span>
                             </div>
                             <div class="graph">
-                                <span style="background-color: rgb(0, 0, 0);"
-                                    class="x-axis"></span>
-                                <span
-                                    style="background-color: rgb(255, 166, 0);"
-                                    class="q1"></span>
-                                <span
-                                    style="background-color: rgba(6, 122, 216, 0.753);"
-                                    class="q2"></span>
-                                <span
-                                    style="background-color: rgb(235, 90, 46);"
-                                    class="q3"></span>
-                                <span style="background-color: rgb(0, 0, 0);"
-                                    class="y-axis"></span>
+                                <span style="background-color: rgb(0, 0, 0);" class="x-axis"></span>
+                                <span style="background-color: rgb(255, 166, 0);" class="q1"></span>
+                                <span style="background-color: rgba(6, 122, 216, 0.753);" class="q2"></span>
+                                <span style="background-color: rgb(235, 90, 46);" class="q3"></span>
+                                <span style="background-color: rgb(0, 0, 0);" class="y-axis"></span>
                             </div>
                         </div>
                     </div>
@@ -282,13 +198,11 @@
                     <!-- mainscreem all-user-normal -->
                     <div id="vid" class="all-user-normal">
                         <div id="prev" class="N-P-button prev disp-none">
-                            <button onclick="scrollMembers(-1)"><i
-                                    class="fad fa-angle-double-left"></i></button>
+                            <button onclick="scrollMembers(-1)"><i class="fad fa-angle-double-left"></i></button>
                         </div>
                         <div class="uservideo">
                             <!-- TODO@Eng-Muhammed-Samy #2 edit this style for this element only -->
-                            <video muted id="mainVideo" autoplay
-                                style="width: 99%; height: 77vh; border-color: #eceaea;"></video>
+                            <video muted id="mainVideo" autoplay style="width: 99%; height: 77vh; border-color: #eceaea;"></video>
                             <!-- <div class="user"> -->
                             <div id="shareContainer" class="v-black"></div>
                             <!-- <video autoplay muted src="./videos/salah.mp4"></video> -->
@@ -312,60 +226,32 @@
                         </div>
 
                         <div id="next" class="N-P-button next disp-none">
-                            <button onclick="scrollMembers(1)"><i
-                                    class="fad fa-angle-double-right"></i></button>
+                            <button onclick="scrollMembers(1)"><i class="fad fa-angle-double-right"></i></button>
                         </div>
                     </div>
                     <div class="otherScreens">
                         <div class="mesage">
                             <div class="headname">Message</div>
                             <div class="msgbody">
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
-                                <span class="hostmessage">
-                                    How are you
-                                </span>
-                                <span class="particmessage">
-                                    I am fine thank you
-                                </span>
+                                <ul id="chat" >
+                                    <li>
+
+                                    </li>
+
+                                </ul>
                             </div>
                             <div class="fotmsg">
                                 <!-- alaa ibrahim -->
                                 <div class="uploadFilePers">file name ..100%
                                 </div>
                                 <div class="msgActions">
-                                    <input type="text" name="" id="msg">
+                                   
+                                 <input class="room-chat" type="text " placeholder="Type message... " name=" " id="msg">
+                           
                                     <!-- alaa ibrahim -->
-                                    <button><i
-                                            class="fas fa-plus-square"></i></button>
+                                    <button><i class="fas fa-plus-square"></i></button>
                                     <!--mohammed bakr -->
-                                    <button><i
-                                            class="fas fa-paper-plane"></i></button>
+                                    <button><i class="fas fa-paper-plane"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -374,17 +260,8 @@
                             <!-- mohammed ismael and mohammed bakr -->
                             <div class="msgbody" id="users_list">
                                 <div class="userfriend">
-                                    <% if (typeof pro_img=='undefined' ) { %>
-                                        <img  src="/upload_images/default.png" width="50px" alt="user image" srcset="">
-                                       
-                                    <% } else if (pro_img.startsWith("https")) { %>      
-                                            
-                                        <img  src="<%=pro_img%>" width="50px" alt="user image" srcset="">
-                                    <% } else { %>
-                                       <img   src="/upload_images/<%=pro_img%>" width="50px" alt="user image" srcset="">
-                
-                                  <% } %>
-                                           
+                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
+                                        width="50px" alt="" />
                                     <label>Name</label>
                                 </div>
 
@@ -400,37 +277,28 @@
             <footer class="boxedit foot">
                 <div class="footbtn">
                     <!-- khiry and ismael -->
-                    <button id="audioControl" class="btn btns"><i
-                            class="icons fas fa-microphone"></i></button>
-                    <button id="videoControl" class="btn btns"><i
-                            class="icons fas fa-video"></i></button>
+                    <button id="audioControl" class="btn btns"><i class="icons fas fa-microphone"></i></button>
+                    <button id="videoControl" class="btn btns"><i class="icons fas fa-video"></i></button>
                 </div>
                 <div class="footbtn">
                     <!-- khiry -->
-                    <button id="shareScreen" class="btn btns"><i
-                            class="fas fa-share-square"></i></button>
+                    <button id="shareScreen" class="btn btns"><i class="fas fa-share-square"></i></button>
                     <!-- khiry -->
-                    <button class="btn btns"><i
-                            class="icons fas fa-bullseye"></i></button>
+                    <button class="btn btns"><i class="icons fas fa-bullseye"></i></button>
                     <!-- gamal -->
-                    <button class="btn btns" id="raiseHand_btn"><i
-                            class="icons fas fa-hand-paper"></i></button>
+                    <button class="btn btns" id="raiseHand_btn"><i class="icons fas fa-hand-paper"></i></button>
                 </div>
 
                 <div class="footbtn">
 
-                    <button onclick="openOPtion()" type="submit"
-                        class="btn btns btn-danger"><i
+                    <button onclick="openOPtion()" type="submit" class="btn btns btn-danger"><i
                             class="col icons fas fa-sign-out-alt text-light"></i></button>
                 </div>
                 <div class="selectOptiion dspnoneopt">
 
-                    <button id="leave" class="btn btns btn-outline-dark">Leave
-                        Meeting</button>
+                    <button id="leave" class="btn btns btn-outline-dark">Leave Meeting</button>
                     <% if (isHost) { %>
-                        <button id="endForAll"
-                            class="btn btns btn-outline-danger">End
-                            Meetiing</button>
+                        <button id="endForAll" class="btn btns btn-outline-danger">End Meetiing</button>
                         <% }%>
                 </div>
             </footer>
@@ -441,14 +309,15 @@
         <script>
             var socket = io('/')
         </script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js "
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js "
             integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW "
             crossorigin="anonymous "></script>
         <!-- <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script> -->
         <script src="/js/mainmeeting/newmeeting.js"></script>
         <script src="/js/mainmeeting/leave.js"></script>
         <script src="/js/newroomui/meeting.js"></script>
+        <script src="/js/meetingChat.js"></script>
+
         <!-- <script src="/js/speech_to_text/speech_to_text.js"></script> -->
         <script src="/js/attendance&participants/attendence.js"></script>
 

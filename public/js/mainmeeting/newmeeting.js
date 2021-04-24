@@ -31,12 +31,12 @@ connection.session = {
 }
 //connection extra data
 connection.extra = {
-    username: logedInUser.innerText,
-    raiseHand: false,
-    isAudioMuted: false,
-    isVideoMuted: false,
-    img: document.querySelector('#profileImg').src
-}
+	username: logedInUser.innerText,
+	raiseHand: false,
+	isAudioMuted: false,
+	isVideoMuted: false,
+	// img: document.querySelector('#profileImg').src
+};
 //joining room
 socket.emit('join-room', ROOM_ID)
 

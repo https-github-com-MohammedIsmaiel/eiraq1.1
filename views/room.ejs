@@ -89,7 +89,7 @@
                     <% if(typeof meetinginfo!='undefined' ) { %>
                         <table class="table table-hover table-borderless">
                             <tr>
-                                <td><label>Meeting Id</label></td>
+                                <td><label><i class="far fa-id-badge"></i></label></td>
                                 <td>
                                     <span>
                                         <%= meetinginfo.meetingid%>
@@ -97,7 +97,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Host Name</label></td>
+                                <td><label><i class="fas fa-user"></i></label></td>
                                 <td>
                                     <span>
                                         <%= meetinginfo.hostname%>
@@ -105,7 +105,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Passcode</label></td>
+                                <td><label><i class="fas fa-key"></i></label></td>
                                 <td>
                                     <span>
                                         <%= meetinginfo.password%>
@@ -113,18 +113,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Url</label></td>
+                                <td><label><i class="fas fa-link"></i></label></td>
                                 <td>
                                     <span>
                                         <%= meetinginfo.meetingurl%>
                                     </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
                                     <button
-                                        class=" Copy far fa-copy border-0 border-color:#EEE "
-                                        onclick="copy();"></button>
+                                    class=" Copy far fa-copy border-0 border-color:#EEE "
+                                    onclick="copy();"></button>
                                 </td>
                             </tr>
                         </table>

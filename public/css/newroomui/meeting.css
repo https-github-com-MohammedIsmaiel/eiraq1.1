@@ -590,7 +590,6 @@ body {
 .otherScreens {
     width: 0;
     height: calc(100vh - 140px);
-    display: none;
 }
 
 .all-users::-webkit-scrollbar {

@@ -277,10 +277,6 @@
                             <div class="headname">Message</div>
                             <div class="msgbody">
                                 <ul id="chat">
-                                    <li>
-
-                                    </li>
-
                                 </ul>
                             </div>
                             <div class="fotmsg">
@@ -349,7 +345,8 @@
                 </div>
                 <div class="selectOptiion dspnoneopt">
 
-                    <button id="leave" class="btn btns btn-outline-dark">Leave
+                    <button onclick="leaveMeeting()" id="leave"
+                        class="btn btns btn-outline-dark">Leave
                         Meeting</button>
                     <% if (isHost) { %>
                         <button id="endForAll"

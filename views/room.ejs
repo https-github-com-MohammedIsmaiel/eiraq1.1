@@ -72,6 +72,7 @@
             <!----------------- Start Aside ------------------->
             <div class="mainrightside">
                 <!-- fatma khaled -->
+<<<<<<< HEAD
                 <div class="meeting-info meeting-d-none">
                     <% if(typeof meetinginfo!='undefined' ) { %>
                     <label>Meeting Id: <input type="text" value=" <%= meetinginfo.meetingid%>" style="background-color: #EEE; border:none;"></label>
@@ -86,6 +87,52 @@
                     </div>
                     <!-- fatma khaled -->
                 <button id="meet-inf" onclick="dispMeetingInfo()"><i class="x far fa-lightbulb"></i></button>
+=======
+
+                <button id="meet-inf" onclick="dispMeetingInfo()"><i class="x far fa-lightbulb"></i></button>
+
+               <div class="meeting-info meeting-d-none">
+                <% if(typeof meetinginfo!='undefined' ) { %>
+                <table class="table table-hover table-borderless">
+                    <tr>
+                        <td><label>Meeting Id</label></td>
+                        <td>
+                            <span>
+                                <%= meetinginfo.meetingid%>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Host Name</label></td>
+                        <td>
+                            <span>
+                                <%= meetinginfo.hostname%>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Passcode</td>
+                        <td>
+                            <span>
+                                <%= meetinginfo.password%>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>URL</td>
+                        <td>
+                            <input class="form-control" type="text" name="copyUrl"
+                                value="<%= meetinginfo.meetingurl%>" id="Url">
+                            <button id="copy"
+                            class=" Copy far fa-copy border-0 border-color:#EEE "
+                            ></button>
+                        </td>
+                    </tr>
+                </table>
+                 <% } %>
+                </div>
+            
+>>>>>>> 7b9863a8650fedc18955a38abd43158a3dfb51bd
                 <!-- mohammed ismael -->
                 <button id="btnroom" class="btn" onclick="rooms()">
                     <i class="fad fa-angle-double-right"></i>

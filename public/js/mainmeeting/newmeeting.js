@@ -35,8 +35,9 @@ connection.extra = {
 	raiseHand: false,
 	isAudioMuted: false,
 	isVideoMuted: false,
-	// img: document.querySelector('#profileImg').src
+	img: document.querySelector('#profileImg').src,
 };
+console.log(connection.extra.img);
 //joining room
 socket.emit('join-room', ROOM_ID)
 

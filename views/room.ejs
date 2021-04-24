@@ -29,13 +29,15 @@
             <header class="container-fluid boxedit head">
                 <div class="username">
                     <% if (typeof pro_img=='undefined' ) { %>
-                        <img id="profile_img" src="/upload_images/default.png" width="50px" alt="user image" srcset="">
+                        <img id="profileImg" src="/upload_images/default.png" width="50px"
+                            alt="user image" srcset="">
                        
                     <% } else if (pro_img.startsWith("https")) { %>      
                             
-                        <img id="profile_img" src="<%=pro_img%>" width="50px" alt="user image" srcset="">
+                        <img id="profileImg" src="<%=pro_img%>" width="50px" alt="user image" srcset="">
                     <% } else { %>
-                       <img id="profile_img"  src="/upload_images/<%=pro_img%>" width="50px" alt="user image" srcset="">
+                    <img id="profileImg" src="/upload_images/<%=pro_img%>" width="50px"
+                        alt="user image" srcset="">
 
                   <% } %>
                                 <% if (isHost) { %>

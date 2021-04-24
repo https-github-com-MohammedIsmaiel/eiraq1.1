@@ -8,7 +8,7 @@ attendence.addEventListener('click', () => {
     let par = connection.getAllParticipants()
     for (let i = 0; i < par.length; i++) {
         var username = connection.getExtraData(par[i]);
-        allUsers.push(username.username)
+        allUsers.push(`${i + 1} - ${username.username} \n`);
     }
     var myBlob = new Blob(["Attendence: \n" + allUsers], { type: 'text/plain' });
     var url = window.URL.createObjectURL(myBlob);

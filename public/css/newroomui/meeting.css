@@ -78,6 +78,7 @@
 .logo {
     font-size: 50px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: contents;
 }
 
 .username span {
@@ -837,6 +838,7 @@ video {
 .hide {
     width: 0px;
     right: -999px;
+    display: none;
 }
 
 .width {
@@ -931,9 +933,7 @@ video {
 
 .meeting-info {
     position: absolute;
-    /* width: 250px; */
-    top: 30px;
-    height: 200px;
+    margin: 0px 70px;
     background-color: #EEE;
     z-index: 3;
     display: grid;

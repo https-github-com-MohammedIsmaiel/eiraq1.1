@@ -71,7 +71,7 @@ exports.checkId=(meetingid)=>{
                           "meetingid":results.rows[0].meeting_id,
                           "hostname":results.rows[0].hostname,
                           "password":results.rows[0].meetingpassword,
-                          "meetingurl":results.rows[0].URL
+                          "meetingurl":results.rows[0].url
                       })
                     }else{
                         rej("invalid meetingid")

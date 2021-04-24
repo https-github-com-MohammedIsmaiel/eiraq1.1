@@ -35,18 +35,18 @@
                             
                         <img  src="<%=pro_img%>" width="50px" alt="user image" srcset="">
                     <% } else { %>
-                            <img src="/upload_images/<%=pro_img%>" width="50px" alt="user image" srcset="">
+                       <img   src="/upload_images/<%=pro_img%>" width="50px" alt="user image" srcset="">
 
                   <% } %>
                                 <% if (isHost) { %>
                                     <span id="logedInUser">
                                         <%= loggedinuser+" (host)"%>
                                     </span>
-                                    <% } else { %>
+                                <% } else { %>
                                         <span id="logedInUser">
                                             <%= loggedinuser%>
                                         </span>
-                                        <% } %>
+                                 <% } %>
                 </div>
                 <div class="logo">
                     <div class="contain">
@@ -285,8 +285,17 @@
                             <!-- mohammed ismael and mohammed bakr -->
                             <div class="msgbody" id="users_list">
                                 <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
+                                    <% if (typeof pro_img=='undefined' ) { %>
+                                        <img  src="/upload_images/default.png" width="50px" alt="user image" srcset="">
+                                       
+                                    <% } else if (pro_img.startsWith("https")) { %>      
+                                            
+                                        <img  src="<%=pro_img%>" width="50px" alt="user image" srcset="">
+                                    <% } else { %>
+                                       <img   src="/upload_images/<%=pro_img%>" width="50px" alt="user image" srcset="">
+                
+                                  <% } %>
+                                           
                                     <label>Name</label>
                                 </div>
 

@@ -3,6 +3,7 @@
 const passport = require('passport');
 const connection = require('./models/init_database').connection;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 
 function createUser(name, email, profileImg) {
 	return new Promise((res, rej) => {
@@ -107,3 +108,27 @@ passport.use(new FacebookStrategy({
 },
 )
 );
+
+// Twitter
+
+passport.use(new TwitterStrategy({
+	consumerKey: "EN5X0ed3z7b7JXmoqnClOHdAs",
+	consumerSecret: "9LK2Oa17Ekwg022L2cgrtZH55rADiKeck4g62Omq0ynkfLjJQc",
+	callbackURL: "https://eiraq.herokuapp.com/auth/twitter/callback"
+},
+function(token, tokenSecret, profile, done) {
+	const id = profile.id;
+	const name = profile.displayName;
+	const profileImg = profile.photos[0].value;
+
+	createUser(name, id, profileImg)
+	.then((obj) => {
+		profile.appId = obj.id;
+		profile.profileimg = obj.profileimg;
+	})
+	.then(() => {
+		done(null, profile);
+	})
+	.catch((e) => {});
+}
+));

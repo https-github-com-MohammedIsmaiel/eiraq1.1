@@ -795,7 +795,7 @@ video {
 
 .msgActions {
     display: grid;
-    grid-template-columns: 150px 50px 50px;
+    grid-template-columns: 120px 40px 40px 40px 10px;
     margin: 10px 5px;
     transition: all .5s;
 }
@@ -822,10 +822,32 @@ video {
     border: none;
 }
 
-.msgActions button i:hover {
-    color: white;
+ .msgActions button i{
+    font-size: 25px;
+} 
+.emoji{
+    position: absolute;
+    width: 200px;
+    background-color: #eeeeee;
+    bottom: 6vh;
+    left: 0px;
+    border: 1px solid #dfdbdb;
+    border-radius: 15px;
 }
-
+.hide-imo{
+   display: none;
+}
+.emoji button{
+    border-radius: 50%;
+    border: none;
+}
+.emoji button:hover{
+    border: none;
+    outline: none;
+}
+.emoji button i{
+    color: #929200;
+}
 .disp {
     width: 250px;
     right: 0px;
@@ -1057,6 +1079,9 @@ video {
     }
 }
 
+table i{
+    font-size: 16px;
+}
 @media (max-width : 320px) {
     .logo>span {
         font-size: 20px;

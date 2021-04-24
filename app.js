@@ -22,6 +22,7 @@ const profileRoutes = require('./routes/profile.route')
 const roomRoutes = require('./routes/room.route')
 const googleRoutes = require("./routes/google.route");
 const facebookRoutes = require("./routes/facebook.router");
+const twitterRoutes = require("./routes/twitter.router");
 const fs = require('fs');
 const logger = require('morgan');
 const flash = require("connect-flash");
@@ -145,6 +146,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use("/", googleRoutes);
 app.use("/", facebookRoutes);
+app.use("/", twitterRoutes);
 
 /* End of Google authentication */
 

@@ -139,3 +139,24 @@ function openOPtion(){
  let d = document.querySelector('.selectOptiion');
  d.classList.toggle('dspnoneopt')
 }
+
+
+var copyTextareaBtn = document.querySelector('#copy');
+
+copyTextareaBtn.addEventListener('click', function (event) {
+	var copyTextarea = document.querySelector('#Url');
+	copyTextarea.focus();
+	copyTextarea.select();
+
+	try {
+		var successful = document.execCommand('copy');
+		var msg = successful ? 'successful' : 'unsuccessful';
+	} catch (err) {
+		console.log('Oops, unable to copy');
+	}
+});
+
+function showEmojies() {
+	let imo = document.getElementById('imo');
+	imo.classList.toggle('hide-imo');
+}

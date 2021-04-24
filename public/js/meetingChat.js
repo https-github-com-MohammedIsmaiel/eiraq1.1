@@ -11,20 +11,19 @@
 
 
 
-document.getElementById("leaveButton").addEventListener("submit", () => {
-    const messagewriter = logedInUser.innerText;
-    socket.emit("message", "left", messagewriter);
-
-})
-
+function leaveMeeting()  {
+	const messagewriter = logedInUser.innerText;
+	socket.emit('message', 'left', messagewriter);
+}
 
 
 
 
-let text = $("input.room-chat");
+
+let text = $('input.room-chat');
 $("html").keydown((e) => {
     if (e.which == 13 && text.val().length !== 0) {
-
+        console.log(e.value);
         const messagewriter = logedInUser.innerText;
         socket.emit("message", text.val(), messagewriter);
         text.val("");

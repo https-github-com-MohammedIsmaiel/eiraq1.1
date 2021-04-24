@@ -139,3 +139,28 @@ function openOPtion(){
  let d = document.querySelector('.selectOptiion');
  d.classList.toggle('dspnoneopt')
 }
+
+// function copy() {
+// 	var copyText = document.querySelector('#input');
+// 	let x = copyText.select();
+// 	console.log(x);
+// 	document.execCommand('copy');
+// }
+
+// document.querySelector('#copy').addEventListener('click', copy);
+
+var copyTextareaBtn = document.querySelector('#copy');
+
+copyTextareaBtn.addEventListener('click', function (event) {
+	var copyTextarea = document.querySelector('#Url');
+	copyTextarea.focus();
+	copyTextarea.select();
+
+	try {
+		var successful = document.execCommand('copy');
+		var msg = successful ? 'successful' : 'unsuccessful';
+		console.log('Copying text command was ' + msg);
+	} catch (err) {
+		console.log('Oops, unable to copy');
+	}
+});

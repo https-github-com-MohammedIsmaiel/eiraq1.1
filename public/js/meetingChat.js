@@ -8,17 +8,10 @@
 })()
 
 
-
-
-
 function leaveMeeting()  {
 	const messagewriter = logedInUser.innerText;
 	socket.emit('message', 'left', messagewriter);
 }
-
-
-
-
 
 let text = $('input.room-chat');
 $("html").keydown((e) => {

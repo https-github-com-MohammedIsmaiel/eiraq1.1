@@ -252,7 +252,7 @@ audioControl.addEventListener('click', (e) => {
         // connection.streamEvents[connection.userid].stream.unmute('audio');
         // localStream.unmute('audio');
         // connection.streamEvents.selectFirst().unmute('audio');
-        firstLocalStream.mute('audio');
+        firstLocalStream.unmute('audio');
         audioControl.innerHTML = `<i class=" fas fa-microphone"></i>`
         connection.streamEvents.selectFirst('local').mediaElement.muted = true;
         //uncomment this when using different devices

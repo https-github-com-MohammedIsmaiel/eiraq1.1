@@ -160,3 +160,13 @@ function showEmojies() {
 	let imo = document.getElementById('imo');
 	imo.classList.toggle('hide-imo');
 }
+
+function handleEmojies(id){
+    console.log('test handleEmojies call');
+    console.log(id)
+    var emojiElement = document.getElementById(id)
+    var messageBar = document.getElementById("msgBar")
+    console.log(emojiElement.value);
+    messageBar.value += emojiElement.innerText
+
+}

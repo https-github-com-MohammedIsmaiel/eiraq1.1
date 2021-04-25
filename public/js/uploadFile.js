@@ -1,11 +1,18 @@
 /** @format */
-
+const inputchat= document.getElementsByClassName('room-chat')[0];
+$("#files").change(function() {
+	filename = this.files[0].name
+inputchat.value =filename;
+	console.log(filename);
+  });
+  
 $('#form').on('submit', handleFormSubmit);
 // let typingTimeout = null;
 // let isStartTypeSent = false;
 // let typingUsers = new Set();
 
 function handleFormSubmit(e) {
+	inputchat.value =" ";
 	e.preventDefault();
 	const form = $(this);
 	const formData = new FormData(form[0]);

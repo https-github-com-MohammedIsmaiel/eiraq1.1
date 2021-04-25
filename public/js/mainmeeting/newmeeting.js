@@ -237,17 +237,22 @@ shareScreen.addEventListener('click', () => {
 })
 //mute and unmute
 audioControl.addEventListener('click', (e) => {
+    let firstLocalStream = connection.streamEvents.selectFirst({
+        local: true
+    }).stream;
     if (connection.extra.isAudioMuted === false) {
         // connection.streamEvents[connection.userid].stream.mute('audio');
         connection.extra.isAudioMuted = true
         // localStream.mute('audio');
-        connection.streamEvents.selectFirst().mute('audio');
+        // connection.streamEvents.selectFirst().mute('audio');
+        firstLocalStream.mute('audio');
         audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`
     } else {
         connection.extra.isAudioMuted = false
         // connection.streamEvents[connection.userid].stream.unmute('audio');
         // localStream.unmute('audio');
-        connection.streamEvents.selectFirst().unmute('audio');
+        // connection.streamEvents.selectFirst().unmute('audio');
+        firstLocalStream.mute('audio');
         audioControl.innerHTML = `<i class=" fas fa-microphone"></i>`
         connection.streamEvents.selectFirst('local').mediaElement.muted = true;
         //uncomment this when using different devices
@@ -262,7 +267,7 @@ audioControl.addEventListener('click', (e) => {
 })
 
 videoControl.addEventListener('click', (e) => {
-    var firstLocalStream = connection.streamEvents.selectFirst({
+    let firstLocalStream = connection.streamEvents.selectFirst({
         local: true
     }).stream;
     if (connection.extra.isVideoMuted === false) {

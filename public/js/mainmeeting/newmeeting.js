@@ -31,11 +31,11 @@ connection.session = {
 }
 //connection extra data
 connection.extra = {
-	username: logedInUser.innerText,
-	raiseHand: false,
-	isAudioMuted: false,
-	isVideoMuted: false,
-	img: document.querySelector('#profileImg').src,
+    username: logedInUser.innerText,
+    raiseHand: false,
+    isAudioMuted: false,
+    isVideoMuted: false,
+    img: document.querySelector('#profileImg').src,
 };
 console.log(connection.extra.img);
 //joining room
@@ -238,14 +238,16 @@ shareScreen.addEventListener('click', () => {
 //mute and unmute
 audioControl.addEventListener('click', (e) => {
     if (connection.extra.isAudioMuted === false) {
-		// connection.streamEvents[connection.userid].stream.mute('audio');
-		connection.extra.isAudioMuted = true;
-		localStream.mute('audio');
-		audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`;
-	} else {
+        // connection.streamEvents[connection.userid].stream.mute('audio');
+        connection.extra.isAudioMuted = true
+        // localStream.mute('audio');
+        connection.streamEvents.selectFirst().mute('audio');
+        audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`
+    } else {
         connection.extra.isAudioMuted = false
         // connection.streamEvents[connection.userid].stream.unmute('audio');
-        localStream.unmute('audio');
+        // localStream.unmute('audio');
+        connection.streamEvents.selectFirst().unmute('audio');
         audioControl.innerHTML = `<i class=" fas fa-microphone"></i>`
         connection.streamEvents.selectFirst('local').mediaElement.muted = true;
         //uncomment this when using different devices
@@ -290,14 +292,14 @@ connection.onunmute = function (e) {
     // $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
     // e.mediaElement.srcObject = null;
     // e.mediaElement.setAttribute('poster', connection.extra.img);
-    console.log('unmuting');
+    // console.log('unmuting');
 };
 //handle on mute
 connection.onmute = function (e) {
     // $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
     // e.mediaElement.srcObject = null;
     // e.mediaElement.setAttribute('poster', connection.extra.img);
-    console.log('muting');
+    // console.log('muting');
 };
 
 //mute all

@@ -32,5 +32,6 @@ connection.onclose = function (event) {
 
 socket.on('endForAll', (d) => {
     console.log('ending');
+    // alert('the host end this meeting!!!')
     window.location.replace('/profile')
 })

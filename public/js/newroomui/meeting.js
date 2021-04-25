@@ -64,6 +64,7 @@ document.getElementById('msg').addEventListener("click", () => {
     if (friends.classList.contains("disp")) {
         friends.classList.add("hide");
         friends.classList.remove("disp");
+        vidIvon.classList.remove('gold');
         video.classList.toggle('width')
     }
 });
@@ -83,6 +84,7 @@ document.getElementById('users').addEventListener("click", () => {
     if (mesage.classList.contains("disp")) {
         mesage.classList.add("hide");
         mesage.classList.remove("disp");
+        msgicon.classList.remove('gold');
         video.classList.toggle('width')
     }
 });
@@ -156,4 +158,25 @@ copyTextareaBtn.addEventListener('click', function (event) {
 function showEmojies() {
 	let imo = document.getElementById('imo');
 	imo.classList.toggle('hide-imo');
+}
+
+function share() {
+	let share = document.querySelector('.fa-share-square');
+	share.classList.toggle('gold');
+}
+function record() {
+	let record = document.querySelector('.fa-bullseye');
+	record.classList.toggle('gold');
+}
+function raiseHand() {
+	let handIcon = document.querySelector('.fa-hand-paper');
+	handIcon.classList.toggle('gold');
+}
+function fileUpload() {
+	let file = document.querySelector('.fa-file-alt');
+	file.classList.toggle('gold');
+}
+function caption() {
+	let caption = document.querySelector('.fa-closed-captioning');
+	caption.classList.toggle('gold');
 }

@@ -238,11 +238,11 @@ shareScreen.addEventListener('click', () => {
 //mute and unmute
 audioControl.addEventListener('click', (e) => {
     if (connection.extra.isAudioMuted === false) {
-        // connection.streamEvents[connection.userid].stream.mute('audio');
-        connection.extra.isAudioMuted = true
-        localStream.mute('audio');
-        audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`;
-    } else {
+		// connection.streamEvents[connection.userid].stream.mute('audio');
+		connection.extra.isAudioMuted = true;
+		localStream.mute('audio');
+		audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`;
+	} else {
         connection.extra.isAudioMuted = false
         // connection.streamEvents[connection.userid].stream.unmute('audio');
         localStream.unmute('audio');

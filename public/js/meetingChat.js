@@ -26,13 +26,27 @@ $("html").keydown((e) => {
 socket.on("createMessage", (message, messagewriter) => {
     const messegeOwner = logedInUser.innerText;
     if (messegeOwner == messagewriter) {
-        $("#chat").append(
-            `<li style="color:green" class = "message"><b>${messagewriter} : </b>${message}</li>`
-        );
+        $('#chat').append(
+			`<li style="color: #00415a;
+             list-style: none;
+             border: 1px solid #eae3e3;
+             background-color: lightcyan;
+             border-radius: 13px;
+             margin-top : 5px"
+             class = "message">
+             <b>${messagewriter} : </b>${message}</li>`,
+		);
     }
     else {
-        $("#chat").append(
-            `<li class = "message"><b>${messagewriter} : </b>${message}</li>`
-        );
+        $('#chat').append(
+			`<li style = "color: #664d03;
+             list-style: none;
+             border: 1px solid #bdbdbd;
+             background-color: #f1d5d8;
+             border-radius: 13px;
+             margin-top : 5px"
+             class = "message">
+             <b>${messagewriter} : </b>${message}</li>`,
+		);
     }
 });

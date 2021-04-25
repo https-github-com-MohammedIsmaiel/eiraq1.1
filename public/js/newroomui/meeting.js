@@ -189,6 +189,3 @@ function handleEmojies(id){
     console.log(emojiElement.value);
     messageBar.value += emojiElement.innerText
 }
-
-
-sdghre45h

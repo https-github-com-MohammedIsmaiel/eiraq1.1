@@ -242,7 +242,7 @@ audioControl.addEventListener('click', (e) => {
         connection.extra.isAudioMuted = true
         // localStream.mute('audio');
         connection.streamEvents.selectFirst().mute('audio');
-        audioControl.innerHTML = `<i class=" fas fa-microphone-slash"></i>`
+        audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`
     } else {
         connection.extra.isAudioMuted = false
         // connection.streamEvents[connection.userid].stream.unmute('audio');
@@ -268,7 +268,7 @@ videoControl.addEventListener('click', (e) => {
     if (connection.extra.isVideoMuted === false) {
         connection.extra.isVideoMuted = true
         firstLocalStream.mute('video');
-        videoControl.innerHTML = `<i class="fas fa-video-slash"></i>`
+        videoControl.innerHTML = `<i style = "color: #ff6a00;" class="fas fa-video-slash"></i>`;
         //uncomment this when using different devices
         // connection.attachStreams[0].getVideoTracks().forEach(function (track) {
         //     track.stop(); // turn off cam

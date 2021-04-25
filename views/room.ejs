@@ -123,11 +123,11 @@
                     <i class="fad fa-angle-double-right"></i>
                 </button>
                 <!--mohammed gamal -->
-                <button class="btn" id="attendence">
+                <button onclick="fileUpload()" class="btn" id="attendence">
                     <i class="far fa-file-alt"></i>
                 </button>
                 <!-- mohammed gamal -->
-                <button class="btn" id="speech_to_text">
+                <button onclick="caption()" class="btn" id="speech_to_text">
                     <i class="fas fa-closed-captioning"></i>
                 </button>
                 <!-- mohammed ismael -->
@@ -153,13 +153,6 @@
 
             <!----------------- Start Video Section ------------------->
             <section class="boxedit main">
-                <!-- fatma khaled -->
-                <div class="meeting-info meeting-d-none">
-                    <label>Meeting Id: </label><span>2547687687468686</span>
-                    <label>Host Name: </label><span>Mohammed Samy</span>
-                    <label>Passcode: </label><span>25476876</span>
-                    <label>Url: </label><span>https://www.google.com</span>
-                </div>
                 <!-- mohammed ismael -->
                 <div class="breakrooms">
                     <div class="text">
@@ -363,11 +356,14 @@
                 </div>
                 <div class="footbtn">
                     <!-- khiry -->
-                    <button id="shareScreen" class="btn btns"><i class="fas fa-share-square"></i></button>
+                    <button onclick="share()" id="shareScreen" class="btn btns"><i
+                            class="fas fa-share-square"></i></button>
                     <!-- khiry -->
-                    <button class="btn btns"><i class="icons fas fa-bullseye"></i></button>
+                    <button onclick="record()" class="btn btns"><i
+                            class="icons fas fa-bullseye"></i></button>
                     <!-- gamal -->
-                    <button class="btn btns" id="raiseHand_btn"><i class="icons fas fa-hand-paper"></i></button>
+                    <button onclick="raiseHand()" class="btn btns" id="raiseHand_btn"><i
+                            class="icons fas fa-hand-paper"></i></button>
                 </div>
 
                 <div class="footbtn">

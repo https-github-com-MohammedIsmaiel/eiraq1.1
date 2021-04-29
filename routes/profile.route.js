@@ -57,7 +57,7 @@ check("clientname")
     .isLength({ min: 6 })
     .withMessage("your name must be at least 6 charachters")
 
-, meetingController.getRoom);
+,profileController.getRoom);
 
 // when press cancel redirect me to profile page
 router.get('/returnback', profileController.getBackToMeeting);

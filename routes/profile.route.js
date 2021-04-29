@@ -45,19 +45,22 @@ router.post(
 	profileController.getProfileImage,
 );
 // when press join redirect me to meeting page
-router.post('/room',   bodyParser.urlencoded({ extended: true }),
-check("meetingpassword")
-    .not()
-    .isEmpty()
-    .withMessage("meetingpassword is required"),
-check("clientname")
-    .not()
-    .isEmpty()
-    .withMessage("your name is required")
-    .isLength({ min: 6 })
-    .withMessage("your name must be at least 6 charachters")
+router.post(
+	'/room',
+	bodyParser.urlencoded({ extended: true }),
+	check('meetingpassword')
+		.not()
+		.isEmpty()
+		.withMessage('meetingpassword is required'),
+	check('clientname')
+		.not()
+		.isEmpty()
+		.withMessage('your name is required')
+		.isLength({ min: 6 })
+		.withMessage('your name must be at least 6 charachters'),
 
-, meetingController.getRoom);
+	profileController.getRoom,
+);
 
 // when press cancel redirect me to profile page
 router.get('/returnback', profileController.getBackToMeeting);

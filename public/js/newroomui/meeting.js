@@ -180,3 +180,9 @@ function caption() {
 	let caption = document.querySelector('.fa-closed-captioning');
 	caption.classList.toggle('gold');
 }
+
+function handleEmojies(id){
+    var emojiElement = document.getElementById(id)
+    var messageBar = document.getElementById("msgBar")
+    messageBar.value += emojiElement.innerText
+}

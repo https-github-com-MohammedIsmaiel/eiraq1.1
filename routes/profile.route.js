@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bodyParser = require("body-parser");
 const check = require("express-validator").check;
 const path = require('path');
 const profileController = require('../controllers/profile.controller');
@@ -43,5 +44,22 @@ router.post(
 	}),
 	profileController.getProfileImage,
 );
+// when press join redirect me to meeting page
+router.post('/room',   bodyParser.urlencoded({ extended: true }),
+check("meetingpassword")
+    .not()
+    .isEmpty()
+    .withMessage("meetingpassword is required"),
+check("clientname")
+    .not()
+    .isEmpty()
+    .withMessage("your name is required")
+    .isLength({ min: 6 })
+    .withMessage("your name must be at least 6 charachters")
+
+, meetingController.getRoom);
+
+// when press cancel redirect me to profile page
+router.get('/returnback', profileController.getBackToMeeting);
 router.get('/schedule', profileController.getScedule);
 module.exports = router;

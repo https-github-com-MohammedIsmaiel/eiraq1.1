@@ -43,7 +43,7 @@ router.post(
 	}),
 	profileController.getProfileImage,
 );
-<<<<<<< HEAD
+
 // when press join redirect me to meeting page
 router.post("/roomvideo",bodyParser.urlencoded({ extended: true }),
 check("meetingpassword")
@@ -60,8 +60,7 @@ check("username")
 
 // when press cancel redirect me to profile page
 router.get('/returnback', profileController.getBackToMeeting);
-=======
->>>>>>> 0ca393612c3a40c06c70d44974da4dc85c5f468b
+
 router.get('/schedule', profileController.getScedule);
 
 module.exports = router;

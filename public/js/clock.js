@@ -1,8 +1,9 @@
 
-    $('#mymodal').modal({
-    
-           keyboard: false
-    })
+    $('#myForm').on('submit', function(e){
+        $('#mymodal').modal('show');
+        
+      });
+      
 
 
   

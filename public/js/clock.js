@@ -1,3 +1,11 @@
+
+    $('#mymodal').modal({
+    
+           keyboard: false
+    })
+
+
+  
 setInterval(() => {
     var h_hand = document.querySelector(".h-hand");
     var m_hand = document.querySelector(".m-hand");
@@ -31,3 +39,6 @@ document.getElementById("spanDate").innerHTML =
     (tomorrow.getDate() - 1) +
     ", " +
     tomorrow.getFullYear();
+
+
+    

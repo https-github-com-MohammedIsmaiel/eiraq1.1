@@ -172,30 +172,38 @@
                                              <label class="close pt-0 text-light" aria-hidden="true" data-dismiss="modal" style="font-size: 20px; font-weight: bold; cursor: pointer; margin-top: 0;">&times;</label>
                                      </div>
                                      <div class="modal-body" >
-                                        <form method="POST" action="/room">
+                                        <form method="POST" action="/roomvideo" class="modalform">
                                             <div class="form-group">
                                                 <label class="text-danger " style="font-weight:bold;font-size: 20px; font-family: 'Times New Roman', Times, serif;"><i class="fas fa-user-lock"></i>  Password:</label>
                                                 <br>
-                                                <input class="text-light" style="width: 400px; border: none; background: transparent; border-bottom: 1px solid #fff; background: transparent; outline: none;" type="text" name="meetingpassword" value="<%=meetingpassword%>"   placeholder="Enter Meeting Password">
-                                                <span class="span2"></span>
-                                                  <% if(typeof validationErrors!='undefined' ){%>
-                                                  <% let meetingpasswordError=validationErrors.find(err=> err.param === 'meetingpassword') %>
+                                                <input class="text-light" style="width: 400px; border: none; background: transparent; border-bottom: 1px solid #fff; background: transparent; outline: none;" type="text" name="meetingpassword"   placeholder="Enter Meeting Password">
+                                                  <% if(typeof validationRoomErrors!='undefined' ){%>
+                                                  <% let meetingpasswordError=validationRoomErrors.find(err=> err.param === 'meetingpassword') %>
                                                   <% if (meetingpasswordError ) { %>
-                                                  <span class="span5">
-                                                  <%= meetingpasswordError.msg %>
-                                                  </span>
-                                                  <% } %>
+                                                    <p class="mt-1 alert alert-danger backerror">
+                                                        <%= meetingpasswordError.msg %>
+                                                    </p>
+                                                <% } %>
+                                            <% } %>
                                                   <% if (authError ) { %>
-                                                  <span class="span5">
+                                                    <p class="mt-1 alert alert-danger backerror">
+                                            
                                                   <%= authError%>
-                                                 </span>
-                                                 <% } %>
+                                                 </p>
                                                  <% } %>
                                                 <br>
                                                 <br>
                                                 <label  class="text-danger " style="font-weight: bold; font-size: 20px; font-family: 'Times New Roman', Times, serif;"><i class="fas fa-user"></i>  Username:</label>
                                                 <br>
-                                                <input class="bg-transparent text-light" style="width: 400px; border: none; border-bottom: 1px solid #fff; outline: none;" type="text" value="<%=loggedinuser%>" >
+                                                <input class="bg-transparent text-light" style="width: 400px; border: none; border-bottom: 1px solid #fff; outline: none;" name="username" type="text" placeholder="Enter Your Name" >
+                                                <% if(typeof validationRoomErrors!='undefined' ){%>
+                                                    <% let usernameError=validationRoomErrors.find(err=> err.param === 'username') %>
+                                                    <% if (usernameError) { %>
+                                                      <p class="mt-1 alert alert-danger backerror">
+                                                          <%= usernameError.msg %>
+                                                      </p>
+                                                  <% } %>
+                                              <% } %>
                                                 <br>
                                                 <br>
                                                 <input class="btn btns"  id="audioControl" type="checkbox"/>
@@ -208,13 +216,16 @@
                                                  
                                                  <toggle-switch toggle-state="false"></toggle-switch>
                                             </div>
-                                        </form>
-                                    </div>
-                                            <div class="modal-footer  " >
-                                                <button class="btn btn-danger w-25" style="float: left;" >Join</button>
+                                            <div class="modal-footer " >
+                                                <button class="btn btn-danger w-25" type="submit" style="float: left;" >Join</button>
                                                 <button class="btn btn-danger w-25" data-dismiss="modal" >Cancel</button>
 
                                             </div>
+                                        </form>
+                                        <button class="btn btn-primary btn-lg" data-backdrop="static" data-keyboard="false" data-target="#myModal" data-toggle="modal">
+
+                                    </div>
+                                            
                                         </div>
                                     </div>
                     </div>

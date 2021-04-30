@@ -80,3 +80,20 @@ exports.checkId=(meetingid)=>{
             );    
     })
 }
+exports.checkMeetingIdByPassword=(meetingpassword)=>{ 
+    return new Promise((res, rej) => {
+        connection.query(
+            "SELECT * FROM meetingInfo WHERE meetingpassword = $1", [meetingpassword],
+            function(error, results, fields) {
+                if (error) console.log(error);
+                if (results.rows.length >0 && results.rows[0].validity==true){
+                    res({
+                        "meetingid":results.rows[0].meeting_id
+                    })
+                    
+                 }else{
+                    rej("invalid password")
+                }
+            });
+    });
+}

@@ -74,23 +74,22 @@ exports.getProfileImage = (req, res) => {
 		res.redirect('/profile');
 	}
 };
-exports.getRoom = (req, res) => {
+exports.getRoomByPassword= (req, res) => {
 	const clientpassword = req.body.meetingpassword;
 	if (validationResult(req).isEmpty()) {
-		MeetingInfoModel.checkMeetingPassword(clientpassword)
-			.then(() => {
-				if (!req.session.loggedinuser) {
-					req.session.loggedinuser = req.body.clientname;
-				}
-				res.redirect(`/meeting/${clientpassword}`);
+		MeetingInfoModel.checkMeetingIdByPassword(clientpassword)
+			.then((obj) => {
+				const meetingid=obj.meetingid;
+				res.redirect(`/meeting/${meetingid}`);
 			})
 			.catch((err) => {
+				console.log(err)
 				req.flash('authError', err);
-				res.redirect('/joinmeeting?meetingpassword=' + clientpassword);
+				res.redirect('/profile');
 			});
 	} else {
-		req.flash('validationErrors', validationResult(req).array());
-		res.redirect('/joinmeeting?meetingpassword=' + clientpassword);
+		req.flash('validationRoomErrors', validationResult(req).array());
+		res.redirect('/profile');
 	}
 };
 exports.getBackToMeeting = (req, res, next) => {

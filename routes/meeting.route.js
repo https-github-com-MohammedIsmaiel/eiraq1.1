@@ -10,7 +10,7 @@ check("meetingid")
     .not()
     .isEmpty()
     .withMessage("meetingid is required"),
-check("clientname")
+check("username")
     .not()
     .isEmpty()
     .withMessage("your name is required")

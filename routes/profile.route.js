@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bodyParser = require("body-parser");
 const check = require("express-validator").check;
 const path = require('path');
 const profileController = require('../controllers/profile.controller');

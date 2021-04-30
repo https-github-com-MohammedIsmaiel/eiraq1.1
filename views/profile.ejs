@@ -171,6 +171,7 @@
                                        <h6 class="text-light"><i class="far fa-play-circle"></i>  Join a Meeting</h6>
                                              <label class="close pt-0 text-light" aria-hidden="true" data-dismiss="modal" style="font-size: 20px; font-weight: bold; cursor: pointer; margin-top: 0;">&times;</label>
                                      </div>
+<<<<<<< HEAD
                                      <div class="modal-body" >
                                         <form method="POST" action="/roomvideo" class="modalform">
                                             <div class="form-group">
@@ -218,6 +219,35 @@
                                             </div>
                                             <div class="modal-footer " >
                                                 <button class="btn btn-danger w-25" type="submit" style="float: left;" >Join</button>
+
+                                            <div class="modal-body" >
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label class="text-danger " style="font-weight:bold;font-size: 20px; font-family: 'Times New Roman', Times, serif;"><i class="fas fa-user-lock"></i>  Password:</label>
+                                                        <br>
+                                                        <input class="text-light" style="width: 400px; border: none; background: transparent; border-bottom: 1px solid #fff; background: transparent; outline: none;" type="text" placeholder="Enter Meeting Password">
+                                                        <br>
+                                                        <br>
+                                                        <label  class="text-danger " style="font-weight: bold; font-size: 20px; font-family: 'Times New Roman', Times, serif;"><i class="fas fa-user"></i>  Username:</label>
+                                                        <br>
+                                                        <input class="bg-transparent text-light" style="width: 400px; border: none; border-bottom: 1px solid #fff; outline: none;" type="text" value="<%=loggedinuser%>" >
+                                                        <br>
+                                                        <br>
+                                                        <input class="btn btns"  id="audioControl" type="checkbox"/>
+                                                        <label  class="text-light" for="audioControl">Turn Off my Audio</label>
+                                                         
+                                                         <toggle-switch toggle-state="false"></toggle-switch>
+                                                          <br>
+                                                          <input class="btn btns" id="videoControl" type="checkbox"/>
+                                                         <label class="text-light" for="videoControl">Turn off my Camera</label>
+                                                         
+                                                         <toggle-switch toggle-state="false"></toggle-switch>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer  " >
+                                                <button class="btn btn-danger w-25" style="float: left;" >Join</button>
+>>>>>>> 0ca393612c3a40c06c70d44974da4dc85c5f468b
                                                 <button class="btn btn-danger w-25" data-dismiss="modal" >Cancel</button>
 
                                             </div>

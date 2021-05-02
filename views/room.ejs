@@ -111,7 +111,7 @@
                             <input class="form-control" style="border: none; outline: none;" type="text"
                                 name="copyUrl"
                                 value="<%= meetinginfo.meetingurl%>" id="Url">
-                            <button id="copy"
+                            <button title="copy url" id="copy"
                             class="Copy far fa-copy border-0 border-color:#EEE "
                             ></button>
                         </td>
@@ -120,32 +120,32 @@
                  <% } %>
                 </div>
                 <!-- mohammed ismael -->
-                <button id="btnroom" class="btn" onclick="rooms()">
+                <button title="beak rooms" id="btnroom" class="btn" onclick="rooms()">
                     <i class="fad fa-angle-double-right"></i>
                 </button>
                 <!--mohammed gamal -->
-                <button onclick="fileUpload()" class="btn" id="attendence">
+                <button title="attendance" onclick="fileUpload()" class="btn" id="attendence">
                     <i class="far fa-file-alt"></i>
                 </button>
                 <!-- mohammed gamal -->
-                <button onclick="caption()" class="btn" id="speech_to_text">
+                <button title="caption" onclick="caption()" class="btn" id="speech_to_text">
                     <i class="fas fa-closed-captioning"></i>
                 </button>
                 <!-- mohammed gamal  white boord-->
-                <button class="btn">
+                <button title="white board" class="btn">
                     <i class="far fa-clipboard"></i>
                 </button>
                 <!-- bakr -->
-                <button id="msg" onclick="" class="btn">
+                <button id="msg" title="global chat" onclick="" class="btn">
                     <i class="far fa-envelope"></i>
                 </button>
                 <!-- mohammed ismael -->
-                <button id="users" onclick="" class="btn">
+                <button id="users" title="Users" onclick="" class="btn">
                     <i class="fas fa-users"></i>
                 </button>
                 <!-- ismael mute all -->
                 <% if (isHost) { %>
-                    <button class="btn" onclick="toggleButt()">
+                    <button title="Security" class="btn" onclick="toggleButt()">
                         <i class="fad fa-shield-alt"></i>
                     </button>
                     <% }%>
@@ -329,18 +329,22 @@
             <footer class="boxedit foot">
                 <div class="footbtn">
                     <!-- khiry and ismael -->
-                    <button id="audioControl" class="btn btns"><i class="icons fas fa-microphone"></i></button>
-                    <button id="videoControl" class="btn btns"><i class="icons fas fa-video"></i></button>
+                    <button title="microphone" id="audioControl" class="btn btns"><i
+                            class="icons fas fa-microphone"></i></button>
+                    <button title="video" id="videoControl" class="btn btns"><i
+                            class="icons fas fa-video"></i></button>
                 </div>
                 <div class="footbtn">
                     <!-- khiry -->
-                    <button onclick="share()" id="shareScreen" class="btn btns"><i
+                    <button title="share screen" onclick="share()" id="shareScreen"
+                        class="btn btns"><i
                             class="fas fa-share-square"></i></button>
                     <!-- khiry -->
-                    <button onclick="record()" class="btn btns"><i
+                    <button title="record screen" onclick="record()" class="btn btns"><i
                             class="icons fas fa-bullseye"></i></button>
                     <!-- gamal -->
-                    <button onclick="raiseHand()" class="btn btns" id="raiseHand_btn"><i
+                    <button title="raise hand" onclick="raiseHand()" class="btn btns"
+                        id="raiseHand_btn"><i
                             class="icons fas fa-hand-paper"></i></button>
                 </div>
 
@@ -351,7 +355,7 @@
                 </div>
                 <div class="selectOptiion dspnoneopt">
 
-                    <button id="leave" onclick="leaveMeeting()"
+                    <button title="leave meeting" id="leave" onclick="leaveMeeting()"
                         class="btn btns btn-outline-dark">Leave Meeting</button>
                     <% if (isHost) { %>
                         <button id="endForAll" class="btn btns btn-outline-danger">End Meetiing</button>

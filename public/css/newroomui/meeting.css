@@ -835,6 +835,22 @@ video {
     border: 1px solid #dfdbdb;
     border-radius: 15px;
 }
+.ervice-controls{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: 1px solid gray;
+    z-index: 10;
+    border-radius: 5px;
+}
+.ervice-controls button{
+    display: block;
+    min-width: 120px
+}
+.hide-controls{
+    display: none;
+    left: -100px;
+}
 .hide-imo{
    display: none;
 }

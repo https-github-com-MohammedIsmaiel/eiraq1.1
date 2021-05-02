@@ -186,3 +186,7 @@ function handleEmojies(id){
     var messageBar = document.getElementById("msgBar")
     messageBar.value += emojiElement.innerText
 }
+function toggleButt() {
+	let togg = document.querySelector('.ervice-controls');
+	togg.classList.toggle('hide-controls');
+}

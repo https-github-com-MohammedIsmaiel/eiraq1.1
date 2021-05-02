@@ -131,9 +131,9 @@
                 <button onclick="caption()" class="btn" id="speech_to_text">
                     <i class="fas fa-closed-captioning"></i>
                 </button>
-                <!-- mohammed ismael -->
-                <button onclick="vote()" class="btn">
-                    <i id="votebtn" class="fas fa-poll"></i>
+                <!-- mohammed gamal  white boord-->
+                <button class="btn">
+                    <i class="far fa-clipboard"></i>
                 </button>
                 <!-- bakr -->
                 <button id="msg" onclick="" class="btn">
@@ -145,8 +145,8 @@
                 </button>
                 <!-- ismael mute all -->
                 <% if (isHost) { %>
-                    <button id="muteAll" class="btn">
-                        <i class="fas fa-microphone-alt"></i>
+                    <button class="btn" onclick="toggleButt()">
+                        <i class="fad fa-shield-alt"></i>
                     </button>
                     <% }%>
             </div>
@@ -180,44 +180,6 @@
                     </div>
                 </div>
                 <div class="mainsec">
-                    <!-- vote -->
-                    <div class="cards">
-                        <div class="c front">
-                            <h3>Vote</h3>
-                            <span>Enter the question :</span>
-                            <div class="question">
-                                <input type="text" name="" id="">
-                            </div>
-                            <div class="chosse">
-                                <div><input type="checkbox" name="" id=""><label>question 1</label></div>
-                                <div><input type="checkbox" name="" id=""><label>question 2</label></div>
-                                <div><input type="checkbox" name="" id=""><label>question 3</label></div>
-                            </div>
-                            <div class="action">
-                                <input type="submit" value="Submit">
-                                <input onclick="rotate()" type="submit" value="Result">
-                            </div>
-                        </div>
-                        <div class="c back">
-                            <h4 class="res">Graph Resalt</h4>
-                            <button class="backs" onclick="rotatex()"><i class="fad fa-angle-double-left"></i></button>
-                            <div class="ress">
-                                <span style="background-color: rgb(255, 166, 0);;">v
-                                    1</span>
-                                <span style="background-color: rgba(6, 122, 216, 0.753);">v
-                                    2</span>
-                                <span style="background-color: rgb(235, 90, 46);">v
-                                    3</span>
-                            </div>
-                            <div class="graph">
-                                <span style="background-color: rgb(0, 0, 0);" class="x-axis"></span>
-                                <span style="background-color: rgb(255, 166, 0);" class="q1"></span>
-                                <span style="background-color: rgba(6, 122, 216, 0.753);" class="q2"></span>
-                                <span style="background-color: rgb(235, 90, 46);" class="q3"></span>
-                                <span style="background-color: rgb(0, 0, 0);" class="y-axis"></span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- mohammed ismael and  bakr -->
                 <div class="vidAndMessAndFri">
@@ -354,6 +316,11 @@
                             <div class="fotmsg"></div>
                         </div>
                     </div>
+                </div>
+                <div class="ervice-controls hide-controls">
+                    <button id="muteAll" class="btn">Mute All</button>
+                    <button id="" class="btn">Share Screen</button>
+                    <button id="" class="btn">Chat</button>
                 </div>
             </section>
             <!----------------- End Video Section ------------------->

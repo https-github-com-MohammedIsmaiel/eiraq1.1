@@ -354,11 +354,15 @@
                             class="col icons fas fa-sign-out-alt text-light"></i></button>
                 </div>
                 <div class="selectOptiion dspnoneopt">
-
+                    
                     <button title="leave meeting" id="leave" onclick="leaveMeeting()"
                         class="btn btns btn-outline-dark">Leave Meeting</button>
+
                     <% if (isHost) { %>
-                        <button id="endForAll" class="btn btns btn-outline-danger">End Meetiing</button>
+                        <a href="/leavemeeting">
+                            <button id="endForAll" class="btn btns btn-outline-danger">End For
+                                All</button>
+                        </a>
                         <% }%>
                 </div>
             </footer>

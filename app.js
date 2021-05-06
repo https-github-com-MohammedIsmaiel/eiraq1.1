@@ -160,49 +160,6 @@ app.get("/schedule", (req, res) => res.render("schedule"));
 
 app.use(cors());
 
-// const Vote = mongoose.model(
-// 	'myvoteModel',
-// 	{
-// 		question: {
-// 			type: String,
-// 			required: true,
-// 			trim: true,
-// 		},
-// 		option1: {
-// 			key: {
-// 				type: String,
-// 				required: true,
-// 				trim: true,
-// 			},
-// 			value: {
-// 				type: Number,
-// 			},
-// 		},
-// 		option2: {
-// 			key: {
-// 				type: String,
-// 				required: true,
-// 				trim: true,
-// 			},
-// 			value: {
-// 				type: Number,
-// 			},
-// 		},
-// 		option3: {
-// 			key: {
-// 				type: String,
-// 				required: true,
-// 				trim: true,
-// 			},
-// 			value: {
-// 				type: Number,
-// 			},
-// 		},
-// 	},
-// 	'voteData',
-// );
-// const newVote = new Vote();
-
 io.on("connection", (socket) => {
     RTCMultiConnectionServer.addSocket(socket)
     socket.on("join-room", (roomid) => {

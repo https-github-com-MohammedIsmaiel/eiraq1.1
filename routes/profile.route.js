@@ -1,4 +1,5 @@
 
+const bodyParser = require("body-parser");
 const check = require("express-validator").check;
 const path = require('path');
 const profileController = require('../controllers/profile.controller');
@@ -103,6 +104,23 @@ router.post(
 	}),
 	profileController.getProfileImage,
 );
+
+// when press join redirect me to meeting page
+router.post("/roomvideo",bodyParser.urlencoded({ extended: true }),
+check("meetingpassword")
+    .not()
+    .isEmpty()
+    .withMessage("meetingpassword is required"),
+check("username")
+    .not()
+    .isEmpty()
+    .withMessage("your name is required")
+    .isLength({ min: 6 })
+    .withMessage("your name must be at least 6 charachters"),
+	profileController.getRoomByPassword);
+
+// when press cancel redirect me to profile page
+router.get('/returnback', profileController.getBackToMeeting);
 router.get('/schedule', profileController.getScedule);
 router.get('/profile/folders', profileController.getData);
 router.post('/createfolder',profileController.createFolder)
@@ -115,7 +133,6 @@ router.get('/profile/folders/files/delete/:fileid/:driveid/:folderid/:foldername
 router.get('/profile/folders/delete/:fileid/:driveid',profileController.deleteGeneralFile)
 router.get('/profile/folders/files/return',profileController.returnToFolders)
 router.get('/profile/folders/return',profileController.returnToProfile)
-
 
 
 module.exports = router;

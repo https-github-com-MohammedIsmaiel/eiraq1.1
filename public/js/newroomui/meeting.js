@@ -13,15 +13,11 @@ function rooms() {
 
     s3.classList.contains('breakroomsdisplayed') ?
         setTimeout(() => {     
-            document.getElementById('btnroom').innerHTML = '<i class="fad fa-angle-double-left"></i>'
-        }, 500) :
+            document.getElementById('btnroom').innerHTML = '<i style = "color:#ff6a00" class="fad fa-angle-double-left"></i>'
+        }, 400) :
         setTimeout(() => {
             document.getElementById('btnroom').innerHTML = '<i class="fad fa-angle-double-right"></i>'
-        }, 500)
-}
-
-function mic() {
-    document.getElementById()
+        }, 300)
 }
 
 function rotate() {
@@ -38,32 +34,37 @@ function rotatex() {
 }
 function colorRed() {
     let color = document.getElementById('x');
-    color.classList.toggle('red')
+    color.classList.toggle('gold')
 }
 function vote() {
     let card = document.querySelector('.cards');
     let color = document.getElementById('votebtn');
-    color.classList.toggle('red')
+    color.classList.toggle('gold');
     card.classList.toggle('cardshow');
 }
+
 let video = document.getElementById('vid')
 let mesage = document.querySelector('.mesage');
 let friends = document.querySelector('.friends');
-
+let msgicon = document.querySelector('.fa-envelope')
+let vidIvon = document.querySelector('.fa-users')
 // open / close chat window
 document.getElementById('msg').addEventListener("click", () => {
     if (mesage.classList.contains("disp")) {
         mesage.classList.add("hide");
         mesage.classList.remove("disp");
+        msgicon.classList.remove('gold')
         video.classList.toggle('width')
     } else {
         mesage.classList.remove("hide");
         mesage.classList.add("disp");
+        msgicon.classList.add('gold')
         video.classList.toggle('width')
     }
     if (friends.classList.contains("disp")) {
         friends.classList.add("hide");
         friends.classList.remove("disp");
+        vidIvon.classList.remove('gold');
         video.classList.toggle('width')
     }
 });
@@ -72,21 +73,21 @@ document.getElementById('users').addEventListener("click", () => {
     if (friends.classList.contains("disp")) {
         friends.classList.add("hide");
         friends.classList.remove("disp");
+        vidIvon.classList.remove('gold')
         video.classList.toggle('width')
     } else {
         friends.classList.remove("hide");
         friends.classList.add("disp");
+        vidIvon.classList.add('gold')
         video.classList.toggle('width')
     }
     if (mesage.classList.contains("disp")) {
         mesage.classList.add("hide");
         mesage.classList.remove("disp");
+        msgicon.classList.remove('gold');
         video.classList.toggle('width')
     }
 });
-
-
-
 
 function scrollMembers(factor) {
     let members = document.querySelector('.all-users')
@@ -127,8 +128,65 @@ function dispMeetingInfo() {
     let icon = document.getElementsByClassName('x')[0]
     info.classList.toggle('meeting-d-none')
     if (info.classList.contains('meeting-d-none')) {
-        icon.classList.remove('coloryello')
+        icon.classList.remove('gold')
     } else {
-        icon.classList.add('coloryello')
+        icon.classList.add('gold')
     }
+}
+
+function openOPtion(){
+ let d = document.querySelector('.selectOptiion');
+ d.classList.toggle('dspnoneopt')
+}
+
+
+var copyTextareaBtn = document.querySelector('#copy');
+
+copyTextareaBtn.addEventListener('click', function (event) {
+	var copyTextarea = document.querySelector('#Url');
+	copyTextarea.focus();
+	copyTextarea.select();
+
+	try {
+		var successful = document.execCommand('copy');
+		var msg = successful ? 'successful' : 'unsuccessful';
+	} catch (err) {
+		console.log('Oops, unable to copy');
+	}
+});
+
+function showEmojies() {
+	let imo = document.getElementById('imo');
+	imo.classList.toggle('hide-imo');
+}
+
+function share() {
+	let share = document.querySelector('.fa-share-square');
+	share.classList.toggle('gold');
+}
+function record() {
+	let record = document.querySelector('.fa-bullseye');
+	record.classList.toggle('gold');
+}
+function raiseHand() {
+	let handIcon = document.querySelector('.fa-hand-paper');
+	handIcon.classList.toggle('gold');
+}
+function fileUpload() {
+	let file = document.querySelector('.fa-file-alt');
+	file.classList.toggle('gold');
+}
+function caption() {
+	let caption = document.querySelector('.fa-closed-captioning');
+	caption.classList.toggle('gold');
+}
+
+function handleEmojies(id){
+    var emojiElement = document.getElementById(id)
+    var messageBar = document.getElementById("msgBar")
+    messageBar.value += emojiElement.innerText
+}
+function toggleButt() {
+	let togg = document.querySelector('.ervice-controls');
+	togg.classList.toggle('hide-controls');
 }

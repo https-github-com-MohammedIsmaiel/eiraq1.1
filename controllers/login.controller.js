@@ -33,7 +33,6 @@ exports.authLogin =  (req, res, next) => {
     if (validationResult(req).isEmpty()) {
         accountsModel.authAccount(useremail,password )
             .then((obj) => {
-                console.log(obj)
                 req.session.userId = obj.id;
                 req.session.loggedinuser = obj.username;
                 req.session.loggedin = true;
@@ -68,6 +67,9 @@ exports.handleAuth = (request, response) => {
         response.render('profile', {
 			loggedinuser: request.session.loggedinuser,
 			validationErrors: request.flash('validationErrors'),
+			validationRoomErrors: request.flash('validationRoomErrors'),
+              authError: request.flash("authError")[0],
+            
 			pro_img: request.session.profileimg,
 			acc_type: request.session.type,
 		});

@@ -1,7 +1,6 @@
 var fileTypes = ['pdf', 'docx', 'rtf', 'jpg', 'jpeg', 'png', 'txt','rar','zip'];  //acceptable file types
 function readURL(input) {
     if (input.files && input.files[0]) {
-        console.log(input.files)
         var extension = input.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
             isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
 

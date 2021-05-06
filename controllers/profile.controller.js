@@ -50,7 +50,6 @@ exports.geVideoRoom = (req, res) => {
 		return res.redirect('/joinmeeting?meetingid=' + req.params.room);
 	}
 	MeetingInfoModel.checkId(req.params.room).then((obj) => {
-		// console.log(req.params.room);
 		obj.meetingurl = req.headers.host + obj.meetingurl;
 		res.render('room', {
 			roomid: req.params.room,
@@ -79,6 +78,28 @@ exports.getProfileImage = (req, res) => {
 		res.redirect('/profile');
 	}
 };
+exports.getRoomByPassword= (req, res) => {
+	const clientpassword = req.body.meetingpassword;
+	if (validationResult(req).isEmpty()) {
+		MeetingInfoModel.checkMeetingIdByPassword(clientpassword)
+			.then((obj) => {
+				const meetingid=obj.meetingid;
+				res.redirect(`/meeting/${meetingid}`);
+			})
+			.catch((err) => {
+				console.log(err)
+				req.flash('authError', err);
+				res.redirect('/profile');
+			});
+	} else {
+		req.flash('validationRoomErrors', validationResult(req).array());
+		res.redirect('/profile');
+	}
+};
+exports.getBackToMeeting = (req, res, next) => {
+	res.redirect('/');
+};
+
 exports.getScedule = (req, res) => {
 	res.render('scedule');
 	res.end();

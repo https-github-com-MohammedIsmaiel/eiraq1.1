@@ -1,12 +1,18 @@
 /** @format */
-
+const inputchat= document.getElementsByClassName('room-chat')[0];
+$("#files").change(function() {
+	filename = this.files[0].name
+inputchat.value =filename;
+	console.log(filename);
+  });
+  
 $('#form').on('submit', handleFormSubmit);
-
-let typingTimeout = null;
-let isStartTypeSent = false;
-let typingUsers = new Set();
+// let typingTimeout = null;
+// let isStartTypeSent = false;
+// let typingUsers = new Set();
 
 function handleFormSubmit(e) {
+	inputchat.value =" ";
 	e.preventDefault();
 	const form = $(this);
 	const formData = new FormData(form[0]);
@@ -25,6 +31,7 @@ function handleFormSubmit(e) {
 		success: handleUploadSuccess,
 		xhr: handleUploadProgress,
 	});
+	console.log();
 }
 
 function handleUploadSuccess(resp) {
@@ -37,7 +44,10 @@ function handleUploadSuccess(resp) {
 		},
 	});
 	$('#form')[0].reset();
-	$('#upload-progress').text('');
+	setTimeout(() => {
+		$('#upload-progress').text('');
+	}, 2000);
+	console.log(resp.newFilename);
 }
 
 function handleUploadProgress() {
@@ -71,21 +81,21 @@ function handleUploadProgress() {
 	return xhr;
 }
 
-function handleStartType(name) {
-	typingUsers.add(name);
-	let displayString = '';
-	for (const user of Array.from(typingUsers)) {
-		displayString += `${user}, `;
-	}
-	displayString = displayString.substr(0, displayString.length - 2);
-	displayString += ' typing...';
-	$('#indicator').text(displayString);
-}
+// function handleStartType(name) {
+// 	typingUsers.add(name);
+// 	let displayString = '';
+// 	for (const user of Array.from(typingUsers)) {
+// 		displayString += `${user}, `;
+// 	}
+// 	displayString = displayString.substr(0, displayString.length - 2);
+// 	displayString += ' typing...';
+// 	$('#indicator').text(displayString);
+// }
 
 function handleFile(f) {
-	console.log(f);
+	console.log(f.file.filename);
 	$('#chat').append(`
-            <li class = "message"><b>${f.file.messagewriter} :<a target='_blank' href='/uploads/${f.file.url}'
+            <li><b>${f.file.messagewriter} :<a target='_blank' href='/uploads/${f.file.url}'
             download='${f.file.filename}'>${f.file.filename}</a>
             </li>
         `);

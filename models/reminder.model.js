@@ -33,7 +33,6 @@ module.exports = function(){
         connection.query(query,[today,current_hour],function(err,result){
             if (err) console.log(err)
             if (result.rows.length>0){ 
-               
                 result.rows.forEach(element => {
                    
                         const mailOptions = {

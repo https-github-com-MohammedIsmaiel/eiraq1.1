@@ -1,9 +1,6 @@
-
 const shareScreen = document.querySelector('#shareScreen')
 const videoContainer = document.querySelector('#allUser')
 const shareContainer = document.querySelector('#shareContainer')
-const mainVideo = document.querySelector('#mainVideo')
-// const userVideo = document.querySelector('.uservideo')
 const logedInUser = document.querySelector('#logedInUser')
 const audioControl = document.querySelector('#audioControl')
 const videoControl = document.querySelector('#videoControl')
@@ -16,28 +13,20 @@ var localStreamId
 var connection = new RTCMultiConnection()
 connection.socketURL = '/'
 connection.session = {
-    Audio: {
-        mandatory: {
-            echoCancellation: false,
-            googAutoGainControl: true,
-            googNoiseSuppression: true,
-            googHighpassFilter: true,
-            googTypingNoiseDetection: true,
-        }
-    },
-    video: true,
-    // data: true
+    Audio: false,
+    video: false,
+    data: true
     // screen:true
 }
+
 //connection extra data
 connection.extra = {
     username: logedInUser.innerText,
     raiseHand: false,
     isAudioMuted: false,
     isVideoMuted: false,
-    img: document.querySelector('#profileImg').src,
-};
-console.log(connection.extra.img);
+    img: document.querySelector('#profileImg').src
+}
 //joining room
 socket.emit('join-room', ROOM_ID)
 
@@ -75,32 +64,32 @@ if (resolutions == 'Ultra-HD') {
         frameRate: 30
     };
 }
-// //detect if there is mice or webcam
-// connection.DetectRTC.load(function () {
-//     if (connection.DetectRTC.hasMicrophone === true) {
-//         // enable microphone
-//         connection.mediaConstraints.audio = true;
-//         connection.session.audio = true;
-//     }
+//detect if there is mice or webcam
+connection.DetectRTC.load(function () {
+    if (connection.DetectRTC.hasMicrophone === true) {
+        // enable microphone
+        connection.mediaConstraints.audio = true;
+        connection.session.audio = true;
+    }
 
-//     if (connection.DetectRTC.hasWebcam === true) {
-//         // enable camera
-//         connection.mediaConstraints.video = true;
-//         connection.session.video = true;
-//     }
+    if (connection.DetectRTC.hasWebcam === true) {
+        // enable camera
+        connection.mediaConstraints.video = true;
+        connection.session.video = true;
+    }
 
-//     if (connection.DetectRTC.hasMicrophone === false &&
-//         connection.DetectRTC.hasWebcam === false) {
-//         // he do not have microphone or camera
-//         // so, ignore capturing his devices
-//         connection.dontCaptureUserMedia = true;
-//     }
-// })
+    if (connection.DetectRTC.hasMicrophone === false &&
+        connection.DetectRTC.hasWebcam === false) {
+        // he do not have microphone or camera
+        // so, ignore capturing his devices
+        connection.dontCaptureUserMedia = true;
+    }
+})
 
-connection.mediaConstraints = {
-    video: videoConstraints,
-    audio: true
-};
+// connection.mediaConstraints = {
+//     video: videoConstraints,
+//     audio: true
+//};
 
 var CodecsHandler = connection.CodecsHandler;
 
@@ -202,12 +191,7 @@ connection.onstream = (event) => {
 
     video.id = event.streamid;
     localStreamId = event.streamid
-    video.addEventListener('click', (e) => {
-        console.log('clicked');
-        mainVideo.srcObject = e.target.srcObject
-        mainVideo.setAttribute('height', '80vh')
-        // userGrid.removeChild(e.target)
-    })
+
     // to keep room-id in cache
     localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
 };
@@ -219,7 +203,7 @@ connection.onstreamended = function (event) {
     }
 };
 
-connection.checkPresence(ROOM_ID, (isRoomExist, ROOM_ID) => {
+connection.checkPresence(ROOM_ID + 'sub_room_1', (isRoomExist, ROOM_ID) => {
     console.log('hello')
     if (isRoomExist === true) {
         connection.join(ROOM_ID);
@@ -237,22 +221,15 @@ shareScreen.addEventListener('click', () => {
 })
 //mute and unmute
 audioControl.addEventListener('click', (e) => {
-    let firstLocalStream = connection.streamEvents.selectFirst({
-        local: true
-    }).stream;
     if (connection.extra.isAudioMuted === false) {
         // connection.streamEvents[connection.userid].stream.mute('audio');
         connection.extra.isAudioMuted = true
-        // localStream.mute('audio');
-        // connection.streamEvents.selectFirst().mute('audio');
-        firstLocalStream.mute('audio');
-        audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`
+        localStream.mute('audio');
+        audioControl.innerHTML = `<i class=" fas fa-microphone-slash"></i>`
     } else {
         connection.extra.isAudioMuted = false
         // connection.streamEvents[connection.userid].stream.unmute('audio');
-        // localStream.unmute('audio');
-        // connection.streamEvents.selectFirst().unmute('audio');
-        firstLocalStream.unmute('audio');
+        localStream.unmute('audio');
         audioControl.innerHTML = `<i class=" fas fa-microphone"></i>`
         connection.streamEvents.selectFirst('local').mediaElement.muted = true;
         //uncomment this when using different devices
@@ -262,18 +239,16 @@ audioControl.addEventListener('click', (e) => {
             connection.renegotiate();  // share again with all users
         }, function () { });
     }
-    connection.updateExtraData();
-    renderUsers()
 })
 
 videoControl.addEventListener('click', (e) => {
-    let firstLocalStream = connection.streamEvents.selectFirst({
+    var firstLocalStream = connection.streamEvents.selectFirst({
         local: true
     }).stream;
     if (connection.extra.isVideoMuted === false) {
         connection.extra.isVideoMuted = true
         firstLocalStream.mute('video');
-        videoControl.innerHTML = `<i style = "color: #ff6a00;" class="fas fa-video-slash"></i>`;
+        videoControl.innerHTML = `<i class="fas fa-video-slash"></i>`
         //uncomment this when using different devices
         // connection.attachStreams[0].getVideoTracks().forEach(function (track) {
         //     track.stop(); // turn off cam
@@ -289,22 +264,20 @@ videoControl.addEventListener('click', (e) => {
         //     connection.renegotiate();  // share again with all users
         // }, function () { });
     }
-    connection.updateExtraData();
-    renderUsers()
 })
 //handle on mute
 connection.onunmute = function (e) {
     // $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
     // e.mediaElement.srcObject = null;
     // e.mediaElement.setAttribute('poster', connection.extra.img);
-    // console.log('unmuting');
+    console.log('unmuting');
 };
 //handle on mute
 connection.onmute = function (e) {
     // $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
     // e.mediaElement.srcObject = null;
     // e.mediaElement.setAttribute('poster', connection.extra.img);
-    // console.log('muting');
+    console.log('muting');
 };
 
 //mute all
@@ -312,10 +285,6 @@ muteAll.addEventListener('click', () => {
     // Object.keys(connection.streamEvents).forEach(function (streamid) {
     //     connection.streamEvents[streamid].stream.mute('audio');
     // });
-    let parts = connection.getAllParticipants()
-    for (let i = 0; i < par.length; i++) {
-        var username = connection.getExtraData(parts[i]);
-    }
     connection.streamEvents.selectAll({
         local: true,
         isAudio: true

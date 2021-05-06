@@ -13,7 +13,14 @@ exports.destroyMeeting=(req,res,next)=>{
 };
 
 
-
+exports.leave = (req, res, next) => {
+	if (req.session.meetingcreater) {
+		req.session.meetingcreater = false;
+		res.redirect('/profile');
+	} else {
+		res.redirect('/profile');
+	}
+};
 
 
 const Busboy = require('busboy');

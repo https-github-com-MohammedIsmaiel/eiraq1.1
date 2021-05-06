@@ -14,7 +14,7 @@ const connection = require('./init_database').connection;
 });
 module.exports = function(){
     // Cron Job to run around 7am Server Time 
-    cron.schedule('* * * * *', () => {
+    cron.schedule('0 * * * *', () => {
 		var today = new Date();
 		var tomorrow = new Date(today);
 		tomorrow.setDate(tomorrow.getDate() + 1);
@@ -24,15 +24,15 @@ module.exports = function(){
 		var yyyy = tomorrow.getFullYear();
 
 		var current_hour = today.getHours();
-		console.log(current_hour);
-
+        
 		today = yyyy + '-' + mm + '-' + dd;
 		let query =
 			'SELECT events.*, accounts.email,accounts.username FROM events INNER JOIN  accounts ON owner_id= accounts.id WHERE CAST(start_date AS DATE) =$1 AND EXTRACT(HOUR FROM start_date) =$2';
 		connection.query(query, [today, current_hour], function (err, result) {
 			if (err) console.log(err);
-			if (result.rows.length > 0) {
-				result.rows.forEach((element) => {
+            if (result.rows.length > 0) {
+                result.rows.forEach((element) => {
+                    
 					const mailOptions = {
 						from: 'eiraqapp@gmail.com',
 						to: element.email,

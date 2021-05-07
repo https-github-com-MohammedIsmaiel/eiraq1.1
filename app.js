@@ -114,13 +114,13 @@ const connection = require('./models/init_database').connection;
 
 // connect to database
 connection.connect(async function (err) {
-	if (err) throw err;
-	console.log('Connected!');
-	await connection.query(
-		"CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY,username VARCHAR(255), Email VARCHAR(255), password VARCHAR(255),img_url VARCHAR(350) DEFAULT 'default.png', type VARCHAR(20) DEFAULT 'normal')"
-	);
-	await connection.query(
-		'CREATE TABLE IF NOT EXISTS meetingInfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN)'
+    if (err) throw err;
+    console.log('Connected!');
+    await connection.query(
+        "CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY,username VARCHAR(255), Email VARCHAR(255), password VARCHAR(255),img_url VARCHAR(350) DEFAULT 'default.png', type VARCHAR(20) DEFAULT 'normal')"
+    );
+    await connection.query(
+        'CREATE TABLE IF NOT EXISTS meetingInfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN)'
     );
     await connection.query(
         'CREATE TABLE IF NOT EXISTS meetingInfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN)'
@@ -129,12 +129,12 @@ connection.connect(async function (err) {
         'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT, CONSTRAINT fk_owner FOREIGN KEY(owner_id) REFERENCES accounts(id))'
     );
     await connection.query(
-		'CREATE TABLE IF NOT EXISTS folders (id  BIGSERIAL unique not null PRIMARY KEY,foldername VARCHAR(255),user_id INT)'
+        'CREATE TABLE IF NOT EXISTS folders (id  BIGSERIAL unique not null PRIMARY KEY,foldername VARCHAR(255),user_id INT)'
     );
     await connection.query(
-		'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT fk_owner FOREIGN KEY(folder_id) REFERENCES folders(id))'
+        'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT fk_owner FOREIGN KEY(folder_id) REFERENCES folders(id))'
     );
- 
+
     console.log('tables created')
 });
 
@@ -163,10 +163,8 @@ app.use(cors());
 io.on("connection", (socket) => {
     RTCMultiConnectionServer.addSocket(socket)
     socket.on("join-room", (roomid) => {
-        socket.on('endForAll', d => io.to(roomid).emit('endForAll'))
-
         socket.join(roomid);
-
+        socket.on('endForAll', d => io.to(roomid).emit('endForAll'))
         socket.on("join-meet", (data) => {
             io.to(roomid).emit('participants', data)
         })
@@ -174,53 +172,12 @@ io.on("connection", (socket) => {
         socket.on("message", (message, messagewriter) => {
             io.to(roomid).emit("createMessage", message, messagewriter);
         });
-        socket.on('newVote', (question, gender, option1, option2, option3) => {
-            newVote.question = question
-            newVote.option1.key = option1
-            newVote.option2.key = option2
-            newVote.option3.key = option3
-            newVote.option1.value = 0
-            newVote.option2.value = 0
-            newVote.option3.value = 0
-            newVote.save().then((newVote) => {
-                console.log(newVote);
-                io.to(roomid).emit('startVoting', question, gender, option1, option2, option3)
-            }).catch((e) => {
-                console.log(e);
-            })
 
-        })
         //FileUploading
         socket.on('file', (f, messagewriter) => {
             console.log(`File by: ${messagewriter}`);
             io.to(roomid).emit('file', f);
         });
-
-        socket.on('votting', (value) => {
-            console.log('votting')
-            console.log(value)
-            for (let i = 0; i < value.length; i++) {
-                if (newVote.option1.key === value[i]) {
-                    newVote.option1.value += 1
-
-                } else if (newVote.option2.key === value[i]) {
-                    newVote.option2.value += 1
-
-                } else if (newVote.option3.key === value[i]) {
-                    newVote.option3.value += 1
-
-                }
-                newVote.save().then(() => {
-                    console.log(newVote);
-                }).catch(e => {
-                    console.log(e);
-                })
-            }
-            socket.emit('result', newVote.question,
-                { key: newVote.option1.key, value: newVote.option1.value },
-                { key: newVote.option2.key, value: newVote.option2.value },
-                { key: newVote.option3.key, value: newVote.option3.value })
-        })
         socket.on("disconnect", () => {
         });
     });
@@ -228,8 +185,8 @@ io.on("connection", (socket) => {
 });
 
 // reminder
- var reminder=require('./models/reminder.model');
- reminder();
+var reminder = require('./models/reminder.model');
+reminder();
 
 /**
  * Server running

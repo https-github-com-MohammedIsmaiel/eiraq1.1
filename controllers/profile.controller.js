@@ -1,6 +1,12 @@
 /** @format */
 
 const MeetingInfoModel = require('../models/meetingInfo.model');
+const folderfileinfo = require('../models/folderfileinfo.model');
+var path = require('path')
+const GoogleDrive = require('../models/googleDrive');
+const googleDrive = new GoogleDrive();
+
+
 
 const validationResult = require('express-validator').validationResult;
 const accountsModel = require('../models/accounts.model');
@@ -43,9 +49,7 @@ exports.geVideoRoom = (req, res) => {
 	if (!req.session.loggedinuser) {
 		return res.redirect('/joinmeeting?meetingid=' + req.params.room);
 	}
-	console.log(req.params.room)
 	MeetingInfoModel.checkId(req.params.room).then((obj) => {
-		// console.log(req.params.room);
 		obj.meetingurl = req.headers.host + obj.meetingurl;
 		res.render('room', {
 			roomid: req.params.room,
@@ -99,4 +103,159 @@ exports.getBackToMeeting = (req, res, next) => {
 exports.getScedule = (req, res) => {
 	res.render('scedule');
 	res.end();
+};
+exports.getData = (req, res) => {
+	folderfileinfo.getAllFolders().then((result1) => {
+		folderfileinfo.getAllGeneralFiles().then((result2) => {
+			res.render('files/createfolder', {
+				folders: result1,
+				files:result2,
+				user_id: req.session.userId	
+			});
+		}).catch(err => console.log(err));
+	
+	}).catch(err => console.log(err));
+};
+
+exports.createFolder = (req, res) => {
+	const foldername = req.body.foldername;
+	const user_id = req.session.userId;
+	folderfileinfo.SaveFolderInfo(
+		foldername,
+		user_id
+	).then(() => {
+		res.redirect(`/profile/folders`);
+		res.end();
+	});
+};
+
+exports.showFiles = (req, res) => {
+	const folderid = req.query.folderid;
+	const foldername = req.query.folderName;
+	folderfileinfo.getAllFiles(
+		folderid
+	).then((result) => {
+	    res.render('files/uploadfiles',{
+			files: result,
+			folderid:folderid,
+			foldername:foldername,
+			user_id: req.session.userId
+		})
+	
+	}).catch(err => console.log(err));
+};
+exports.createFiles = (req, res, next) => {
+	const filename = req.file.fileName;
+    var filetype = path.extname(filename);
+	const folderid = req.body.folderid;
+	const foldername = req.body.foldername;
+	const fileid = req.file.fileId;
+	const user_id = req.session.userId;
+  googleDrive.generatePublicUrl(fileid).then(link => {
+	  const webViewLink = link.webViewLink;
+	  folderfileinfo.SaveFileInfo(
+		filename,
+		fileid,
+		webViewLink,
+		filetype,
+		user_id,
+		folderid
+	).then(() => {
+		res.redirect('/profile/folders/files?folderName='+foldername+'&folderid='+folderid);
+		res.end();
+	}).catch(err => console.log(err));
+	})
+
+};
+
+exports.createGeneralFiles = (req, res, next) => {
+	const filename = req.file.fileName;
+    var filetype = path.extname(filename);
+	const fileid = req.file.fileId;
+	const user_id = req.session.userId;
+  googleDrive.generatePublicUrl(fileid).then(link => {
+	  const webViewLink = link.webViewLink;
+	  folderfileinfo.SaveGeneralFileInfo(
+		filename,
+		fileid,
+		webViewLink,
+		filetype,
+		user_id,
+	).then(() => {
+		res.redirect('/profile/folders');
+		res.end();
+	}).catch(err => console.log(err));
+	})
+
+};
+exports.deleteFolder = (req, res, next) => {
+	const folderid = req.params.folderid;
+	folderfileinfo.getAllFiles(
+		folderid
+	).then((result) => {
+		if(result.length>0){
+		result.forEach(function(element) 
+		{ 
+			googleDrive.Deletefile(element.fileid).then(() => {
+			
+			}).catch(err => console.log(err));
+			
+		
+		});
+	  }
+	
+	}).then(()=>{
+		folderfileinfo.deleteFolderWithFiles(
+			folderid
+		).then(() => {
+			res.redirect('/profile/folders');
+		})
+	
+	}).catch(err => console.log(err));
+	
+};
+
+exports.deleteFile = (req, res, next) => {
+	const folderid = req.params.folderid;
+	const foldername = req.params.foldername;
+	const fileid = req.params.fileid;
+	const filedriveid = req.params.driveid;
+	googleDrive.Deletefile(filedriveid ).then(() => {
+		folderfileinfo.deleteFile(
+			fileid
+		).then(() => {
+			res.redirect('/profile/folders/files?folderName='+foldername+'&folderid='+folderid); 
+		
+		}).catch(err => console.log(err));
+	
+	}).catch(err => console.log(err));
+	
+
+};
+exports.deleteGeneralFile = (req, res, next) => {
+	const fileid = req.params.fileid;
+	const filedriveid = req.params.driveid;
+	googleDrive.Deletefile(filedriveid ).then(() => {
+		folderfileinfo.deleteFile(
+			fileid
+		).then(() => {
+			res.redirect('/profile/folders'); 
+		
+		}).catch(err => console.log(err));
+	
+	}).catch(err => console.log(err));
+	
+
+};
+
+exports.returnToFolders = (req, res, next) => {
+	
+			res.redirect('/profile/folders'); 
+	
+};
+
+exports.returnToProfile = (req, res, next) => {
+	
+	res.redirect('/profile'); 
+
 };

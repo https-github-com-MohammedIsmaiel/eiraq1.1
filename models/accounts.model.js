@@ -8,7 +8,6 @@ exports.createAccount = function(username, useremail, password) {
         var sql = "SELECT * FROM accounts WHERE Email =$1";
         connection.query(sql, [useremail], function(err, data, fields) {
             if (err) reject(err)
-            console.log(data.rows.length)
             if (data.rows.length >= 1) {
                 var msg = useremail + " was already exist";
                 reject(msg)

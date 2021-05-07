@@ -6,8 +6,6 @@ const session = require('express-session');
 const express = require('express');
 var cors = require('cors');
 
-
-
 const bodyParser = require('body-parser');
 const path = require('path');
 // var mysql = require('mysql');
@@ -70,12 +68,12 @@ const Knex = require('knex');
 const knex = Knex({
     client: 'pg',
     connection: {
-        host: 'ec2-3-91-127-228.compute-1.amazonaws.com',
-        user: 'ykpkcybaauradp',
+        host: 'ec2-34-206-8-52.compute-1.amazonaws.com',
+        user: 'rbgvqvhqammioy',
         password:
-            '445569c30ab5ca4807c8f3d051a031b8c9dc2ed71709811ed048cda8aa0a03c5',
+            '4164b47f7d7558ac4e65468537b777d3b13aca818a6a61e51fd85d03843012b8',
         port: '5432',
-        database: 'd9ou5t95ridkjr',
+        database: 'd7bvh5o2o71u2c',
         ssl: {
             rejectUnauthorized: false,
         },
@@ -112,7 +110,7 @@ app.use('/', profileRoutes)
 app.use('/', roomRoutes)
 
 
-const connection = require('./models/init_database').connection
+const connection = require('./models/init_database').connection;
 
 // connect to database
 connection.connect(async function (err) {
@@ -130,6 +128,13 @@ connection.connect(async function (err) {
     await connection.query(
         'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT, CONSTRAINT fk_owner FOREIGN KEY(owner_id) REFERENCES accounts(id))'
     );
+    await connection.query(
+		'CREATE TABLE IF NOT EXISTS folders (id  BIGSERIAL unique not null PRIMARY KEY,foldername VARCHAR(255),user_id INT)'
+    );
+    await connection.query(
+		'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT fk_owner FOREIGN KEY(folder_id) REFERENCES folders(id))'
+    );
+ 
     console.log('tables created')
 });
 
@@ -154,49 +159,6 @@ app.use("/", twitterRoutes);
 app.get("/schedule", (req, res) => res.render("schedule"));
 
 app.use(cors());
-
-// const Vote = mongoose.model(
-// 	'myvoteModel',
-// 	{
-// 		question: {
-// 			type: String,
-// 			required: true,
-// 			trim: true,
-// 		},
-// 		option1: {
-// 			key: {
-// 				type: String,
-// 				required: true,
-// 				trim: true,
-// 			},
-// 			value: {
-// 				type: Number,
-// 			},
-// 		},
-// 		option2: {
-// 			key: {
-// 				type: String,
-// 				required: true,
-// 				trim: true,
-// 			},
-// 			value: {
-// 				type: Number,
-// 			},
-// 		},
-// 		option3: {
-// 			key: {
-// 				type: String,
-// 				required: true,
-// 				trim: true,
-// 			},
-// 			value: {
-// 				type: Number,
-// 			},
-// 		},
-// 	},
-// 	'voteData',
-// );
-// const newVote = new Vote();
 
 io.on("connection", (socket) => {
     RTCMultiConnectionServer.addSocket(socket)
@@ -264,6 +226,10 @@ io.on("connection", (socket) => {
     });
 
 });
+
+// reminder
+ var reminder=require('./models/reminder.model');
+ reminder();
 
 /**
  * Server running

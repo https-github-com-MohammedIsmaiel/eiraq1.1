@@ -33,7 +33,6 @@ exports.authLogin =  (req, res, next) => {
     if (validationResult(req).isEmpty()) {
         accountsModel.authAccount(useremail,password )
             .then((obj) => {
-                console.log(obj)
                 req.session.userId = obj.id;
                 req.session.loggedinuser = obj.username;
                 req.session.loggedin = true;

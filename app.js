@@ -68,12 +68,12 @@ const Knex = require('knex');
 const knex = Knex({
     client: 'pg',
     connection: {
-        host: 'ec2-34-206-8-52.compute-1.amazonaws.com',
-        user: 'rbgvqvhqammioy',
+        host: 'ec2-54-152-185-191.compute-1.amazonaws.com',
+        user: 'rcezopoulzyyhl',
         password:
-            '4164b47f7d7558ac4e65468537b777d3b13aca818a6a61e51fd85d03843012b8',
+            '4e54bf606cfc76caafcc7b056ae5d0f0a6e2b9f68d7b288d902c762a210104a8',
         port: '5432',
-        database: 'd7bvh5o2o71u2c',
+        database: 'd9t3p362ihaeei',
         ssl: {
             rejectUnauthorized: false,
         },

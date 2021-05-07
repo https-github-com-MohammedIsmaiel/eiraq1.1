@@ -30,26 +30,25 @@
             <header class="container-fluid boxedit head">
                 <div class="username">
                     <% if (typeof pro_img=='undefined' ) { %>
-                        <img id="profileImg" src="/upload_images/default.png" width="50px"
-                            alt="user image" srcset="">
-                       
-                    <% } else if (pro_img.startsWith("https")) { %>      
-                            
-                        <img id="profileImg" src="<%=pro_img%>" width="50px" alt="user image" srcset="">
-                    <% } else { %>
-                    <img id="profileImg" src="/upload_images/<%=pro_img%>" width="50px"
-                        alt="user image" srcset="">
+                        <img id="profileImg" src="/upload_images/default.png" width="50px" alt="user image" srcset="">
 
-                  <% } %>
-                                <% if (isHost) { %>
-                                    <span id="logedInUser">
-                                        <%= loggedinuser+" (host)"%>
-                                    </span>
-                                <% } else { %>
+                        <% } else if (pro_img.startsWith("https")) { %>
+
+                            <img id="profileImg" src="<%=pro_img%>" width="50px" alt="user image" srcset="">
+                            <% } else { %>
+                                <img id="profileImg" src="/upload_images/<%=pro_img%>" width="50px" alt="user image"
+                                    srcset="">
+
+                                <% } %>
+                                    <% if (isHost) { %>
                                         <span id="logedInUser">
-                                            <%= loggedinuser%>
+                                            <%= loggedinuser+" (host)"%>
                                         </span>
-                                 <% } %>
+                                        <% } else { %>
+                                            <span id="logedInUser">
+                                                <%= loggedinuser%>
+                                            </span>
+                                            <% } %>
                 </div>
                 <div class="logo">
                     <div class="contain">
@@ -78,46 +77,44 @@
 
                 <button id="meet-inf" onclick="dispMeetingInfo()"><i class="x far fa-lightbulb"></i></button>
 
-               <div class="meeting-info meeting-d-none">
-                <% if(typeof meetinginfo!='undefined' ) { %>
-                <table class="table table-hover table-borderless">
-                    <tr>
-                        <td><i class="fas fa-id-card-alt"></i></td>
-                        <td>
-                            <span>
-                                <%= meetinginfo.meetingid%>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-user"></i></td>
-                        <td>
-                            <span>
-                                <%= meetinginfo.hostname%>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-key"></i></td>
-                        <td>
-                            <span>
-                                <%= meetinginfo.password%>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-link"></i></td>
-                        <td>
-                            <input class="form-control" style="border: none; outline: none;" type="text"
-                                name="copyUrl"
-                                value="<%= meetinginfo.meetingurl%>" id="Url">
-                            <button title="copy url" id="copy"
-                            class="Copy far fa-copy border-0 border-color:#EEE "
-                            ></button>
-                        </td>
-                    </tr>
-                </table>
-                 <% } %>
+                <div class="meeting-info meeting-d-none">
+                    <% if(typeof meetinginfo!='undefined' ) { %>
+                        <table class="table table-hover table-borderless">
+                            <tr>
+                                <td><i class="fas fa-id-card-alt"></i></td>
+                                <td>
+                                    <span>
+                                        <%= meetinginfo.meetingid%>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-user"></i></td>
+                                <td>
+                                    <span>
+                                        <%= meetinginfo.hostname%>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-key"></i></td>
+                                <td>
+                                    <span>
+                                        <%= meetinginfo.password%>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-link"></i></td>
+                                <td>
+                                    <input class="form-control" style="border: none; outline: none;" type="text"
+                                        name="copyUrl" value="<%= meetinginfo.meetingurl%>" id="Url">
+                                    <button title="copy url" id="copy"
+                                        class="Copy far fa-copy border-0 border-color:#EEE "></button>
+                                </td>
+                            </tr>
+                        </table>
+                        <% } %>
                 </div>
                 <!-- mohammed ismael -->
                 <button title="beak rooms" id="btnroom" class="btn" onclick="rooms()">
@@ -160,19 +157,31 @@
                         BreakOut Rooms
                     </div>
                     <div class="h44">
-                        <h4 onclick="slideMain()">main room</h4>
-                        <ul class="displayed" id="main">
+                        <h4 id="joinMainRoom" class="btn btn-primary" onclick="">main room</h4>
+                        <!-- <ul class="displayed" id="main">
                             <li>ahmed</li>
                             <li>ahmed</li>
                             <li>ahmed</li>
                             <li>ahmed</li>
                             <li>ahmed</li>
                             <li>ahmed</li>
+                        </ul> -->
+                    </div>
+                    <div class="h44">
+                        <h4 id="" class="btn btn-outline-success" onclick="slideOther()">Section</h4>
+                        <h4 class="btn" id="joinSection"><i class="fas fa-plus-square"></i>
+                        </h4>
+                        <ul class="displayed" id="other">
+                            <li>mohammed</li>
+                            <li>mohammed</li>
+                            <li>mohammed</li>
                         </ul>
                     </div>
                     <div class="h44">
-                        <h4 onclick="slideOther()">other room</h4>
-                        <ul class="displayed" id="other">
+                        <h4 class="btn btn-outline-success" onclick="slideMain()">Lab</h4>
+                        <h4 class="btn" id="joinLab"><i class="fas fa-plus-square"></i>
+                        </h4>
+                        <ul class="displayed" id="main">
                             <li>mohammed</li>
                             <li>mohammed</li>
                             <li>mohammed</li>
@@ -190,7 +199,8 @@
                         </div>
                         <div class="uservideo">
                             <!-- TODO@Eng-Muhammed-Samy #2 edit this style for this element only -->
-                            <video muted id="mainVideo" autoplay style="width: 99%; height: 77vh; border-color: #eceaea;"></video>
+                            <video muted id="mainVideo" autoplay
+                                style="width: 99%; height: 77vh; border-color: #eceaea;"></video>
                             <!-- <div class="user"> -->
                             <div id="shareContainer" class="v-black"></div>
                             <!-- <video autoplay muted src="./videos/salah.mp4"></video> -->
@@ -232,8 +242,8 @@
                                 <div style="color: green;" id="upload-progress" class="uploadFilePers">
                                 </div>
                                 <div class="msgActions">
-                                <input class="room-chat" type="text " placeholder="Type message... " name=" "
-                                    id="msgBar">
+                                    <input class="room-chat" type="text " placeholder="Type message... " name=" "
+                                        id="msgBar">
                                     <!-- mohammed gammal -->
                                     <button onclick="showEmojies()"><i class="far fa-grin"></i></button>
                                     <!-- alaa ibrahim -->
@@ -242,8 +252,8 @@
                                         <label for="files"><i class="fas fa-file"></i></label>
                                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                                     </form>
-                                    
-                                    
+
+
                                     <!--bakr -->
                                     <!-- <button><i class="fas fa-paper-plane"></i></button> -->
                                 </div>
@@ -296,9 +306,9 @@
                                     <button class="btn" id="Yes" onclick="handleEmojies('Yes')">
                                         👍
                                     </button>
-                                    
 
-                                    
+
+
                                 </div>
                             </div>
                         </div>
@@ -331,20 +341,17 @@
                     <!-- khiry and ismael -->
                     <button title="microphone" id="audioControl" class="btn btns"><i
                             class="icons fas fa-microphone"></i></button>
-                    <button title="video" id="videoControl" class="btn btns"><i
-                            class="icons fas fa-video"></i></button>
+                    <button title="video" id="videoControl" class="btn btns"><i class="icons fas fa-video"></i></button>
                 </div>
                 <div class="footbtn">
                     <!-- khiry -->
-                    <button title="share screen" onclick="share()" id="shareScreen"
-                        class="btn btns"><i
+                    <button title="share screen" onclick="share()" id="shareScreen" class="btn btns"><i
                             class="fas fa-share-square"></i></button>
                     <!-- khiry -->
                     <button title="record screen" onclick="record()" class="btn btns"><i
                             class="icons fas fa-bullseye"></i></button>
                     <!-- gamal -->
-                    <button title="raise hand" onclick="raiseHand()" class="btn btns"
-                        id="raiseHand_btn"><i
+                    <button title="raise hand" onclick="raiseHand()" class="btn btns" id="raiseHand_btn"><i
                             class="icons fas fa-hand-paper"></i></button>
                 </div>
 
@@ -354,13 +361,13 @@
                             class="col icons fas fa-sign-out-alt text-light"></i></button>
                 </div>
                 <div class="selectOptiion dspnoneopt">
-                    
+
                     <button title="leave meeting" id="leave" onclick="leaveMeeting()"
                         class="btn btns btn-outline-dark">Leave Meeting</button>
-                    
+
                     <% if (isHost) { %>
-                            <button id="endForAll" class="btn btns btn-outline-danger">End For
-                                All</button>
+                        <button id="endForAll" class="btn btns btn-outline-danger">End For
+                            All</button>
                         <% }%>
                 </div>
             </footer>
@@ -368,7 +375,7 @@
         </div>
 
         <!-- end new ui -->
-        
+
         <script>
             var socket = io('/')
         </script>
@@ -392,8 +399,9 @@
 
         <!-- <script src="/js/speech_to_text/speech_to_text.js"></script> -->
         <script src="/js/attendance&participants/attendence.js"></script>
-        
-    
+        <script src="/js/mainmeeting/breackoutrooms.js"></script>
+
+
     </body>
 
     </html>

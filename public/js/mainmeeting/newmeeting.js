@@ -313,9 +313,7 @@ muteAll.addEventListener('click', () => {
     //     connection.streamEvents[streamid].stream.mute('audio');
     // });
     let parts = connection.getAllParticipants()
-    for (let i = 0; i < par.length; i++) {
-        var username = connection.getExtraData(parts[i]);
-    }
+    if (!parts) { return }
     connection.streamEvents.selectAll({
         local: true,
         isAudio: true
@@ -324,4 +322,11 @@ muteAll.addEventListener('click', () => {
             track.stop();
         });
     })
+    socket.emit('renderMuteAll')
+})
+socket.on('renderMuteAll', () => {
+    connection.extra.isAudioMuted = true
+    connection.updateExtraData();
+    audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`
+    renderUsers()
 })

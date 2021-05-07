@@ -178,6 +178,8 @@ io.on("connection", (socket) => {
             console.log(`File by: ${messagewriter}`);
             io.to(roomid).emit('file', f);
         });
+        // io.to(roomid).emit('file', f);
+        socket.on('renderMuteAll', () => io.to(roomid).emit('renderMuteAll'))
         socket.on("disconnect", () => {
         });
     });

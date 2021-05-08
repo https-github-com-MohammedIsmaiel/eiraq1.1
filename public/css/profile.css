@@ -256,3 +256,10 @@ ul li p {
     position: absolute;
     top: 10px;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color: white;
+}

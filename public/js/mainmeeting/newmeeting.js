@@ -8,6 +8,9 @@ const logedInUser = document.querySelector('#logedInUser')
 const audioControl = document.querySelector('#audioControl')
 const videoControl = document.querySelector('#videoControl')
 const muteAll = document.querySelector('#muteAll')
+const whiteBoardBtn = document.querySelector("#whiteBoard")
+const whilteBoardContainer = document.querySelector("#whiteBoardContainer")
+const userVideoDiv = document.querySelector(".uservideo")
 
 var localStream
 var localStreamId
@@ -204,6 +207,8 @@ connection.onstream = (event) => {
     localStreamId = event.streamid
     video.addEventListener('click', (e) => {
         console.log('clicked');
+        mainVideo.style.display = ''
+        whilteBoardContainer.style.display = 'none'
         mainVideo.srcObject = e.target.srcObject
         mainVideo.setAttribute('height', '80vh')
         // userGrid.removeChild(e.target)
@@ -324,4 +329,10 @@ muteAll.addEventListener('click', () => {
             track.stop();
         });
     })
+})
+
+whiteBoardBtn.addEventListener('click', ()=>{
+    mainVideo.style.display = 'none';
+    // userVideoDiv.innerHTML = ''
+    whilteBoardContainer.style.display = "";
 })

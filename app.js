@@ -225,6 +225,8 @@ io.on("connection", (socket) => {
         });
     });
 
+    socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
+
 });
 
 // reminder

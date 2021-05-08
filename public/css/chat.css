@@ -25,33 +25,29 @@ sidebar {
     width: 300px;
     min-width: 300px;
     display: flex;
-    background: #3A5160;
+    background: #fff;
     flex-direction: column;
+    border-right: 1px solid #ccc;
     transition: 500ms all;
 }
 sidebar .logo {
     display: flex;
-    /* margin: 10px 0 0 0; */
-    /* padding-bottom: 10px; */
+    margin: 10px 0 0 0;
+    padding-bottom: 10px;
     align-items: center;
     justify-content: center;
     color: #000;
     font-size: 3em;
     letter-spacing: 7px;
-    background-color: #517785;
     border-bottom: 1px solid #ccc;
-
-
 }
-
-
 sidebar .list-wrap {
     width: 100%;
     overflow: auto;
 }
 sidebar .list-wrap .list {
-    background-color: #53758A;
-color: white;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
     display: flex;
     align-items: center;
     padding: 5px;
@@ -59,7 +55,7 @@ color: white;
     cursor: pointer;
 }
 sidebar .list-wrap .list:hover, sidebar .list-wrap .list.active {
-    background: #3A5160;
+    background: #f4f7f9;
 }
 sidebar .list-wrap .list img {
     border-radius: 50%;

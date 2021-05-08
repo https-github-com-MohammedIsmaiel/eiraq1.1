@@ -120,6 +120,8 @@ check("username")
 	profileController.getRoomByPassword);
 
 // when press cancel redirect me to profile page
+router.get('/chat', profileController.getChat);
+
 router.get('/returnback', profileController.getBackToMeeting);
 router.get('/schedule', profileController.getScedule);
 router.get('/profile/folders', profileController.getData);

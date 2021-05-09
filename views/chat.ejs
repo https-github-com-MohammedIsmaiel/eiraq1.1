@@ -5,22 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/chat.css">
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-
+    <link rel="stylesheet" href="/css/chat.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
+    
+  </head>
 <body>
-  <span class="top"></span>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   
-    <div class="container-fluid bg-white chatbox shadow-lg rounded">
+    <div class="container">
       <sidebar>
-        <span class="logo">  <ul class="list-group list-group-flush">
+        <span class="logo"> 
+           <ul class="list-group list-group-flush">
             <li class="list-group-item" style="background-color:#f8f8f8;">
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search or new chat" class="form-control form-rounded" />
             </li>
-        </ul></span>
+        </ul>
+      </span>
       
         <div class="list-wrap" id="myLists">
             <% for(var i=0; i < result.length; i++) { %>

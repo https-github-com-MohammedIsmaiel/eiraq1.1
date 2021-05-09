@@ -1,163 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/chat.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/chat.css">
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 <body>
   <span class="top"></span>
-  
-    <div class="container-fluid bg-white chatbox shadow-lg rounded">
-      <sidebar>
-        <span class="logo">  <ul class="list-group list-group-flush">
-            <li class="list-group-item" style="background-color:#f8f8f8;">
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search or new chat" class="form-control form-rounded" />
-            </li>
-        </ul></span>
-      
-        <div class="list-wrap" id="myLists">
-            <% for(var i=0; i < result.length; i++) { %>
-        <div class="list">
-            <% if ( result[i].img_url =='undefined' ) { %>
-                <img  src="/upload_images/default.png" 
-                    alt="user image" >
-            
-            <% } else if (result[i].img_url.startsWith("https")) { %>      
-                    
-                <img  src="<%= result[i].img_url%>" width="50px" alt="user image" srcset="">
-            <% } else { %>
-            <img src="/upload_images/<%= result[i].img_url%>" width="50px"
-                alt="user image" srcset="">
 
-        <% } %>
+  <div class="container-fluid bg-white chatbox shadow-lg rounded">
+    <sidebar>
+      <span class="logo">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" style="background-color:#f8f8f8;">
+            <input type="text" id="myInput" onkeyup="myFunction()"
+              placeholder="Search or new chat"
+              class="form-control form-rounded" />
+          </li>
+        </ul>
+      </span>
 
-        <div class="info">
-            <span class="user"><%= result[i].username%></span>
-          </div>
- 
-        </div>
+      <div class="list-wrap" id="myLists">
+        <% for(var i=0; i < result.length; i++) { %>
+          <div class="list">
+            <% if ( result[i].img_url=='undefined' ) { %>
+              <img src="/upload_images/default.png" alt="user image">
 
-        <% } %>
-    
+              <% } else if (result[i].img_url.startsWith("https")) { %>
 
-        </div>
-      </sidebar>
-      <div class="content">
-        <header>
-          <img src="" alt="">
-          <div class="info">
-            <span class="user"></span>
-            <!-- <span class="time"></span> -->
-          </div>
-          <div class="open">
-            <a href="javascript:;">UP</a>
-          </div>
-        </header>
-        <div class="message-wrap">
-          <div class="message-list">
-            <div class="msg">
-              <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit minus minima quo corporis.
-            </p>
-            </div>
-            <!-- <div class="time">now</div> -->
-          </div>
-          <div class="message-list me">
-            <div class="msg">
-                <p>
-                  Lorem ipsum dolor sit amet.
-                </p>
-            </div>
-            <!-- <div class="time">now</div> -->
-          </div>
-          <div class="message-list">
-            <div class="msg">
-              <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit minus minima quo corporis.
-            </p>
-            </div>
-            <!-- <div class="time">now</div> -->
-          </div>
-          <div class="message-list me">
-            <div class="msg">
-                <p>
-                  Lorem ipsum dolor sit amet.
-                </p>
-            </div>
-            <!-- <div class="time">now</div> -->
-          </div>
-          <div class="message-list">
-            <div class="msg">
-              <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit minus minima quo corporis.
-            </p>
-            </div>
-            <!-- <div class="time">now</div> -->
-          </div>
-          <div class="message-list me">
-            <div class="msg">
-                <p>
-                  Lorem ipsum dolor sit amet.
-                </p>
-            </div>
-            <!-- <div class="time">now</div> -->
-          </div>
-          <div class="message-list">
-            <div class="msg">
-              <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit minus minima quo corporis.
-            </p>
-            </div>
-            <!-- <div class="time">now</div> -->
-          </div>
-          <div class="message-list me">
-            <div class="msg">
-                <p>
-                  Lorem ipsum dolor sit amet.
-                </p>
-            </div>
-            <!-- <div class="time">now</div> -->
-          </div>
-   
-    
-        </div>
-        
-        <div class="card-footer">
-            <div class="row" style="position:relative;">
-                <div class="col-md-12" id="emoji" style="display:none;">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#smiley" role="tab" aria-controls="home" aria-selected="true">Smiley</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="smiley" role="tabpanel" aria-labelledby="home-tab">
-                        </div>
+                <img src="<%= result[i].img_url%>" width="50px" alt="user image"
+                  srcset="">
+                <% } else { %>
+                  <img src="/upload_images/<%= result[i].img_url%>" width="50px"
+                    alt="user image" srcset="">
+
+                  <% } %>
+
+                    <div class="info">
+                      <span class="user">
+                        <%= result[i].username%>
+                      </span>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2 col-md-1">
-                    <i class="far fa-grin fa-1x" onclick=showEmojiPanel(); style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px;"></i>
-                </div>
-                <div class="col-8 col-md-10">
-                    <input type="text" data-placeholder="Send a message to {0}" type="text" onfocus=hideEmojiPanel() class="form-control form-rounded" />
-                </div>
-                <div class="col-2 col-md-1">
-                    <i class="fas fa-paper-plane fa-1x"style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px;"></i>
-                </div>
-            </div>
+
+          </div>
+
+          <% } %>
+
+
+      </div>
+    </sidebar>
+    <div class="content">
+      <header>
+        <img src="" alt="">
+        <div class="info">
+          <span class="user"></span>
+          <!-- <span class="time"></span> -->
         </div>
-    </div>
+        <div class="open">
+          <a href="javascript:;">UP</a>
+        </div>
+      </header>
+      <div class="message-wrap">
+        <div class="message-list">
+          <div class="msg">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit
+              minus minima quo corporis.
+            </p>
+          </div>
+          <!-- <div class="time">now</div> -->
+        </div>
+        <div class="message-list me">
+          <div class="msg">
+            <p>
+              Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <!-- <div class="time">now</div> -->
+        </div>
+        <div class="message-list">
+          <div class="msg">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit
+              minus minima quo corporis.
+            </p>
+          </div>
+          <!-- <div class="time">now</div> -->
+        </div>
+        <div class="message-list me">
+          <div class="msg">
+            <p>
+              Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <!-- <div class="time">now</div> -->
+        </div>
+        <div class="message-list">
+          <div class="msg">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit
+              minus minima quo corporis.
+            </p>
+          </div>
+          <!-- <div class="time">now</div> -->
+        </div>
+        <div class="message-list me">
+          <div class="msg">
+            <p>
+              Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <!-- <div class="time">now</div> -->
+        </div>
+        <div class="message-list">
+          <div class="msg">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit
+              minus minima quo corporis.
+            </p>
+          </div>
+          <!-- <div class="time">now</div> -->
+        </div>
+        <div class="message-list me">
+          <div class="msg">
+            <p>
+              Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <!-- <div class="time">now</div> -->
+        </div>
+
+
+      </div>
+
+      <div class="card-footer">
+        <div class="row" style="position:relative;">
+          <div class="col-md-12" id="emoji" style="display:none;">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab"
+                  href="#smiley" role="tab" aria-controls="home"
+                  aria-selected="true">Smiley</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="smiley" role="tabpanel"
+                aria-labelledby="home-tab">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 col-md-1">
+            <i class="far fa-grin fa-1x" onclick=showEmojiPanel();
+              style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px;"></i>
+          </div>
+          <div class="col-8 col-md-10">
+            <input type="text" data-placeholder="Send a message to {0}"
+              type="text" onfocus=hideEmojiPanel()
+              class="form-control form-rounded" />
+          </div>
+          <div class="col-2 col-md-1">
+            <i class="fas fa-paper-plane fa-1x"
+              style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px;"></i>
+          </div>
+        </div>
       </div>
     </div>
-    <script src="/js/chat.js"></script>
+  </div>
+  </div>
+  <script src="/js/chat.js"></script>
 </body>
+
 </html>

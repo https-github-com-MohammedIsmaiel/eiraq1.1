@@ -104,6 +104,19 @@ exports.getScedule = (req, res) => {
 	res.render('scedule');
 	res.end();
 };
+exports.getChat = (req, res) => {
+	accountsModel.getAllAccounts()
+            .then((result) => {
+               
+				res.render('chat',{
+					result:result
+				});
+                res.end();
+            })
+            .catch(err => {
+                res.redirect("/profile");
+            });
+};
 exports.getData = (req, res) => {
 	folderfileinfo.getAllFolders().then((result1) => {
 		folderfileinfo.getAllGeneralFiles().then((result2) => {

@@ -21,6 +21,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
     <link rel="stylesheet" href="/css/newroomui/meeting.css">
     <link rel="stylesheet" href="/css/newroomui/logo.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" id="light" href="/css/newroomui/lightprofile.css">
     <link rel="stylesheet" href="/css/timer.css">
     </head>
@@ -162,7 +163,7 @@
                     <i class="fas fa-closed-captioning"></i>
                 </button>
                 <!-- mohammed gamal  white boord-->
-                <button title="white board" class="btn">
+                <button id="whiteBoard" title="white board" class="btn">
                     <i class="far fa-clipboard"></i>
                 </button>
                 <!-- bakr -->
@@ -238,6 +239,25 @@
                         </div>
                         <div class="uservideo">
                             <!-- TODO@Eng-Muhammed-Samy #2 edit this style for this element only -->
+                            <div id="whiteBoardContainer" style="border-color: #eceaea; display: none;">
+
+                                <canvas class="whiteboard" style="width: calc(100% - 250px); height: 640px; z-index: 10;"></canvas>
+
+                                <div class="colors" style="z-index: 30;">
+                                    <div class="color black"></div>
+                                    <div class="color white"></div>
+                                    <div class="color red"></div>
+                                    <div class="color green"></div>
+                                    <div class="color blue"></div>
+                                    <div class="color yellow"></div>
+                                    <div class="btn colorClear">CLEAR</div>
+                                    <div class="slidecontainer">
+                                        <input type="range" min="1" max="30" value="4" class="slider" id="myRange">
+                                      </div>
+                                </div>
+
+                            </div>
+
                             <video muted id="mainVideo" autoplay
                                 style="width: 99%; height: 77vh; border-color: #eceaea;"></video>
                             <!-- <div class="user"> -->
@@ -473,8 +493,9 @@
         <!-- <script src="/js/speech_to_text/speech_to_text.js"></script> -->
         <script src="/js/attendance&participants/attendence.js"></script>
         <script src="/js/mainmeeting/breackoutrooms.js"></script>
+        <script src="/js/whiteboard.js"></script>
 
-
+        <script src="/js/mainmeeting/timer.js"></script>
     </body>
 
     </html>

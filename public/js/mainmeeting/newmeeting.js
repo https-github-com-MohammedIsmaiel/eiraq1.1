@@ -4,6 +4,8 @@ const shareScreen = document.querySelector('#shareScreen');
 const videoContainer = document.querySelector('#allUser');
 const shareContainer = document.querySelector('#shareContainer');
 const mainVideo = document.querySelector('#mainVideo');
+const whiteBoardBtn = document.querySelector('#whiteBoard')
+const whiteBoardContainer = document.querySelector('#whiteBoardContainer')
 // const userVideo = document.querySelector('.uservideo')
 const logedInUser = document.querySelector('#logedInUser');
 const audioControl = document.querySelector('#audioControl');
@@ -210,6 +212,8 @@ connection.onstream = (event) => {
 	localStreamId = event.streamid;
 	video.addEventListener('click', (e) => {
 		console.log('clicked');
+		mainVideo.style.display = ''
+		whiteBoardContainer.style.display = 'none'
 		mainVideo.srcObject = e.target.srcObject;
 		mainVideo.setAttribute('height', '80vh');
 		// userGrid.removeChild(e.target)
@@ -338,3 +342,8 @@ muteAll.addEventListener('click', () => {
 			});
 		});
 });
+
+whiteBoardBtn.addEventListener('click', ()=>{
+	mainVideo.style.display = 'none'
+	whiteBoardContainer.style.display = ''
+})

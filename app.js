@@ -225,11 +225,14 @@ io.on("connection", (socket) => {
         });
     });
 
+    socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
+
 });
 
 // reminder
  var reminder=require('./models/reminder.model');
  reminder();
+ 
 
 /**
  * Server running

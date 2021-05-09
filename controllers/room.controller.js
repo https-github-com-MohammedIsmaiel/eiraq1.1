@@ -2,7 +2,7 @@
 const MeetingInfoModel = require('../models/meetingInfo.model');
 exports.destroyMeeting=(req,res,next)=>{
   const meetingid=req.session.meetingid;
-    if(req.session.meetingcreater){
+  if(req.session.meetingcreater){
       MeetingInfoModel.clearvalidity(meetingid).then(()=>{
         req.session.meetingcreater=false;
         res.redirect("/profile");

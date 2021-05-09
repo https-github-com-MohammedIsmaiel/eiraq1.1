@@ -5,6 +5,13 @@
     box-sizing: border-box;
     font: 16px sans-serif;
 }
+.top {
+    height: 130px;
+    width: 100%;
+    background-color: #004d96;
+    position: fixed;
+    z-index: -1;
+}
 :focus {
     outline: 0;
 }
@@ -12,7 +19,7 @@ a {
     text-decoration: none;
 }
 body {
-    background: #f4f7f9;
+    background: rgb(80, 89, 99);
 }
 html, body {
     height: 100% !important;

@@ -98,3 +98,24 @@ function hideEmojiPanel() {
 
 
 loadAllEmoji();
+
+function myFunction() {
+  // Declare variables
+  var input, filter, lists, list, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  lists = document.getElementById("myLists");
+  list= document.getElementsByClassName("list");
+
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < list.length; i++) {
+    listcontent = list[i].getElementsByTagName("span")[0];
+    txtValue = listcontent.textContent || listcontent.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      list[i].style.display = "";
+    } else {
+      list[i].style.display = "none";
+    }
+  }
+}

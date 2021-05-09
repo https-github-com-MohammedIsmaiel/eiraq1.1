@@ -16,12 +16,13 @@
   
     <div class="container-fluid bg-white chatbox shadow-lg rounded">
       <sidebar>
-        <ul class="list-group list-group-flush">
+        <span class="logo">  <ul class="list-group list-group-flush">
             <li class="list-group-item" style="background-color:#f8f8f8;">
-                <input type="text" placeholder="Search or new chat" class="form-control form-rounded" />
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search or new chat" class="form-control form-rounded" />
             </li>
-        </ul>
-        <div class="list-wrap">
+        </ul></span>
+      
+        <div class="list-wrap" id="myLists">
             <% for(var i=0; i < result.length; i++) { %>
         <div class="list">
             <% if ( result[i].img_url =='undefined' ) { %>

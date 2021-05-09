@@ -232,6 +232,7 @@ io.on("connection", (socket) => {
 // reminder
  var reminder=require('./models/reminder.model');
  reminder();
+ 
 
 /**
  * Server running

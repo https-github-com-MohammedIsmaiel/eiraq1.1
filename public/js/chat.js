@@ -6,19 +6,19 @@ var list = document.querySelectorAll(".list"),
     open = document.querySelector(".open a");
 
 //init
-// function init() {
-//   //input.focus();
-//   let now = 2;
-//   const texts = ["İyi akşamlar", "Merhaba, nasılsın?",
-//                 "Harikasın! :)", "Günaydın", "Tünaydın",
-//                 "Hahaha", "Öğlen görüşelim.", "Pekala"];
-//   for(var i = 4; i < list.length; i++) {
-//     list[i].querySelector(".time").innerText = `${now} day ago`;
-//     list[i].querySelector(".text").innerText = texts[(i-4) < texts.length ? (i-4) : Math.floor(Math.random() * texts.length)];
-//     now++;
-//   }
-// }
-// init();
+//function init() {
+  //input.focus();
+  //let now = 2;
+  //const texts = ["İyi akşamlar", "Merhaba, nasılsın?",
+             //   "Harikasın! :)", "Günaydın", "Tünaydın",
+             //   "Hahaha", "Öğlen görüşelim.", "Pekala"];
+  //for(var i = 4; i < list.length; i++) {
+    //list[i].querySelector(".time").innerText = `${now} day ago`;
+    //list[i].querySelector(".text").innerText = texts[(i-4) < texts.length ? (i-4) : Math.floor(Math.random() * texts.length)];
+   // now++;
+ // }
+//}
+//init();
 
 //process
 function process() {
@@ -53,11 +53,11 @@ function click(l, index) {
     open.innerText="UP";
     const img = l.querySelector("img").src,
           user = l.querySelector(".user").innerText;
-          // time = l.querySelector(".time").innerText;
+       
 
     content.querySelector("img").src = img;
     content.querySelector(".info .user").innerHTML = user;
-    // content.querySelector(".info .time").innerHTML = time;
+   
 
     const inputPH = input.getAttribute("data-placeholder");
     input.placeholder = inputPH.replace("{0}", user.split(' ')[0]);

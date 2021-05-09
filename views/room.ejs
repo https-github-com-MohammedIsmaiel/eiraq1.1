@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="/css/newroomui/logo.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" id="light" href="/css/newroomui/lightprofile.css">
-    <style>
-    </style>
+    <link rel="stylesheet" href="/css/timer.css">
     </head>
 
 
@@ -60,7 +59,21 @@
                                                 <%= loggedinuser%>
                                             </span>
                                             <% } %>
-                                                <%- include('parts/timer')%>
+
+                                                <div class="timer"
+                                                    style="  margin: 0px 10px; font-size: 18px; font-weight: 700;">
+                                                    <div style="display: inline-block; width: 15px;  height: 15px; border-radius: 50%;"
+                                                        class="timeLamp colorred">
+                                                    </div>
+                                                    <label
+                                                        style=" color: #4700f3;"
+                                                        id="minutes">00</label>
+                                                    <label
+                                                        style=" color: #f36d00;"
+                                                        id="colon">:</label>
+                                                    <label
+                                                        id="seconds">00</label>
+                                                </div>
                 </div>
                 <div class="logo">
                     <div class="contain">
@@ -467,7 +480,7 @@
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js "
             integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW "
-            crossorigin="anonymous "></script>
+            crossorigin="anonymous"></script>
         <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
         <!-- <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script> -->
         <script src="/js/mainmeeting/newmeeting.js"></script>

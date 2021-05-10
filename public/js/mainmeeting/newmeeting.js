@@ -81,6 +81,7 @@ if (resolutions == 'Ultra-HD') {
 //detect if there is mice or webcam
 connection.DetectRTC.load(function () {
     if (connection.DetectRTC.hasMicrophone === true) {
+        console.log('have micccc');
         // enable microphone
         connection.mediaConstraints.audio = true;
         connection.session.audio = {
@@ -92,12 +93,18 @@ connection.DetectRTC.load(function () {
                 googTypingNoiseDetection: true,
             }
         }
+    } else {
+        connection.mediaConstraints.audio = false;
+        connection.session.audio = false;
     }
 
     if (connection.DetectRTC.hasWebcam === true) {
         // enable camera
         connection.mediaConstraints.video = videoConstraints;
         connection.session.video = true;
+    } else {
+        connection.mediaConstraints.video = false;
+        connection.session.video = false;
     }
 
     if (connection.DetectRTC.hasMicrophone === false &&

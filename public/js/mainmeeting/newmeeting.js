@@ -18,20 +18,20 @@ var localStreamId;
 //init connection
 var connection = new RTCMultiConnection();
 connection.socketURL = '/';
-connection.session = {
-    Audio: {
-        mandatory: {
-            echoCancellation: false,
-            googAutoGainControl: true,
-            googNoiseSuppression: true,
-            googHighpassFilter: true,
-            googTypingNoiseDetection: true,
-        },
-    },
-    video: true,
-    // data: true
-    // screen:true
-};
+// connection.session = {
+//     Audio: {
+//         mandatory: {
+//             echoCancellation: false,
+//             googAutoGainControl: true,
+//             googNoiseSuppression: true,
+//             googHighpassFilter: true,
+//             googTypingNoiseDetection: true,
+//         },
+//     },
+//     video: true,
+//     // data: true
+//     // screen:true
+// };
 //connection extra data
 connection.extra = {
     username: logedInUser.innerText,
@@ -78,32 +78,40 @@ if (resolutions == 'Ultra-HD') {
         frameRate: 30,
     };
 }
-// //detect if there is mice or webcam
-// connection.DetectRTC.load(function () {
-//     if (connection.DetectRTC.hasMicrophone === true) {
-//         // enable microphone
-//         connection.mediaConstraints.audio = true;
-//         connection.session.audio = true;
-//     }
+//detect if there is mice or webcam
+connection.DetectRTC.load(function () {
+    if (connection.DetectRTC.hasMicrophone === true) {
+        // enable microphone
+        connection.mediaConstraints.audio = true;
+        connection.session.audio = {
+            mandatory: {
+                echoCancellation: false,
+                googAutoGainControl: true,
+                googNoiseSuppression: true,
+                googHighpassFilter: true,
+                googTypingNoiseDetection: true,
+            }
+        }
+    }
 
-//     if (connection.DetectRTC.hasWebcam === true) {
-//         // enable camera
-//         connection.mediaConstraints.video = true;
-//         connection.session.video = true;
-//     }
+    if (connection.DetectRTC.hasWebcam === true) {
+        // enable camera
+        connection.mediaConstraints.video = videoConstraints;
+        connection.session.video = true;
+    }
 
-//     if (connection.DetectRTC.hasMicrophone === false &&
-//         connection.DetectRTC.hasWebcam === false) {
-//         // he do not have microphone or camera
-//         // so, ignore capturing his devices
-//         connection.dontCaptureUserMedia = true;
-//     }
-// })
+    if (connection.DetectRTC.hasMicrophone === false &&
+        connection.DetectRTC.hasWebcam === false) {
+        // he do not have microphone or camera
+        // so, ignore capturing his devices
+        connection.dontCaptureUserMedia = true;
+    }
+})
 
-connection.mediaConstraints = {
-    video: videoConstraints,
-    audio: true,
-};
+// connection.mediaConstraints = {
+//     video: videoConstraints,
+//     audio: true,
+// };
 
 var CodecsHandler = connection.CodecsHandler;
 

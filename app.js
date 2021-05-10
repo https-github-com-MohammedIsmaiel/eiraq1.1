@@ -186,77 +186,36 @@ io.on("connection", (socket) => {
 
     socket.on('drawing', function (data) {
         socket.broadcast.emit('drawing', data);
-<<<<<<< HEAD
-        console.log(data);
     });
 
     socket.on('rectangle', function (data) {
         socket.broadcast.emit('rectangle', data);
-        console.log(data);
     });
 
     socket.on('linedraw', function (data) {
         socket.broadcast.emit('linedraw', data);
-        console.log(data);
     });
 
     socket.on('circledraw', function (data) {
         socket.broadcast.emit('circledraw', data);
-        console.log(data);
     });
 
     socket.on('ellipsedraw', function (data) {
         socket.broadcast.emit('ellipsedraw', data);
-        console.log(data);
     });
 
     socket.on('textdraw', function (data) {
         socket.broadcast.emit('textdraw', data);
-        console.log(data);
     });
 
     socket.on('copyCanvas', function (data) {
         socket.broadcast.emit('copyCanvas', data);
-        console.log(data);
     });
 
     socket.on('Clearboard', function (data) {
         socket.broadcast.emit('Clearboard', data);
-        console.log(data);
     });
 
-=======
-      });
-      
-      socket.on('rectangle', function(data){
-        socket.broadcast.emit('rectangle', data);
-      });
-      
-      socket.on('linedraw', function(data){
-        socket.broadcast.emit('linedraw', data);
-      });
-      
-       socket.on('circledraw', function(data){
-        socket.broadcast.emit('circledraw', data);
-      });
-      
-      socket.on('ellipsedraw', function(data){
-        socket.broadcast.emit('ellipsedraw', data);
-      });
-      
-      socket.on('textdraw', function(data){
-        socket.broadcast.emit('textdraw', data);
-      });
-      
-      socket.on('copyCanvas', function(data){
-        socket.broadcast.emit('copyCanvas', data);
-      });
-      
-      socket.on('Clearboard', function(data){
-        socket.broadcast.emit('Clearboard', data);
-      });
-    
->>>>>>> 27afea32cb532efa17c11c3163c55b3fd1764b4c
 
 });
 

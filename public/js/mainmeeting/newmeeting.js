@@ -324,24 +324,33 @@ connection.onmute = function (e) {
 
 //mute all
 muteAll.addEventListener('click', () => {
-    // Object.keys(connection.streamEvents).forEach(function (streamid) {
-    //     connection.streamEvents[streamid].stream.mute('audio');
-    // });
-    let parts = connection.getAllParticipants();
-    for (let i = 0; i < par.length; i++) {
-        var username = connection.getExtraData(parts[i]);
-    }
-    connection.streamEvents
-        .selectAll({
-            local: true,
-            isAudio: true,
-        })
-        .forEach(function (localAudioStreamEvent) {
-            localAudioStreamEvent.stream.getAudioTracks().forEach(function (track) {
-                track.stop();
-            });
-        });
+    // // Object.keys(connection.streamEvents).forEach(function (streamid) {
+    // //     connection.streamEvents[streamid].stream.mute('audio');
+    // // });
+    // let parts = connection.getAllParticipants();
+    // for (let i = 0; i < parts.length; i++) {
+    //     var username = connection.getExtraData(parts[i]);
+    // }
+    // connection.streamEvents
+    //     .selectAll({
+    //         // local: true,
+    //         isAudio: true,
+    //     })
+    //     .forEach(function (localAudioStreamEvent) {
+    //         localAudioStreamEvent.stream.getAudioTracks().forEach(function (track) {
+    //             track.stop();
+    //         });
+    //     });
+    socket.emit('renderMuteAll')
 });
+
+socket.on('renderMuteAll', () => {
+    audioControl.click()
+    // connection.extra.isAudioMuted = true
+    // connection.updateExtraData();
+    // audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`
+    // renderUsers()
+})
 
 whiteBoardBtn.addEventListener('click', () => {
     mainVideo.style.display = 'none'

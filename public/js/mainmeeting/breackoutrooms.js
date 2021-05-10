@@ -3,12 +3,19 @@ const joinSection = document.querySelector('#joinSection')
 const joinMainRoom = document.querySelector('#joinMainRoom')
 const sectionUsers = document.querySelector('#other')
 const labUsers = document.querySelector('#main')
+const labMembers = document.querySelector('#labMembers')
+const sectionMembers = document.querySelector('#sectionMembers')
 
 joinLab.addEventListener('click', (e) => {
     // videoContainer.innerHTML = ''
     removeOldStreams()
     console.log('joining lab');
     openOrJoin(ROOM_ID + '-lab')
+    joinLabUsers()
+    labMembers.innerHTML = ''
+    labUsersArr.forEach((user) => {
+        labMembers.innerHTML += `<li>${user}</li>`
+    })
 })
 
 joinSection.addEventListener('click', (e) => {
@@ -16,6 +23,11 @@ joinSection.addEventListener('click', (e) => {
     removeOldStreams()
     console.log('joining section');
     openOrJoin(ROOM_ID + '-section')
+    joinSectionUsers()
+    sectionMembers.innerHTML = ''
+    sectionUsersArr.forEach((user) => {
+        sectionMembers.innerHTML += `<li>${user}</li>`
+    })
 })
 
 joinMainRoom.addEventListener('click', (e) => {
@@ -54,37 +66,42 @@ const removeOldStreams = () => {
 let allLabUsers = []
 let allSectionUsers = []
 const joinSectionUsers = (room) => {
+    socket.emit('leaveSection', connection.extra.username)
+    socket.emit('leaveLab', connection.extra.username)
     socket.emit('joinSection', connection.extra.username)
-
-    // let par = connection.getAllParticipants()
-    // room.innerHTML = `<li>${connection.extra.username}</li>`
-    // for (let i = 0; i < par.length; i++) {
-    //     var user = connection.getExtraData(par[i]);
-    //     if (!user) { return }
-    //     room.innerHTML += `
-    //         <li>${user.username}</li>
-    //         `
-    // }
+    // socket.emit('', connection.extra.username)
 }
-
+// sub rooms attributes
+let labUsersArr = []
+let sectionUsersArr = []
 const joinLabUsers = () => {
+    socket.emit('leaveSection', connection.extra.username)
+    socket.emit('leaveLab', connection.extra.username)
     socket.emit('joinLab', connection.extra.username)
-
 }
 
 //rendering breackout rooms users
 socket.on('joinSection', (data) => {
-
+    sectionUsersArr.push(data)
+    console.log(sectionUsersArr);
 })
 
 socket.on('joinLab', (data) => {
-
+    labUsersArr.push(data)
 })
 
 socket.on('leaveSection', (data) => {
-
+    if (!data) return
+    sectionUsersArr = sectionUsersArr.filter(name => name !== data)
+    console.log(sectionUsersArr);
 })
 
 socket.on('leaveLab', (data) => {
-
+    if (!data) return
+    labUsersArr = labUsersArr.filter(name => name !== data)
 })
+
+// connection.onleave = function (event) {
+//     console.log('leaving ' + connection.sessionid)
+//     var remoteUserFullName = event.extra.fullName;
+// };

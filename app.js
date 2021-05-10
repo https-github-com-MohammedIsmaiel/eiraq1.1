@@ -179,42 +179,63 @@ io.on("connection", (socket) => {
             io.to(roomid).emit('file', f);
         });
         // io.to(roomid).emit('file', f);
-        socket.on('renderMuteAll', (data) => io.to(roomid).emit('renderMuteAll', (data)))
+        socket.on('renderMuteAll', (data) => socket.broadcast.to(roomid).emit('renderMuteAll', (data)))
+        socket.on('drawing', function (data) {
+            socket.broadcast.emit('drawing', data);
+        });
+
+        socket.on('rectangle', function (data) {
+            socket.broadcast.emit('rectangle', data);
+        });
+
+        socket.on('linedraw', function (data) {
+            socket.broadcast.emit('linedraw', data);
+        });
+
+        socket.on('circledraw', function (data) {
+            socket.broadcast.emit('circledraw', data);
+        });
+
+        socket.on('ellipsedraw', function (data) {
+            socket.broadcast.emit('ellipsedraw', data);
+        });
+
+        socket.on('textdraw', function (data) {
+            socket.broadcast.emit('textdraw', data);
+        });
+
+        socket.on('copyCanvas', function (data) {
+            socket.broadcast.emit('copyCanvas', data);
+        });
+
+        socket.on('Clearboard', function (data) {
+            socket.broadcast.emit('Clearboard', data);
+        });
+        //sub rooms sockets
+        socket.on('joinSection', (data) => {
+            io.to(roomid).emit("joinSection", data);
+        })
+        socket.on('joinLab', (data) => {
+            io.to(roomid).emit("joinLab", data);
+        })
+
+
+        socket.on('leaveSection', (data) => {
+            io.to(roomid).emit("leaveSection", data);
+        })
+
+        socket.on('leaveLab', (data) => {
+            io.to(roomid).emit("leaveLab", data);
+        })
+
+
+
+        //dissconnect
         socket.on("disconnect", () => {
         });
     });
 
-    socket.on('drawing', function (data) {
-        socket.broadcast.emit('drawing', data);
-    });
 
-    socket.on('rectangle', function (data) {
-        socket.broadcast.emit('rectangle', data);
-    });
-
-    socket.on('linedraw', function (data) {
-        socket.broadcast.emit('linedraw', data);
-    });
-
-    socket.on('circledraw', function (data) {
-        socket.broadcast.emit('circledraw', data);
-    });
-
-    socket.on('ellipsedraw', function (data) {
-        socket.broadcast.emit('ellipsedraw', data);
-    });
-
-    socket.on('textdraw', function (data) {
-        socket.broadcast.emit('textdraw', data);
-    });
-
-    socket.on('copyCanvas', function (data) {
-        socket.broadcast.emit('copyCanvas', data);
-    });
-
-    socket.on('Clearboard', function (data) {
-        socket.broadcast.emit('Clearboard', data);
-    });
 
 
 });

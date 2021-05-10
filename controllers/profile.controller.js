@@ -99,6 +99,9 @@ exports.getRoomByPassword= (req, res) => {
 exports.getBackToMeeting = (req, res, next) => {
 	res.redirect('/');
 };
+exports.getBackToProfile = (req, res, next) => {
+	res.redirect('/profile');
+};
 
 exports.getScedule = (req, res) => {
 	res.render('scedule');
@@ -109,7 +112,9 @@ exports.getChat = (req, res) => {
             .then((result) => {
                
 				res.render('chat',{
-					result:result
+					result:result,
+
+					user_id: req.session.userId	
 				});
                 res.end();
             })

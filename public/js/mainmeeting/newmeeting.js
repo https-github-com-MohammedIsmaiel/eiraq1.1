@@ -360,7 +360,11 @@ muteAll.addEventListener('click', () => {
 });
 
 socket.on('renderMuteAll', () => {
-    audioControl.click()
+    if(connection.extra.isAudioMuted === true) {
+        return
+    }else{
+        audioControl.click()
+    }
     // connection.extra.isAudioMuted = true
     // connection.updateExtraData();
     // audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`

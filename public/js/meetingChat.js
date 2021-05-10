@@ -9,13 +9,13 @@ document.getElementById("msg").onclick = function (isChatOpend) {
 function checkChatState() {
     if (isChatOpend == true) {
         isChatOpend = false;
-        console.log("dbg")
+        
         msgIcon.innerHTML = '<i class="far fa-envelope"></i>'
 
     } else{
         isChatOpend = true;
     msgIcon.innerHTML = '<i class="far fa-envelope " style="color:green"></i>'
-    console.log("dbggg")
+    
 
     }
 }

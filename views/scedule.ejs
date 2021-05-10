@@ -5,10 +5,12 @@
     <title>Sсheduler</title>
     <meta charset="utf-8">
     <!-- scheduler -->
-    <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js" charset="utf-8"></script>
-    <link href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css" rel="stylesheet" type="text/css"
-        charset="utf-8">
-    
+    <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"
+        charset="utf-8"></script>
+    <link
+        href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css"
+        rel="stylesheet" type="text/css" charset="utf-8">
+
     <style>
         html,
         body {
@@ -17,11 +19,35 @@
             height: 100%;
             overflow: hidden;
         }
+
+        .btn-exit {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            min-width: 100px;
+            font-size: 18px;
+            z-index: 10;
+            background-color: rgb(35, 125, 243);
+            border: 1px solid rgb(49, 135, 247);
+            padding: 5px 10px;
+            color: white;
+            transition: all .3s;
+        }
+
+        .btn-exit:hover {
+            background-color: rgb(53, 136, 245);
+            border: 1px solid rgb(94, 162, 250);
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
-    <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
+    <a href="exitchat">
+        <button class="btn-exit">exit</button>
+    </a>
+    <div id="scheduler_here" class="dhx_cal_container"
+        style='width:100%; height:100%;'>
         <div class="dhx_cal_navline">
             <div class="dhx_cal_prev_button">&nbsp;</div>
             <div class="dhx_cal_next_button">&nbsp;</div>
@@ -34,8 +60,9 @@
         <div class="dhx_cal_header"></div>
         <div class="dhx_cal_data"></div>
     </div>
-        <!-- scheduler recurring tasks extension -->
-        <script src="https://cdn.dhtmlx.com/scheduler/edge/ext/dhtmlxscheduler_recurring.js"></script>
+    <!-- scheduler recurring tasks extension -->
+    <script
+        src="https://cdn.dhtmlx.com/scheduler/edge/ext/dhtmlxscheduler_recurring.js"></script>
 
     <script>
 

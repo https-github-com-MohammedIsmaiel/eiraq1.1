@@ -1,0 +1,126 @@
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Canvas
+ */
+
+.whiteboard {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.colors {
+  position: fixed;
+}
+
+.color {
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  z-index: 11;
+}
+.color:hover{
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.color.black { background-color: black; }
+.color.red { background-color: red; }
+.color.green { background-color: green; }
+.color.blue { background-color: blue; }
+.color.yellow { background-color: yellow; }
+.color.white { background-color: white; }
+
+#container { position: relative; }
+      #container{
+        width: calc(100% - 250px);
+        height: 640px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+      
+      #imageView { border: 1px solid #000; }
+      #imageTemp { position: absolute; top: 1px; left: 1px; }
+      canvas {
+        border-radius: 5px;
+        cursor: url(../img/pen.png), crosshair;
+    }
+    #text_tool {
+    position: absolute;
+    border: 1px dashed black;
+    outline: 0;
+    z-index:1000 !important;
+    display: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.container .btn.btn-sm{
+    background: #06f;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    text-shadow: 0 1px #06f;
+    display: inline-block;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-right: 5px;
+}
+.container .btn.btn-sm:active{
+   background: #06f; 
+}
+label{
+    color: #000;
+}

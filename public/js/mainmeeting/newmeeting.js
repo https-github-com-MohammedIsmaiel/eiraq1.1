@@ -1,20 +1,23 @@
+/** @format */
 
-const shareScreen = document.querySelector('#shareScreen')
-const videoContainer = document.querySelector('#allUser')
-const shareContainer = document.querySelector('#shareContainer')
-const mainVideo = document.querySelector('#mainVideo')
+const shareScreen = document.querySelector('#shareScreen');
+const videoContainer = document.querySelector('#allUser');
+const shareContainer = document.querySelector('#shareContainer');
+const mainVideo = document.querySelector('#mainVideo');
+const whiteBoardBtn = document.querySelector('#whiteBoard')
+const whiteBoardContainer = document.querySelector('#whiteBoardContainer')
 // const userVideo = document.querySelector('.uservideo')
-const logedInUser = document.querySelector('#logedInUser')
-const audioControl = document.querySelector('#audioControl')
-const videoControl = document.querySelector('#videoControl')
-const muteAll = document.querySelector('#muteAll')
+const logedInUser = document.querySelector('#logedInUser');
+const audioControl = document.querySelector('#audioControl');
+const videoControl = document.querySelector('#videoControl');
+const muteAll = document.querySelector('#muteAll');
 
-var localStream
-var localStreamId
+var localStream;
+var localStreamId;
 
 //init connection
-var connection = new RTCMultiConnection()
-connection.socketURL = '/'
+var connection = new RTCMultiConnection();
+connection.socketURL = '/';
 connection.session = {
     Audio: {
         mandatory: {
@@ -23,12 +26,12 @@ connection.session = {
             googNoiseSuppression: true,
             googHighpassFilter: true,
             googTypingNoiseDetection: true,
-        }
+        },
     },
     video: true,
     // data: true
     // screen:true
-}
+};
 //connection extra data
 connection.extra = {
     username: logedInUser.innerText,
@@ -39,15 +42,15 @@ connection.extra = {
 };
 console.log(connection.extra.img);
 //joining room
-socket.emit('join-room', ROOM_ID)
+socket.emit('join-room', ROOM_ID);
 
 //connection settings
 connection.sdpConstraints.mandatory = {
     OfferToRecieveAudio: true,
     OfferToRecieveVideo: true,
-}
+};
 
-//setting audio and video 
+//setting audio and video
 var bitrates = 512;
 var resolutions = 'Ultra-HD';
 var videoConstraints = {};
@@ -55,24 +58,24 @@ var videoConstraints = {};
 if (resolutions == 'HD') {
     videoConstraints = {
         width: {
-            ideal: 1280
+            ideal: 1280,
         },
         height: {
-            ideal: 720
+            ideal: 720,
         },
-        frameRate: 30
+        frameRate: 30,
     };
 }
 
 if (resolutions == 'Ultra-HD') {
     videoConstraints = {
         width: {
-            ideal: 1920
+            ideal: 1920,
         },
         height: {
-            ideal: 1080
+            ideal: 1080,
         },
-        frameRate: 30
+        frameRate: 30,
     };
 }
 // //detect if there is mice or webcam
@@ -99,7 +102,7 @@ if (resolutions == 'Ultra-HD') {
 
 connection.mediaConstraints = {
     video: videoConstraints,
-    audio: true
+    audio: true,
 };
 
 var CodecsHandler = connection.CodecsHandler;
@@ -115,7 +118,7 @@ connection.processSdp = function (sdp) {
         sdp = CodecsHandler.setApplicationSpecificBandwidth(sdp, {
             audio: 128,
             video: bitrates,
-            screen: bitrates
+            screen: bitrates,
         });
 
         sdp = CodecsHandler.setVideoBitrates(sdp, {
@@ -128,7 +131,7 @@ connection.processSdp = function (sdp) {
         sdp = CodecsHandler.setApplicationSpecificBandwidth(sdp, {
             audio: 128,
             video: bitrates,
-            screen: bitrates
+            screen: bitrates,
         });
 
         sdp = CodecsHandler.setVideoBitrates(sdp, {
@@ -141,19 +144,22 @@ connection.processSdp = function (sdp) {
 };
 
 //set ice servers (stun and turn)
-connection.iceServers = [{
-    'urls': [
-        'stun:stun.l.google.com:19302',
-        'stun:stun1.l.google.com:19302',
-        'stun:stun2.l.google.com:19302',
-        'stun:stun.l.google.com:19302?transport=udp',
-    ]
-}];
+connection.iceServers = [
+    {
+        urls: [
+            'stun:stun.l.google.com:19302',
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            'stun:stun.l.google.com:19302?transport=udp',
+        ],
+    },
+];
 
 //setting screen container
-connection.videosContainer = videoContainer
+connection.videosContainer = videoContainer;
 //start getting streams
 console.log(connection);
+allStreams = [];
 connection.onstream = (event) => {
     console.log('on stream');
     var existing = document.getElementById(event.streamid);
@@ -184,6 +190,8 @@ connection.onstream = (event) => {
             video.setAttribute('muted', true);
         }
     }
+    recorder.addStreams(event.stream);
+    allStreams.push(event.stream);
     video.srcObject = event.stream;
 
     // var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
@@ -201,13 +209,15 @@ connection.onstream = (event) => {
     }, 5000);
 
     video.id = event.streamid;
-    localStreamId = event.streamid
+    localStreamId = event.streamid;
     video.addEventListener('click', (e) => {
         console.log('clicked');
-        mainVideo.srcObject = e.target.srcObject
-        mainVideo.setAttribute('height', '80vh')
+        mainVideo.style.display = ''
+        whiteBoardContainer.style.display = 'none'
+        mainVideo.srcObject = e.target.srcObject;
+        mainVideo.setAttribute('height', '80vh');
         // userGrid.removeChild(e.target)
-    })
+    });
     // to keep room-id in cache
     localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
 };
@@ -220,7 +230,7 @@ connection.onstreamended = function (event) {
 };
 
 connection.checkPresence(ROOM_ID, (isRoomExist, ROOM_ID) => {
-    console.log('hello')
+    console.log('hello');
     if (isRoomExist === true) {
         connection.join(ROOM_ID);
     } else {
@@ -232,46 +242,51 @@ connection.checkPresence(ROOM_ID, (isRoomExist, ROOM_ID) => {
 shareScreen.addEventListener('click', () => {
     connection.addStream({
         screen: true,
-        oneway: true
+        oneway: true,
     });
-})
+});
 //mute and unmute
 audioControl.addEventListener('click', (e) => {
     let firstLocalStream = connection.streamEvents.selectFirst({
-        local: true
+        local: true,
     }).stream;
     if (connection.extra.isAudioMuted === false) {
         // connection.streamEvents[connection.userid].stream.mute('audio');
-        connection.extra.isAudioMuted = true
+        connection.extra.isAudioMuted = true;
         // localStream.mute('audio');
         // connection.streamEvents.selectFirst().mute('audio');
         firstLocalStream.mute('audio');
-        audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`
+        audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`;
     } else {
-        connection.extra.isAudioMuted = false
+        connection.extra.isAudioMuted = false;
         // connection.streamEvents[connection.userid].stream.unmute('audio');
         // localStream.unmute('audio');
         // connection.streamEvents.selectFirst().unmute('audio');
         firstLocalStream.unmute('audio');
-        audioControl.innerHTML = `<i class=" fas fa-microphone"></i>`
+        audioControl.innerHTML = `<i class=" fas fa-microphone"></i>`;
         connection.streamEvents.selectFirst('local').mediaElement.muted = true;
         //uncomment this when using different devices
-        navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
-        navigator.getUserMedia({ audio: true }, function (audioStream) {
-            connection.attachStreams[0].addTrack(audioStream.getAudioTracks()[0]); // enable audio again
-            connection.renegotiate();  // share again with all users
-        }, function () { });
+        navigator.getUserMedia =
+            navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+        navigator.getUserMedia(
+            { audio: true },
+            function (audioStream) {
+                connection.attachStreams[0].addTrack(audioStream.getAudioTracks()[0]); // enable audio again
+                connection.renegotiate(); // share again with all users
+            },
+            function () { },
+        );
     }
     connection.updateExtraData();
-    renderUsers()
-})
+    renderUsers();
+});
 
 videoControl.addEventListener('click', (e) => {
     let firstLocalStream = connection.streamEvents.selectFirst({
-        local: true
+        local: true,
     }).stream;
     if (connection.extra.isVideoMuted === false) {
-        connection.extra.isVideoMuted = true
+        connection.extra.isVideoMuted = true;
         firstLocalStream.mute('video');
         videoControl.innerHTML = `<i style = "color: #ff6a00;" class="fas fa-video-slash"></i>`;
         //uncomment this when using different devices
@@ -279,9 +294,9 @@ videoControl.addEventListener('click', (e) => {
         //     track.stop(); // turn off cam
         // });
     } else {
-        connection.extra.isVideoMuted = false
+        connection.extra.isVideoMuted = false;
         firstLocalStream.unmute('video');
-        videoControl.innerHTML = `<i class="fas fa-video"></i>`
+        videoControl.innerHTML = `<i class="fas fa-video"></i>`;
         //uncomment this when using different devices
         // navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
         // navigator.getUserMedia({ video: true }, function (videoStream) {
@@ -290,8 +305,8 @@ videoControl.addEventListener('click', (e) => {
         // }, function () { });
     }
     connection.updateExtraData();
-    renderUsers()
-})
+    renderUsers();
+});
 //handle on mute
 connection.onunmute = function (e) {
     // $(`#${localStreamId}`).poster = "/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfBhSHCY3v0mocVZF2bOz-Qtd5cHojpbEc_g&usqp=CAU"
@@ -312,21 +327,23 @@ muteAll.addEventListener('click', () => {
     // Object.keys(connection.streamEvents).forEach(function (streamid) {
     //     connection.streamEvents[streamid].stream.mute('audio');
     // });
-    let parts = connection.getAllParticipants()
-    if (!parts) { return }
-    connection.streamEvents.selectAll({
-        local: true,
-        isAudio: true
-    }).forEach(function (localAudioStreamEvent) {
-        localAudioStreamEvent.stream.getAudioTracks().forEach(function (track) {
-            track.stop();
+    let parts = connection.getAllParticipants();
+    for (let i = 0; i < par.length; i++) {
+        var username = connection.getExtraData(parts[i]);
+    }
+    connection.streamEvents
+        .selectAll({
+            local: true,
+            isAudio: true,
+        })
+        .forEach(function (localAudioStreamEvent) {
+            localAudioStreamEvent.stream.getAudioTracks().forEach(function (track) {
+                track.stop();
+            });
         });
-    })
-    socket.emit('renderMuteAll')
-})
-socket.on('renderMuteAll', () => {
-    connection.extra.isAudioMuted = true
-    connection.updateExtraData();
-    audioControl.innerHTML = `<i style = "color:#ff6a00;" class=" fas fa-microphone-slash"></i>`
-    renderUsers()
+});
+
+whiteBoardBtn.addEventListener('click', () => {
+    mainVideo.style.display = 'none'
+    whiteBoardContainer.style.display = ''
 })

@@ -99,10 +99,28 @@ exports.getRoomByPassword= (req, res) => {
 exports.getBackToMeeting = (req, res, next) => {
 	res.redirect('/');
 };
+exports.getBackToProfile = (req, res, next) => {
+	res.redirect('/profile');
+};
 
 exports.getScedule = (req, res) => {
 	res.render('scedule');
 	res.end();
+};
+exports.getChat = (req, res) => {
+	accountsModel.getAllAccounts()
+            .then((result) => {
+               
+				res.render('chat',{
+					result:result,
+
+					user_id: req.session.userId	
+				});
+                res.end();
+            })
+            .catch(err => {
+                res.redirect("/profile");
+            });
 };
 exports.getData = (req, res) => {
 	folderfileinfo.getAllFolders().then((result1) => {

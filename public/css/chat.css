@@ -12,50 +12,86 @@ a {
     text-decoration: none;
 }
 body {
-    background: #f4f7f9;
+    background: #7F7FD5;
+    background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+     background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
 }
 html, body {
     height: 100% !important;
+    overflow: hidden;
 }
 .container {
+    margin: 30px auto;
     display: flex;
-    height: 100% !important;
+    height: 90% !important;
 }
 sidebar {
     width: 300px;
     min-width: 300px;
     display: flex;
-    background: #fff;
+    background: #53748A;
     flex-direction: column;
     border-right: 1px solid #ccc;
     transition: 500ms all;
+    margin-right: 20px;
 }
 sidebar .logo {
     display: flex;
-    margin: 10px 0 0 0;
-    padding-bottom: 10px;
-    align-items: center;
-    justify-content: center;
-    color: #000;
+   
+    background-color: #53748A;
     font-size: 3em;
-    letter-spacing: 7px;
-    border-bottom: 1px solid #ccc;
+    flex-direction: column;
+}
+#myInput{
+    border: none;
+    outline: none;
+    margin-bottom:10px ;
+    width: 95%;
+    margin-left: 3px;
+    border-radius: 8px;
+}
+sidebar .profile{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    height: 70px;
+    cursor: pointer;
+    color: white;
+}
+sidebar .profile img{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+}
+sidebar .profileinfo{
+    flex: 1;
+    
+
+}
+sidebar .username{
+    font-weight: 600;
+
+    
 }
 sidebar .list-wrap {
     width: 100%;
     overflow: auto;
 }
 sidebar .list-wrap .list {
-    border-bottom: 1px solid #ccc;
-    background: #fff;
+    background: #53748A;
     display: flex;
     align-items: center;
     padding: 5px;
     height: 70px;
     cursor: pointer;
+    color: white;
 }
 sidebar .list-wrap .list:hover, sidebar .list-wrap .list.active {
-    background: #f4f7f9;
+    background: #3A5160;
+    transition: .3s ease-in-out;
 }
 sidebar .list-wrap .list img {
     border-radius: 50%;
@@ -69,7 +105,7 @@ sidebar .list-wrap .list .info {
     flex: 1;
 }
 sidebar .list-wrap .list .info .user {
-    font-weight: 700;
+    font-weight: 600;
 }
 sidebar .list-wrap .list .info .text {
     display: flex;
@@ -100,11 +136,12 @@ sidebar .list-wrap .list .count {
 }
 .content header {
     height: 76px;
-    background: #fff;
+    background: #4B5782;
     border-bottom: 1px solid #ccc;
     display: flex;
     padding: 10px;
     align-items: center;
+    color: white;
 }
 .content header img {
     border-radius: 50%;
@@ -151,33 +188,23 @@ sidebar .list-wrap .list .count {
     align-self: flex-end;
 }
 .message-wrap .message-list.me .msg {
-    background: #bde2f7;
+    background: #78E08F;
     color: #111;
 }
 .message-wrap .message-list .msg {
-    background: #fff;
+    background: #82CCDD;
     box-shadow: 0 5px 15px -5px rgba(0, 0, 0, .1);
     padding: 10px 5px;
     margin-bottom: 10px;
     border-radius: 5px;
+    color: #111;
 }
 .message-wrap .message-list .time {
     text-align: right;
     color: #999;
     font-size: 0.75em;
 }
-.message-footer {
-    border-top: 1px solid #ddd;
-    background: #eee;
-    padding: 10px;
-    display: flex;
-    height: 60px;
-}
-.message-footer input {
-    flex: 1;
-    padding: 0 20px;
-    border-radius: 5px;
-}
+
 @media only screen and (max-width: 480px), only screen and (max-width: 767px) {
     sidebar {
         position: absolute;

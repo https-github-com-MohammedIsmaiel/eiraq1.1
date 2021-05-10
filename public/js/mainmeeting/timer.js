@@ -15,6 +15,7 @@ function setTimer(isInitiator) {
     }
 
     value = +value;
+    
 
     setTimeout(()=> {
       endForAll.click()

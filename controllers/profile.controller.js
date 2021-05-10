@@ -109,7 +109,9 @@ exports.getChat = (req, res) => {
             .then((result) => {
                
 				res.render('chat',{
-					result:result
+					result:result,
+
+					user_id: req.session.userId	
 				});
                 res.end();
             })

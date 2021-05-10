@@ -16,16 +16,43 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
      <div class="container">
       <sidebar>
-        <span class="logo">  <ul class="list-group list-group-flush">
-            <li class="list-group-item" style="background-color:#f8f8f8;">
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search or new chat" class="form-control form-rounded" />
-            </li>
-        </ul></span>
+        <span class="logo">  
+          <div class="profile" >
+            <% for(var i=0; i < result.length; i++) { %>
+              <% if(user_id == result[i].id){ %>
+          
+                <% if ( result[i].img_url =='undefined' ) { %>
+                    <img  src="/upload_images/default.png" 
+                        alt="user image" >
+                
+                <% } else if (result[i].img_url.startsWith("https")) { %>      
+                        
+                    <img  src="<%= result[i].img_url%>" width="50px" alt="user image" srcset="">
+                <% } else { %>
+                <img src="/upload_images/<%= result[i].img_url%>" width="50px"
+                    alt="user image" srcset="">
+    
+            <% } %>
+               
+           
+        <div class="profileinfo">
+          <span class="username">
+            <%= result[i].username%>
+
+          </span>
+        </div>
+           </div>
+           <% } %>
+           <% } %>
+          
+           <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search or new chat" class="form-control form-rounded" style="background-color: #3A5260;color: white;"/>
+        </span>
       
      
         <div class="list-wrap" id="myLists">
      <% for(var i=0; i < result.length; i++) { %>
-          <div class="list">
+      <% if(user_id != result[i].id){ %>
+          <div class="list" >
             <% if ( result[i].img_url =='undefined' ) { %>
                 <img  src="/upload_images/default.png" 
                     alt="user image" >
@@ -44,6 +71,7 @@
           </span>
         </div>
       </div>
+      <% } %>
   <% } %>
   </div>
 
@@ -59,7 +87,7 @@
           <a href="javascript:;">UP</a>
         </div>
       </header>
-      <div class="message-wrap">
+      <div class="message-wrap" style="background-color: #4F5D87;">
         <div class="message-list">
           <div class="msg">
             <p>
@@ -132,7 +160,7 @@
 
       </div>
 
-      <div class="card-footer">
+      <div class="card-footer" style="background-color: #36405C;color: white;">
         <div class="row" style="position:relative;">
           <div class="col-md-12" id="emoji" style="display:none;">
             <ul class="nav nav-tabs" id="myTab" role="tablist">

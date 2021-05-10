@@ -36,6 +36,23 @@ const openOrJoin = (roomId) => {
         }
     });
 }
+
+const removeOldStreams = () => {
+    connection.getAllParticipants().forEach(function (participantId) {
+        connection.disconnectWith(participantId);
+    });
+    //or use ...
+    // let allUserStreams = connection.getRemoteStreams();
+    // allUserStreams.forEach(stream => {
+    //     connection.removeStream(stream);
+    // });
+    //or use ....
+    // Object.keys(connection.streamEvents).forEach(function (streamid) {
+    //     connection.removeStream(streamid);
+    // });
+}
+let allLabUsers = []
+let allSectionUsers = []
 const joinSectionUsers = (room) => {
     socket.emit('joinSection', connection.extra.username)
 
@@ -71,18 +88,3 @@ socket.on('leaveSection', (data) => {
 socket.on('leaveLab', (data) => {
 
 })
-
-const removeOldStreams = () => {
-    connection.getAllParticipants().forEach(function (participantId) {
-        connection.disconnectWith(participantId);
-    });
-    //or use ...
-    // let allUserStreams = connection.getRemoteStreams();
-    // allUserStreams.forEach(stream => {
-    //     connection.removeStream(stream);
-    // });
-    //or use ....
-    // Object.keys(connection.streamEvents).forEach(function (streamid) {
-    //     connection.removeStream(streamid);
-    // });
-}

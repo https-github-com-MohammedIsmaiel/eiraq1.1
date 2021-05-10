@@ -179,7 +179,7 @@ io.on("connection", (socket) => {
             io.to(roomid).emit('file', f);
         });
         // io.to(roomid).emit('file', f);
-        socket.on('renderMuteAll', () => io.to(roomid).emit('renderMuteAll'))
+        socket.on('renderMuteAll', (data) => io.to(roomid).emit('renderMuteAll', (data)))
         socket.on("disconnect", () => {
         });
     });

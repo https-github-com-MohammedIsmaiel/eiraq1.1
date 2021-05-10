@@ -369,7 +369,7 @@ window.addEventListener('load', function () {
     function onDrawRect(data){
         var w = canvaso.width;
         var h = canvaso.height;
-        console.log("IN")
+        // console.log("IN")
         drawRect(data.min_x * w, data.min_y * h, data.abs_x * w, data.abs_y * h, data.color, data.lineThickness);
     }
     
@@ -914,7 +914,7 @@ tools.text = function () {
                 img_update(); */
                 
                 DrawText(fs, ff, colorPicked, textarea.style.left, textarea.style.top, processed_lines, true)
-                console.log("lines saved")
+                // console.log("lines saved")
                 textarea.style.display = 'none';
                 textarea.value = '';
                           

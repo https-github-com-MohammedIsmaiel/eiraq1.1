@@ -123,6 +123,8 @@ check("username")
 router.get('/chat', profileController.getChat);
 
 router.get('/returnback', profileController.getBackToMeeting);
+router.get('/exitchat', profileController.getBackToProfile);
+
 router.get('/schedule', profileController.getScedule);
 router.get('/profile/folders', profileController.getData);
 router.post('/createfolder',profileController.createFolder)

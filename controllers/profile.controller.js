@@ -99,6 +99,9 @@ exports.getRoomByPassword= (req, res) => {
 exports.getBackToMeeting = (req, res, next) => {
 	res.redirect('/');
 };
+exports.getBackToProfile = (req, res, next) => {
+	res.redirect('/profile');
+};
 
 exports.getScedule = (req, res) => {
 	res.render('scedule');

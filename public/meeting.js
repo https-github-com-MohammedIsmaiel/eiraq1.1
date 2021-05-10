@@ -1,10 +1,10 @@
 function slideMain() {
-    let sl = document.getElementById('main')
-        sl.classList.toggle('displayed')
+    let sl = document.getElementById('labMembers')
+    sl.classList.toggle('displayed')
 }
 function slideOther() {
-    let s2 = document.getElementById('other')
-        s2.classList.toggle('displayed')
+    let s2 = document.getElementById('sectionMembers')
+    s2.classList.toggle('displayed')
 }
 
 function rooms() {
@@ -12,15 +12,15 @@ function rooms() {
     s3.classList.toggle('breakroomsdisplayed')
 
     s3.classList.contains('breakroomsdisplayed') ?
-        setTimeout(() => {     
+        setTimeout(() => {
             let x = document.getElementById('btnroom');
-			x.innerHTML = '<i class="fad fa-angle-double-left"></i>';
-			x.classList.remove('yellow');
+            x.innerHTML = '<i class="fad fa-angle-double-left"></i>';
+            x.classList.remove('yellow');
         }, 500) :
         setTimeout(() => {
             let x = document.getElementById('btnroom');
-			x.innerHTML = '<i class="fad fa-angle-double-right"></i>';
-			x.classList.add('yellow');
+            x.innerHTML = '<i class="fad fa-angle-double-right"></i>';
+            x.classList.add('yellow');
         }, 500)
 }
 
@@ -119,7 +119,7 @@ function blackmoon() {
     } else {
         document.querySelector("link[href='blackprofile.css']").href = "lightprofile.css";
         enabled = !enabled;
-}
+    }
 }
 
 function dispMeetingInfo() {

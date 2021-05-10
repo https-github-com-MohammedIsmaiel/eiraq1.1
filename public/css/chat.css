@@ -118,6 +118,27 @@ sidebar .list-wrap .list .time {
     font-size: 0.75em;
     color: #a9a9a9;
 }
+.list-wrap::-webkit-scrollbar,
+.message-wrap::-webkit-scrollbar{
+    width: 10px;
+}
+.list-wrap::-webkit-scrollbar-track,
+.message-wrap::-webkit-scrollbar-track {
+    background: #4B5782;
+}
+.list-wrap::-webkit-scrollbar-thumb,
+.message-wrap::-webkit-scrollbar-thumb {
+    background: #82CCDD;
+  }
+.list-wrap::-webkit-scrollbar-thumb:hover,
+.message-wrap::-webkit-scrollbar-thumb:hover {
+    background: #2dd6fc;
+  }
+
+#myInput::placeholder{
+    color: #78E08F;
+    font-size: 18px;
+}
 sidebar .list-wrap .list .count {
     font-size: 0.75em;
     background: #bde2f7;
@@ -204,6 +225,8 @@ sidebar .list-wrap .list .count {
     color: #999;
     font-size: 0.75em;
 }
+
+
 
 @media only screen and (max-width: 480px), only screen and (max-width: 767px) {
     sidebar {

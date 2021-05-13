@@ -22,11 +22,11 @@
 </head>
 
 <body>
-  <div class="container-fluid">
+  <span class="top"></span>
+  <div class="container-fluid bg-white chatbox shadow-lg rounded">
     <div class="row">
       <a href="exitchat">
-        <button class="btn text-light btn-outline-warning" style="position: absolute; top: 10px; right: 10px; 
-        min-width: 100px; font-size: 18px;">exit</button>
+        <button class="btn" id="btn">Exit</button>
       </a>
     </div>
   </div>
@@ -64,7 +64,7 @@
 
             <input type="text" id="myInput" onkeyup="myFunction()"
               placeholder="search in chat" class="form-control form-rounded"
-              style="background-color: #3A5260;color: white;" />
+              style="background-color: white; color: black;" />
       </span>
 
 
@@ -106,7 +106,7 @@
           <a href="javascript:;">UP</a>
         </div>
       </header>
-      <div class="message-wrap" style="background-color: #4F5D87;">
+      <div class="message-wrap" style="background-color: white;">
         <div class="message-list">
           <div class="msg">
             <p>
@@ -179,13 +179,13 @@
 
       </div>
 
-      <div class="card-footer" style="background-color: #36405C;color: white;">
+      <div class="card-footer" style="background-color:#ffffff; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0,0,0,0.23) 0px 3px 6px;">
         <div class="row" style="position:relative;">
           <div class="col-md-12" id="emoji" style="display:none;">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab"
-                  href="#smiley" role="tab" aria-controls="home"
+                <a class="nav-link active" id="home-tab" data-toggle="click"
+                  href="#smiley" role="click" aria-controls="home"
                   aria-selected="true">Smiley</a>
               </li>
             </ul>

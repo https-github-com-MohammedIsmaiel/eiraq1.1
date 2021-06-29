@@ -38,7 +38,7 @@ sidebar {
     background: #53748A;
     flex-direction: column;
     transition: 500ms all;
-    margin-right: 20px;
+    margin-right: 0px;
 }
 sidebar .logo {
     display: flex;
@@ -75,7 +75,6 @@ sidebar .profile img{
 sidebar .profileinfo{
     flex: 1;
     
-
 }
 sidebar .username{
     font-weight: 600;

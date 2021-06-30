@@ -198,12 +198,12 @@
         </div>
         <div class="row">
           <div class="col-2 col-md-1">
-            <i class="far fa-grin fa-1x" onclick=showEmojiPanel();
-              style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px;"></i>
+            <i class="far fa-grin fa-1x" onclick="showEmojiPanel() "
+              style="cursor: pointer; text-decoration: none; font-size:20px; display: flex; margin-top: 10px;"></i>
           </div>
           <div class="col-8 col-md-10">
-            <input type="text" data-placeholder="Send a message to {0}"
-            id="txtMessage" onfocus=hideEmojiPanel()
+            <input type="text" onfocus="hideEmojiPanel()" data-placeholder="Send a message to {0}"
+            id="txtMessage"
               class="form-control form-rounded" />
           </div>
           <div class="col-2 col-md-1">

@@ -79,18 +79,20 @@ function loadAllEmoji() {
 
     document.getElementById('smiley').innerHTML = emoji;
 }
-
 function showEmojiPanel() {
-    document.getElementById('emoji').removeAttribute('style');
+  document.getElementById('emoji').removeAttribute('style');
 }
 
 function hideEmojiPanel() {
-    document.getElementById('emoji').setAttribute('style', 'display:none;');
+  document.getElementById('emoji').setAttribute('style', 'display:none;');
 }
 
 function getEmoji(control) {
-    document.getElementById('txtMessage').value += control.innerHTML;
+  document.getElementById('txtMessage').value += control.innerHTML;
 }
+
+
+
 
 
 

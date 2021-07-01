@@ -112,6 +112,7 @@ app.use('/', roomRoutes)
 
 const connection = require('./models/init_database').connection;
 
+
 // connect to database
 connection.connect(async function (err) {
     if (err) throw err;
@@ -120,19 +121,16 @@ connection.connect(async function (err) {
         "CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY,username VARCHAR(255), Email VARCHAR(255), password VARCHAR(255),img_url VARCHAR(350) DEFAULT 'default.png', type VARCHAR(20) DEFAULT 'normal')"
     );
     await connection.query(
-        'CREATE TABLE IF NOT EXISTS meetingInfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN)'
+        'CREATE TABLE IF NOT EXISTS meeting (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN,user_id INT ,  CONSTRAINT meeting_fk FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
     await connection.query(
-        'CREATE TABLE IF NOT EXISTS meetingInfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN)'
+        'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT REFERENCES accounts ON DELETE CASCADE, CONSTRAINT event_fk FOREIGN KEY(owner_id) REFERENCES accounts(id))'
     );
     await connection.query(
-        'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT, CONSTRAINT fk_owner FOREIGN KEY(owner_id) REFERENCES accounts(id))'
+        'CREATE TABLE IF NOT EXISTS folders (id  BIGSERIAL unique not null PRIMARY KEY,foldername VARCHAR(255), user_id INT  REFERENCES accounts ON DELETE CASCADE,  CONSTRAINT folder_fk FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
     await connection.query(
-        'CREATE TABLE IF NOT EXISTS folders (id  BIGSERIAL unique not null PRIMARY KEY,foldername VARCHAR(255),user_id INT)'
-    );
-    await connection.query(
-        'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT fk_owner FOREIGN KEY(folder_id) REFERENCES folders(id))'
+        'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT  REFERENCES accounts ON DELETE CASCADE,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT files_fk1 FOREIGN KEY(folder_id) REFERENCES folders(id),CONSTRAINT files_fk2 FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
 
     console.log('tables created')

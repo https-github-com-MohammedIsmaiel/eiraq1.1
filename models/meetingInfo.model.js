@@ -3,10 +3,10 @@ const connection = require("../models/init_database").connection;
 
 
 
-exports.SaveMeetingInfo=(meetingId,hostname,password, meeting_url)=>{
+exports.SaveMeetingInfo=(meetingId,hostname,password, meeting_url,user_id)=>{
      return new Promise((resolve, reject) => {        
         connection.query(
-            "INSERT INTO meetinginfo (meeting_id,hostname,meetingpassword,URL,validity) VALUES ($1,$2,$3,$4,$5)", [meetingId, hostname, password,meeting_url,true],
+            "INSERT INTO meetinginfo (meeting_id,hostname,meetingpassword,URL,validity) VALUES ($1,$2,$3,$4,$5,$6)", [meetingId, hostname, password,meeting_url,user_id,true],
             function(err, result) {
                 if (err) reject(err)
                 resolve()

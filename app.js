@@ -68,12 +68,12 @@ const Knex = require('knex');
 const knex = Knex({
     client: 'pg',
     connection: {
-       host: 'ec2-107-21-10-179.compute-1.amazonaws.com',
-	user: 'yilybqpvuolpen',
-	password:
-		'b8c8c8d3cf2d77d0b14fe9ca0b33496efa424dc74b693bcfea5f13fb1b089cd7',
-	port: '5432',
-	database: 'd6l3imlttb58vq',
+        host: 'ec2-107-21-10-179.compute-1.amazonaws.com',
+        user: 'yilybqpvuolpen',
+        password:
+            'b8c8c8d3cf2d77d0b14fe9ca0b33496efa424dc74b693bcfea5f13fb1b089cd7',
+        port: '5432',
+        database: 'd6l3imlttb58vq',
         ssl: {
             rejectUnauthorized: false,
         },
@@ -130,7 +130,7 @@ connection.connect(async function (err) {
         'CREATE TABLE IF NOT EXISTS folders (id  BIGSERIAL unique not null PRIMARY KEY,foldername VARCHAR(255), user_id INT  REFERENCES accounts ON DELETE CASCADE,  CONSTRAINT folder_fk FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
     await connection.query(
-        'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT  REFERENCES accounts ON DELETE CASCADE,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT files_fk1 FOREIGN KEY(folder_id) REFERENCES folders(id),CONSTRAINT files_fk2 FOREIGN KEY(user_id) REFERENCES accounts(id))'
+        'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT ,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT files_fk1 FOREIGN KEY(folder_id) REFERENCES folders(id),CONSTRAINT file_fk2 FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
 
     console.log('tables created')

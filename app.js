@@ -124,7 +124,7 @@ connection.connect(async function (err) {
         'CREATE TABLE IF NOT EXISTS meetinginfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN,user_id INT ,  CONSTRAINT meeting_fk FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
     await connection.query(
-        'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT ,CONSTRAINT event_fk FOREIGN KEY(owner_id) REFERENCES accounts(id))'
+        'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT REFERENCES accounts ON DELETE CASCADE, CONSTRAINT event_fk FOREIGN KEY(owner_id) REFERENCES accounts(id))'
     );
     await connection.query(
         'CREATE TABLE IF NOT EXISTS folders (id  BIGSERIAL unique not null PRIMARY KEY,foldername VARCHAR(255), user_id INT  REFERENCES accounts ON DELETE CASCADE,  CONSTRAINT folder_fk FOREIGN KEY(user_id) REFERENCES accounts(id))'

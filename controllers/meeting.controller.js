@@ -6,7 +6,7 @@ const validationResult = require('express-validator').validationResult;
 exports.getRoom = (req, res) => {
 	const clientid = req.body.meetingid;
 	if (validationResult(req).isEmpty()) {
-		MeetingInfoModel.checkMeetingId(clientid)
+		MeetingInfoModel.checkId(clientid)
 			.then(() => {
 				if (!req.session.loggedinuser) {
 					req.session.loggedinuser = req.body.clientname;
@@ -22,11 +22,7 @@ exports.getRoom = (req, res) => {
 		res.redirect('/joinmeeting?meetingid=' + clientid);
 	}
 };
-// exports.geVideoRoom=(req,res,next)=>{
-//     if(req.session.validity){
-//         res.render("room", { roomid:req.session.clientmeetingid ,clientflag: req.session.clientflag,clientname:req.body.clientname});
-//     }
-// }
+
 exports.getBackToMeeting = (req, res, next) => {
 	res.redirect('/');
 };

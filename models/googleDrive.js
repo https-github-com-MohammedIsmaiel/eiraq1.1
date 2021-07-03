@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 var connection_drive = require('./init_google_connection');
-var drive=connection_drive();
+var drive = connection_drive();
 
 
 /* 
@@ -11,14 +11,14 @@ Note: Assumes example.jpg file is in root directory,
 though this can be any filePath
 */
 
-class GoogleDriveClass  {
-	
-async  uploadFile(filename,mimetype,path) {
+class GoogleDriveClass {
+
+  async uploadFile(filename, mimetype, path) {
     try {
       const response = await drive.files.create({
         requestBody: {
-          name:filename, //This can be name of your choice
-          mimeType:mimetype,
+          name: filename, //This can be name of your choice
+          mimeType: mimetype,
         },
         media: {
           mimeType: mimetype,
@@ -32,8 +32,8 @@ async  uploadFile(filename,mimetype,path) {
     }
   }
 
-  
-async generatePublicUrl(Id) {
+
+  async generatePublicUrl(Id) {
     try {
       await drive.permissions.create({
         fileId: Id,
@@ -43,7 +43,7 @@ async generatePublicUrl(Id) {
         },
       });
 
-    const result = await drive.files.get({
+      const result = await drive.files.get({
         fileId: Id,
         fields: 'webViewLink, webContentLink',
       });
@@ -52,18 +52,18 @@ async generatePublicUrl(Id) {
       console.log(error.message);
     }
   }
-    
-async Deletefile(fileId) {
-  try { 
- const result = await  drive.files
-  .delete({
-    fileId: fileId,
-  });
-    return result;
-  } catch (error) {
-    console.log(error.message);
+
+  async Deletefile(fileId) {
+    try {
+      const result = await drive.files
+        .delete({
+          fileId: fileId,
+        });
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
   }
-}
- 
+
 }
 module.exports = GoogleDriveClass;

@@ -1,43 +1,43 @@
 
-  const cron = require('node-cron');
-  const mailer = require('nodemailer');
+const cron = require('node-cron');
+const mailer = require('nodemailer');
 const connection = require('./init_database').connection;
- 
-  var transporter = mailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user: 'eiraqapp@gmail.com',
-        pass: 'eiraqapp10yass'
-    }
+
+var transporter = mailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: 'eiraqapp@gmail.com',
+    pass: 'eiraqapp10yass'
+  }
 });
-module.exports = function(){
-    // Cron Job to run around 7am Server Time 
-    cron.schedule('0 * * * *', () => {
-		var today = new Date();
-		var tomorrow = new Date(today);
-		tomorrow.setDate(tomorrow.getDate() + 1);
+module.exports = function () {
+  // Cron Job to run around 7am Server Time 
+  cron.schedule('0 * * * *', () => {
+    var today = new Date();
+    var tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
 
-		var dd = String(tomorrow.getDate()).padStart(2, '0');
-		var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
-		var yyyy = tomorrow.getFullYear();
+    var dd = String(tomorrow.getDate()).padStart(2, '0');
+    var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = tomorrow.getFullYear();
 
-		var current_hour = today.getHours();
-        
-		today = yyyy + '-' + mm + '-' + dd;
-		let query =
-			'SELECT events.*, accounts.email,accounts.username FROM events INNER JOIN  accounts ON owner_id= accounts.id WHERE CAST(start_date AS DATE) =$1 AND EXTRACT(HOUR FROM start_date) =$2';
-		connection.query(query, [today, current_hour], function (err, result) {
-			if (err) console.log(err);
-            if (result.rows.length > 0) {
-                result.rows.forEach((element) => {
-                    
-					const mailOptions = {
-						from: 'eiraqapp@gmail.com',
-						to: element.email,
-						subject: `Hello ${element.username} `,
-						html: `<div style : "font-size : 20px ;"><strong style = "color:#080; font-size:24px; ">
+    var current_hour = today.getHours();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    let query =
+      'SELECT events.*, accounts.email,accounts.username FROM events INNER JOIN  accounts ON owner_id= accounts.id WHERE CAST(start_date AS DATE) =$1 AND EXTRACT(HOUR FROM start_date) =$2';
+    connection.query(query, [today, current_hour], function (err, result) {
+      if (err) console.log(err);
+      if (result.rows.length > 0) {
+        result.rows.forEach((element) => {
+
+          const mailOptions = {
+            from: 'eiraqapp@gmail.com',
+            to: element.email,
+            subject: `Hello ${element.username} `,
+            html: `<div style : "font-size : 20px ;"><strong style = "color:#080; font-size:24px; ">
                              Happy day 😉😂 </strong>,thank you for using <strong style : "color: #a00; font-size:26px;"> Eiraq App </strong> you have an event tomorrow 
                              <p style = "color:blue; font-size:30px; padding:5px ;border:1px solid blue; border-radius:10px;>
                              ( ${element.text} ) 
@@ -53,19 +53,19 @@ module.exports = function(){
                              </tr>
                              </table>
                              </div>`,
-					};
-					return transporter.sendMail(mailOptions, (error, data) => {
-						if (error) {
-							console.log(error);
-						}
-					});
-				});
-			} else {
-				return 'nothing';
-			}
-		});
-	});
+          };
+          return transporter.sendMail(mailOptions, (error, data) => {
+            if (error) {
+              console.log(error);
+            }
+          });
+        });
+      } else {
+        return 'nothing';
+      }
+    });
+  });
 
 
 
-    }
+}

@@ -7,20 +7,24 @@ const REFRESH_TOKEN = '1//04j8Y28dmaQ2XCgYIARAAGAQSNwF-L9Ir644owAq35q-BXXbkTgGXp
 
 
 
-module.exports=function(){
-    
- const oauth2Client = new google.auth.OAuth2(
-    CLIENT_ID,
-    CLIENT_SECRET,
-    REDIRECT_URI
-);
-  
-oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
-  
-const drive = google.drive({
-    version: 'v3',
-    auth: oauth2Client,
-});
-return drive;
+module.exports = function () {
+
+    const oauth2Client = new google.auth.OAuth2(
+        CLIENT_ID,
+        CLIENT_SECRET,
+        REDIRECT_URI
+    );
+
+    oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+    oauth2Client.generateAuthUrl({
+        // 'online' (default) or 'offline' (gets refresh_token)
+        access_type: 'offline',
+
+    });
+    const drive = google.drive({
+        version: 'v3',
+        auth: oauth2Client,
+    });
+    return drive;
 
 }

@@ -1,606 +1,572 @@
 <%- include('parts/header')%>
-    <title>Room Meeting</title>
-    <link rel="stylesheet"
-        href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-        crossorigin="anonymous" />
-    <script
-        src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <!-- <script src="https://www.webrtc-experiment.com/common.js"></script> -->
+<title>Room Meeting</title>
+<link rel="stylesheet"
+    href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+    crossorigin="anonymous" />
+<script
+    src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<!-- <script src="https://www.webrtc-experiment.com/common.js"></script> -->
 
-    <script>
-        const ROOM_ID = "<%= roomid %>";
-    </script>
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-        crossorigin="anonymous">
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
-    <link rel="stylesheet" href="/css/newroomui/meeting.css">
-    <link rel="stylesheet" href="/css/newroomui/logo.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" id="light" href="/css/newroomui/lightprofile.css">
-    <link rel="stylesheet" href="/css/timer.css">
-    </head>
+<script>
+    const ROOM_ID = "<%= roomid %>";
+</script>
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+    crossorigin="anonymous">
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+<link rel="stylesheet" href="/css/newroomui/meeting.css">
+<link rel="stylesheet" href="/css/newroomui/logo.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" id="light" href="/css/newroomui/lightprofile.css">
+<link rel="stylesheet" href="/css/timer.css">
+</head>
 
 
 
-    <body>
-        <!-- new ui -->
+<body>
+    <!-- new ui -->
 
-        <div class="cont">
+    <div class="cont">
 
-            <!----------------- Start header ------------------->
-            <header class="container-fluid boxedit head">
-                <div class="username">
-                    <% if (typeof pro_img=='undefined' ) { %>
-                        <img id="profileImg" src="/upload_images/default.png"
-                            width="50px" alt="user image" srcset="">
+        <!----------------- Start header ------------------->
+        <header class="container-fluid boxedit head">
+            <div class="username">
+                <% if (typeof pro_img=='undefined' ) { %>
+                <img id="profileImg" src="/upload_images/default.png"
+                    width="50px" alt="user image" srcset="">
 
-                        <% } else if (pro_img.startsWith("https")) { %>
+                <% } else if (pro_img.startsWith("https")) { %>
 
-                            <img id="profileImg" src="<%=pro_img%>" width="50px"
-                                alt="user image" srcset="">
-                            <% } else { %>
-                                <img id="profileImg"
-                                    src="/upload_images/<%=pro_img%>"
-                                    width="50px" alt="user image" srcset="">
+                <img id="profileImg" src="<%=pro_img%>" width="50px"
+                    alt="user image" srcset="">
+                <% } else { %>
+                <img id="profileImg" src="/upload_images/<%=pro_img%>"
+                    width="50px" alt="user image" srcset="">
 
-                                <% } %>
-                                    <% if (isHost) { %>
-                                        <span id="logedInUser">
-                                            <%= loggedinuser+" (host)"%>
-                                        </span>
-                                        <% } else { %>
-                                            <span id="logedInUser">
-                                                <%= loggedinuser%>
-                                            </span>
-                                            <% } %>
-
-                                                <div class="timer"
-                                                    style="  margin: 0px 10px; font-size: 18px; font-weight: 700;">
-                                                    <div style="display: inline-block; width: 15px;  height: 15px; border-radius: 50%;"
-                                                        class="timeLamp colorred">
-                                                    </div>
-                                                    <label
-                                                        style=" color: #4700f3;"
-                                                        id="minutes">00</label>
-                                                    <label
-                                                        style=" color: #f36d00;"
-                                                        id="colon">:</label>
-                                                    <label
-                                                        id="seconds">00</label>
-                                                </div>
-                </div>
-                <div class="logo">
-                    <div class="contain">
-                        <div class="box">
-                            <div class="title">
-                                <span class="block"></span>
-                                <h1>Eiraq<span></span></h1>
-                            </div>
-                            <div class="role">
-                                <div class="block"></div>
-                                <p>Conference App</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="display">
-                    <button onclick="changeseem()" class="btn"><i
-                            class="fas fa-th-large"></i></button>
-                    <button onclick="blackmoon()" class="btn"><i id="black"
-                            class="fas fa-adjust"></i></button>
-                </div>
-            </header>
-            <!----------------- End header ------------------->
-
-            <!----------------- Start Aside ------------------->
-            <div class="mainrightside">
-                <!-- fatma khaled -->
-
-                <button id="meet-inf" onclick="dispMeetingInfo()"><i
-                        class="x far fa-lightbulb"></i></button>
-
-                <div class="meeting-info meeting-d-none">
-                    <% if(typeof meetinginfo!='undefined' ) { %>
-                        <table class="table table-hover table-borderless">
-                            <tr>
-                                <td><i class="fas fa-id-card-alt"></i></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.meetingid%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-user"></i></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.hostname%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-key"></i></td>
-                                <td>
-                                    <span>
-                                        <%= meetinginfo.password%>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-link"></i></td>
-                                <td>
-                                    <input class="form-control"
-                                        style="border: none; outline: none;"
-                                        type="text" name="copyUrl"
-                                        value="<%= meetinginfo.meetingurl%>"
-                                        id="Url">
-                                    <button title="copy url" id="copy"
-                                        class="Copy far fa-copy border-0 border-color:#EEE "></button>
-                                </td>
-                            </tr>
-                        </table>
-                        <% } %>
-                </div>
-                <!-- mohammed ismael -->
-                <button title="beak rooms" id="btnroom" class="btn"
-                    onclick="rooms()">
-                    <i class="fad fa-angle-double-right"></i>
-                </button>
-                <!--mohammed gamal -->
-                <button title="attendance" onclick="fileUpload()" class="btn"
-                    id="attendence">
-                    <i class="far fa-file-alt"></i>
-                </button>
-                <!-- mohammed gamal -->
-                <button title="caption" onclick="caption()" class="btn"
-                    id="speech_to_text">
-                    <i class="fas fa-closed-captioning"></i>
-                </button>
-                <!-- mohammed gamal  white boord-->
-                <button id="whiteBoard" title="white board" class="btn">
-                    <i class="far fa-clipboard"></i>
-                </button>
-                <!-- bakr -->
-                <button id="msg" title="global chat" onclick="" class="btn">
-                    <i class="far fa-envelope"></i>
-                </button>
-                <!-- mohammed ismael -->
-                <button id="users" title="Users" onclick="" class="btn">
-                    <i class="fas fa-users"></i>
-                </button>
-                <!-- ismael mute all -->
+                <% } %>
                 <% if (isHost) { %>
-                    <button title="Security" class="btn" onclick="toggleButt()">
-                        <i class="fad fa-shield-alt"></i>
-                    </button>
-                    <% }%>
+                <span id="logedInUser">
+                    <%= loggedinuser+" (host)"%>
+                </span>
+                <% } else { %>
+                <span id="logedInUser">
+                    <%= loggedinuser%>
+                </span>
+                <% } %>
+
+                <div class="timer"
+                    style="  margin: 0px 10px; font-size: 18px; font-weight: 700;">
+                    <div style="display: inline-block; width: 15px;  height: 15px; border-radius: 50%;"
+                        class="timeLamp colorred">
+                    </div>
+                    <label id="minutes">00</label>
+                    <label id="colon">:</label>
+                    <label id="seconds">00</label>
+                </div>
             </div>
-            <!----------------- End Aside ------------------->
-
-            <!----------------- Start Video Section ------------------->
-            <section class="boxedit main">
-                <!-- mohammed ismael -->
-                <div class="breakrooms">
-                    <div class="text">
-                        BreakOut Rooms
-                    </div>
-                    <div class="h44">
-                        <h4 id="joinMainRoom" class="btn btn-primary"
-                            onclick="">main room</h4>
-                        <!-- <ul class="displayed" id="main">
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                        </ul> -->
-                    </div>
-                    <div class="h44">
-                        <h4 id="" class="btn btn-outline-success"
-                            onclick="slideOther()">Section</h4>
-                        <h4 class="btn" id="joinSection"><i
-                                class="fas fa-plus-square"></i>
-                        </h4>
-                        <ul id="sectionMembers" class="displayed">
-                            <li>mohammed</li>
-                        </ul>
-                    </div>
-                    <div class="h44">
-                        <h4 class="btn btn-outline-success"
-                            onclick="slideMain()">Lab</h4>
-                        <h4 class="btn" id="joinLab"><i
-                                class="fas fa-plus-square"></i>
-                        </h4>
-                        <ul id="labMembers" class="displayed">
-                            <li>mohammed</li>
-                            <li>mohammed</li>
-                            <li>mohammed</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mainsec">
-                </div>
-                <!-- mohammed ismael and  bakr -->
-                <div class="vidAndMessAndFri">
-                    <!-- mainscreem all-user-normal -->
-                    <div id="vid" class="all-user-normal">
-                        <div id="prev" class="N-P-button prev disp-none">
-                            <button onclick="scrollMembers(-1)"><i
-                                    class="fad fa-angle-double-left"></i></button>
+            <div class="logo">
+                <div class="contain">
+                    <div class="box">
+                        <div class="title">
+                            <span class="block"></span>
+                            <h1>Eiraq<span></span></h1>
                         </div>
-                        <div class="uservideo">
-                            <!-- TODO@Eng-Muhammed-Samy #2 edit this style for this element only -->
-                            <div id="whiteBoardContainer"
-                                style="border-color: #eceaea; display: none;">
+                        <div class="role">
+                            <div class="block"></div>
+                            <p>Conference App</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="display">
+                <button onclick="changeseem()" class="btn"><i id="bordericons"
+                        class="fas fa-th-large"></i></button>
+                <button onclick="blackmoon()" class="btn"><i id="bordericons"
+                        id="black" class="fas fa-adjust"></i></button>
+            </div>
+        </header>
+        <!----------------- End header ------------------->
 
-                                <!-- <canvas class="whiteboard" style="width: calc(100% - 250px); height: 640px; z-index: 10;"></canvas>
+        <!----------------- Start Aside ------------------->
+        <div class="mainrightside">
+            <!-- fatma khaled -->
 
-                                <div class="colors" style="z-index: 30;">
-                                    <div class="color black"></div>
-                                    <div class="color white"></div>
-                                    <div class="color red"></div>
-                                    <div class="color green"></div>
-                                    <div class="color blue"></div>
-                                    <div class="color yellow"></div>
-                                    <div class="btn colorClear">CLEAR</div>
-                                    <div class="slidecontainer">
-                                        <input type="range" min="1" max="30" value="4" class="slider" id="myRange">
-                                      </div>
-                                </div> -->
+            <button id="meet-inf" onclick="dispMeetingInfo()"><i
+                    id="bordericons" class="x far fa-lightbulb"></i></button>
 
-                                <div class="container">
+            <div class="meeting-info meeting-d-none">
+                <% if(typeof meetinginfo!='undefined' ) { %>
+                <table class="table table-hover table-borderless">
+                    <tr>
+                        <td><i id="bordericons" class="fas fa-id-card-alt"></i>
+                        </td>
+                        <td>
+                            <span>
+                                <%= meetinginfo.meetingid%>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i id="bordericons" class="fas fa-user"></i></td>
+                        <td>
+                            <span>
+                                <%= meetinginfo.hostname%>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i id="bordericons" class="fas fa-key"></i></td>
+                        <td>
+                            <span>
+                                <%= meetinginfo.password%>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i id="bordericons" class="fas fa-link"></i></td>
+                        <td>
+                            <input class="form-control"
+                                style="border: none; outline: none;" type="text"
+                                name="copyUrl"
+                                value="<%= meetinginfo.meetingurl%>" id="Url">
+                            <button title="copy url" id="copy"
+                                class="Copy far fa-copy border-0 border-color:#EEE "></button>
+                        </td>
+                    </tr>
+                </table>
+                <% } %>
+            </div>
+            <!-- mohammed ismael -->
+            <button title="beak rooms" id="btnroom" class="btn"
+                onclick="rooms()">
+                <i id="bordericons" id="bordericons"
+                    class="fad fa-angle-double-right"></i>
+            </button>
+            <!--mohammed gamal -->
+            <button title="attendance" onclick="fileUpload()" class="btn"
+                id="attendence">
+                <i id="bordericons" id="bordericons"
+                    class="far fa-file-alt"></i>
+            </button>
+            <!-- mohammed gamal -->
+            <button title="caption" onclick="caption()" class="btn"
+                id="speech_to_text">
+                <i id="bordericons" id="bordericons"
+                    class="fas fa-closed-captioning"></i>
+            </button>
+            <!-- mohammed gamal  white boord-->
+            <button id="whiteBoard" title="white board" class="btn">
+                <i id="bordericons" id="bordericons"
+                    class="far fa-clipboard"></i>
+            </button>
+            <!-- bakr -->
+            <button id="msg" title="global chat" onclick="" class="btn">
+                <i id="bordericons" id="bordericons"
+                    class="far fa-envelope"></i>
+            </button>
+            <!-- mohammed ismael -->
+            <button id="users" title="Users" onclick="" class="btn">
+                <i id="bordericons" id="bordericons" class="fas fa-users"></i>
+            </button>
+            <!-- ismael mute all -->
+            <% if (isHost) { %>
+            <button title="Security" class="btn" onclick="toggleButt()">
+                <i id="bordericons" id="bordericons"
+                    class="fad fa-shield-alt"></i>
+            </button>
+            <% }%>
+        </div>
+        <!----------------- End Aside ------------------->
 
-                                    <p>
-                                        <button type="button"
-                                            class="btn btn-warning btn-sm"
-                                            value="pencil"
-                                            id="pencil-button">Pencil</button>
-                                        <button type="button"
-                                            class="btn btn-warning btn-sm"
-                                            value="rect"
-                                            id="rect-button">Rectangle</button>
-                                        <button type="button"
-                                            class="btn btn-warning btn-sm"
-                                            value="circle"
-                                            id="circle-button">Circle</button>
-                                        <button type="button"
-                                            class="btn btn-warning btn-sm"
-                                            value="ellipse"
-                                            id="ellipse-button">Ellipse</button>
-                                        <button type="button"
-                                            class="btn btn-warning btn-sm"
-                                            value="line"
-                                            id="line-button">Line</button>
-                                        <button type="button"
-                                            class="btn btn-warning btn-sm"
-                                            value="text"
-                                            id="text-button">Text</button>
-                                        <button type="button"
-                                            class="btn btn-warning btn-sm"
-                                            id="clear-all">Clear
-                                            All</button>
-                                        <label for="colour"
-                                            style="position:absolute;">Colour :
-                                        </label>
-                                        <input id="colour-picker"
-                                            value="#000000" style="width:80px;"
-                                            class="jscolor {width:243, height:150, position:'right',
-                                borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666'}">
-                                        <span class="form-group"
-                                            style="width: 90px;display: inline-block;">
-                                            <label for="line-Width">Thickness:
-                                            </label>
-                                            <select class="form-control"
-                                                id="line-Width">
-                                                <option>2</option>
-                                                <option>4</option>
-                                                <option>6</option>
-                                                <option>8</option>
-                                                <option>10</option>
-                                                <option>12</option>
-                                                <option>14</option>
-                                            </select>
-                                        </span>
-                                        <span class="form-group"
-                                            style="width: 130px;display: inline-block;">
-                                            <label
-                                                for="draw-text-font-family">Font:
-                                            </label>
-                                            <select class="form-control"
-                                                id="draw-text-font-family">
-                                                <option value="Arial">Arial
-                                                </option>
-                                                <option value="Verdana"
-                                                    selected>Verdana</option>
-                                                <option value="Times New Roman">
-                                                    Times New Roman</option>
-                                                <option value="Courier New">
-                                                    Courier New</option>
-                                                <option value="serif">serif
-                                                </option>
-                                                <option value="sans-serif">
-                                                    sans-serif</option>
-                                            </select>
-                                        </span>
+        <!----------------- Start Video Section ------------------->
+        <section class="boxedit main">
+            <!-- mohammed ismael -->
+            <div class="breakrooms">
+                <div class="text">
+                    BreakOut Rooms
+                </div>
+                <div class="h44">
+                    <h4 id="joinMainRoom" class="btn btn-primary" onclick="">
+                        main room</h4>
 
-                                    </p>
+                </div>
+                <div class="h44">
+                    <h4 id="" class="btn btn-outline-success"
+                        onclick="slideOther()">Section</h4>
+                    <h4 class="btn" id="joinSection"><i id="bordericons"
+                            class="fas fa-plus-square"></i>
+                    </h4>
+                    <ul id="sectionMembers" class="displayed">
+                        <li>mohammed</li>
+                    </ul>
+                </div>
+                <div class="h44">
+                    <h4 class="btn btn-outline-success" onclick="slideMain()">
+                        Lab</h4>
+                    <h4 class="btn" id="joinLab"><i id="bordericons"
+                            class="fas fa-plus-square"></i>
+                    </h4>
+                    <ul id="labMembers" class="displayed">
+                        <li>mohammed</li>
 
-                                    <div id="container">
-                                        <canvas id="imageView" width="1000"
-                                            height="500">
-                                            <p>Unfortunately, your browser is
-                                                currently unsupported by our web
-                                                application. We are sorry for
-                                                the inconvenience. Please use
-                                                one of the
-                                                supported browsers listed below,
-                                                or draw the image you want using
-                                                an
-                                                offline tool.</p>
-                                            <p>Supported browsers: <a
-                                                    href="http://www.opera.com">Opera</a>,
-                                                <a
-                                                    href="http://www.mozilla.com">Firefox</a>,
-                                                <a
-                                                    href="http://www.apple.com/safari">Safari</a>,
-                                                and <a
-                                                    href="http://www.konqueror.org">Konqueror</a>.
-                                            </p>
-                                        </canvas>
-                                    </div>
-                                </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="mainsec">
+            </div>
+            <!-- mohammed ismael and  bakr -->
+            <div class="vidAndMessAndFri">
+                <!-- mainscreem all-user-normal -->
+                <div id="vid" class="all-user-normal">
+                    <div id="prev" class="N-P-button prev disp-none">
+                        <button onclick="scrollMembers(-1)"><i id="bordericons"
+                                class="fad fa-angle-double-left"></i></button>
+                    </div>
+                    <div class="uservideo">
+                        <!-- TODO@Eng-Muhammed-Samy #2 edit this style for this element only -->
+                        <div id="whiteBoardContainer" style="display: none;">
 
-                            </div>
 
-                            <video muted id="mainVideo" autoplay
-                                style="width: 99%; height: 77vh; border-color: #eceaea;"></video>
-                            <!-- <div class="user"> -->
-                            <div id="shareContainer" class="v-black"></div>
-                            <!-- <video autoplay muted src="./videos/salah.mp4"></video> -->
-                            <!-- <span>Muhammed</span> -->
-                            <!-- <button><i class="fas fa-microphone"></i></button> -->
-                            <!-- </div> -->
-                            <!-- mohamed gamal -->
-                            <div class="text-speech" id="stt_container">
+                            <div class="container">
+
                                 <p>
+                                    <button type="button"
+                                        class="btn btn-warning btn-sm"
+                                        value="pencil"
+                                        id="pencil-button">Pencil</button>
+                                    <button type="button"
+                                        class="btn btn-warning btn-sm"
+                                        value="rect"
+                                        id="rect-button">Rectangle</button>
+                                    <button type="button"
+                                        class="btn btn-warning btn-sm"
+                                        value="circle"
+                                        id="circle-button">Circle</button>
+                                    <button type="button"
+                                        class="btn btn-warning btn-sm"
+                                        value="ellipse"
+                                        id="ellipse-button">Ellipse</button>
+                                    <button type="button"
+                                        class="btn btn-warning btn-sm"
+                                        value="line"
+                                        id="line-button">Line</button>
+                                    <button type="button"
+                                        class="btn btn-warning btn-sm"
+                                        value="text"
+                                        id="text-button">Text</button>
+                                    <button type="button"
+                                        class="btn btn-warning btn-sm"
+                                        id="clear-all">Clear
+                                        All</button>
+                                    <label for="colour"
+                                        style="position:absolute;">Colour :
+                                    </label>
+                                    <input id="colour-picker" value="#000000"
+                                        style="width:80px;"
+                                        class="jscolor {width:243, height:150, position:'right',
+                                borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666'}">
+                                    <span class="form-group"
+                                        style="width: 90px;display: inline-block;">
+                                        <label for="line-Width">Thickness:
+                                        </label>
+                                        <select class="form-control"
+                                            id="line-Width">
+                                            <option>2</option>
+                                            <option>4</option>
+                                            <option>6</option>
+                                            <option>8</option>
+                                            <option>10</option>
+                                            <option>12</option>
+                                            <option>14</option>
+                                        </select>
+                                    </span>
+                                    <span class="form-group"
+                                        style="width: 130px;display: inline-block;">
+                                        <label for="draw-text-font-family">Font:
+                                        </label>
+                                        <select class="form-control"
+                                            id="draw-text-font-family">
+                                            <option value="Arial">Arial
+                                            </option>
+                                            <option value="Verdana" selected>
+                                                Verdana</option>
+                                            <option value="Times New Roman">
+                                                Times New Roman</option>
+                                            <option value="Courier New">
+                                                Courier New</option>
+                                            <option value="serif">serif
+                                            </option>
+                                            <option value="sans-serif">
+                                                sans-serif</option>
+                                        </select>
+                                    </span>
+
                                 </p>
+
+                                <div id="container">
+                                    <canvas id="imageView" width="1000"
+                                        height="500">
+                                        <p>Unfortunately, your browser is
+                                            currently unsupported by our web
+                                            application. We are sorry for
+                                            the inconvenience. Please use
+                                            one of the
+                                            supported browsers listed below,
+                                            or draw the image you want using
+                                            an
+                                            offline tool.</p>
+                                        <p>Supported browsers: <a
+                                                href="http://www.opera.com">Opera</a>,
+                                            <a
+                                                href="http://www.mozilla.com">Firefox</a>,
+                                            <a
+                                                href="http://www.apple.com/safari">Safari</a>,
+                                            and <a
+                                                href="http://www.konqueror.org">Konqueror</a>.
+                                        </p>
+                                    </canvas>
+                                </div>
                             </div>
-                        </div>
-                        <!-- all-users -->
-                        <div id="allUser" class="all-users2">
-                            <!-- <div class="user">
-                                <div class="v-black"></div>
-                                <video autoplay muted src=""></video>
-                                <span>Muhammed</span>
-                                <button><i class="fas fa-microphone"></i></button>
-                            </div> -->
+
                         </div>
 
-                        <div id="next" class="N-P-button next disp-none">
-                            <button onclick="scrollMembers(1)"><i
-                                    class="fad fa-angle-double-right"></i></button>
+                        <video muted id="mainVideo" autoplay
+                            style="width: 99%; height: 77vh; border-color: #eceaea;"></video>
+                        <div id="shareContainer" class="v-black"></div>
+                        <!-- mohamed gamal -->
+                        <div class="text-speech" id="stt_container">
+                            <p>
+                            </p>
                         </div>
                     </div>
-                    <div class="otherScreens">
-                        <div class="mesage">
-                            <div class="headname">Message</div>
-                            <div class="msgbody">
-                                <ul id="chat" style="display: flex;
+                    <!-- all-users -->
+                    <div id="allUser" class="all-users2">
+
+                    </div>
+
+                    <div id="next" class="N-P-button next disp-none">
+                        <button onclick="scrollMembers(1)"><i id="bordericons"
+                                class="fad fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+                <div class="otherScreens">
+                    <div class="mesage">
+                        <div class="headname">Message</div>
+                        <div class="msgbody">
+                            <ul id="chat" style="display: flex;
                                                                 flex-direction: column;
                                                                 align-items: center;
                                                                 padding: 8px;">
-                                </ul>
-                            </div>
-                            <div class="fotmsg">
-                                <!-- alaa ibrahim -->
-                                <div style="color: green;" id="upload-progress"
-                                    class="uploadFilePers">
-                                </div>
-                                <div class="msgActions">
-                                    <input class="room-chat" type="text "
-                                        placeholder="Type message... " name=" "
-                                        id="msgBar">
-                                    <!-- mohammed gammal -->
-                                    <button onclick="showEmojies()"><i
-                                            class="far fa-grin"></i></button>
-                                    <!-- alaa ibrahim -->
-                                    <form class="formStyle" id="form">
-                                        <input id="files" style="display: none;"
-                                            type="file" name="file">
-                                        <label for="files"><i
-                                                class="fas fa-file"></i></label>
-                                        <button type="submit"><i
-                                                class="fas fa-paper-plane"></i></button>
-                                    </form>
-
-
-                                    <!--bakr -->
-                                    <!-- <button><i class="fas fa-paper-plane"></i></button> -->
-                                </div>
-                                <div id="imo" class="emoji hide-imo">
-                                    <button class="btn" id="LOL"
-                                        onclick="handleEmojies('LOL')">
-                                        😂
-                                    </button>
-                                    <button class="btn" id="HeartEyes"
-                                        onclick="handleEmojies('HeartEyes')">
-                                        😍
-                                    </button>
-                                    <button class="btn" id="HappySweat"
-                                        onclick="handleEmojies('HappySweat')">
-                                        😅
-                                    </button>
-                                    <button class="btn" id="Awkward"
-                                        onclick="handleEmojies('Awkward')">
-                                        😬
-                                    </button>
-                                    <button class="btn" id="Angry"
-                                        onclick="handleEmojies('Angry')">
-                                        😠
-                                    </button>
-                                    <button class="btn" id="Crying"
-                                        onclick="handleEmojies('Crying')">
-                                        😢
-                                    </button>
-                                    <button class="btn" id="Surprised"
-                                        onclick="handleEmojies('Surprised')">
-                                        😮
-                                    </button>
-                                    <button class="btn" id="HelplessFace"
-                                        onclick="handleEmojies('HelplessFace')">
-                                        😣
-                                    </button>
-                                    <button class="btn" id="Winky"
-                                        onclick="handleEmojies('Winky')">
-                                        😉
-                                    </button>
-                                    <button class="btn" id="Expressionless"
-                                        onclick="handleEmojies('Expressionless')">
-                                        😑
-                                    </button>
-                                    <button class="btn" id="Kissing"
-                                        onclick="handleEmojies('Kissing')">
-                                        😘
-                                    </button>
-                                    <button class="btn" id="Heart"
-                                        onclick="handleEmojies('Heart')">
-                                        ❤️
-                                    </button>
-                                    <button class="btn" id="Glitter"
-                                        onclick="handleEmojies('Glitter')">
-                                        ✨
-                                    </button>
-                                    <button class="btn" id="Flame"
-                                        onclick="handleEmojies('Flame')">
-                                        🔥
-                                    </button>
-                                    <button class="btn" id="Check"
-                                        onclick="handleEmojies('Check')">
-                                        ✔️
-                                    </button>
-                                    <button class="btn" id="Yes"
-                                        onclick="handleEmojies('Yes')">
-                                        👍
-                                    </button>
-
-
-
-                                </div>
-                            </div>
+                            </ul>
                         </div>
-                        <div class="friends">
-                            <div class="headname">Friends</div>
-                            <!-- mohammed ismael and  bakr -->
-                            <div class="msgbody" id="users_list">
-                                <div class="userfriend">
-                                    <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
-                                        width="50px" alt="" />
-                                    <label>Name</label>
-                                </div>
+                        <div class="fotmsg">
+                            <!-- alaa ibrahim -->
+                            <div style="color: green;" id="upload-progress"
+                                class="uploadFilePers">
+                            </div>
+                            <div class="msgActions">
+                                <input class="room-chat" type="text "
+                                    placeholder="Type message... " name=" "
+                                    id="msgBar">
+                                <!-- mohammed gammal -->
+                                <button onclick="showEmojies()"><i
+                                        id="bordericons"
+                                        class="far fa-grin"></i></button>
+                                <!-- alaa ibrahim -->
+                                <form class="formStyle" id="form">
+                                    <input id="files" style="display: none;"
+                                        type="file" name="file">
+                                    <label for="files"><i id="bordericons"
+                                            class="fas fa-file"></i></label>
+                                    <button type="submit"><i id="bordericons"
+                                            class="fas fa-paper-plane"></i></button>
+                                </form>
+
+
+                                <!--bakr -->
+                                <!-- <button><i class="fas fa-paper-plane"></i></button> -->
+                            </div>
+                            <div id="imo" class="emoji hide-imo">
+                                <button class="btn" id="LOL"
+                                    onclick="handleEmojies('LOL')">
+                                    😂
+                                </button>
+                                <button class="btn" id="HeartEyes"
+                                    onclick="handleEmojies('HeartEyes')">
+                                    😍
+                                </button>
+                                <button class="btn" id="HappySweat"
+                                    onclick="handleEmojies('HappySweat')">
+                                    😅
+                                </button>
+                                <button class="btn" id="Awkward"
+                                    onclick="handleEmojies('Awkward')">
+                                    😬
+                                </button>
+                                <button class="btn" id="Angry"
+                                    onclick="handleEmojies('Angry')">
+                                    😠
+                                </button>
+                                <button class="btn" id="Crying"
+                                    onclick="handleEmojies('Crying')">
+                                    😢
+                                </button>
+                                <button class="btn" id="Surprised"
+                                    onclick="handleEmojies('Surprised')">
+                                    😮
+                                </button>
+                                <button class="btn" id="HelplessFace"
+                                    onclick="handleEmojies('HelplessFace')">
+                                    😣
+                                </button>
+                                <button class="btn" id="Winky"
+                                    onclick="handleEmojies('Winky')">
+                                    😉
+                                </button>
+                                <button class="btn" id="Expressionless"
+                                    onclick="handleEmojies('Expressionless')">
+                                    😑
+                                </button>
+                                <button class="btn" id="Kissing"
+                                    onclick="handleEmojies('Kissing')">
+                                    😘
+                                </button>
+                                <button class="btn" id="Heart"
+                                    onclick="handleEmojies('Heart')">
+                                    ❤️
+                                </button>
+                                <button class="btn" id="Glitter"
+                                    onclick="handleEmojies('Glitter')">
+                                    ✨
+                                </button>
+                                <button class="btn" id="Flame"
+                                    onclick="handleEmojies('Flame')">
+                                    🔥
+                                </button>
+                                <button class="btn" id="Check"
+                                    onclick="handleEmojies('Check')">
+                                    ✔️
+                                </button>
+                                <button class="btn" id="Yes"
+                                    onclick="handleEmojies('Yes')">
+                                    👍
+                                </button>
+
+
 
                             </div>
-                            <div class="fotmsg"></div>
                         </div>
                     </div>
+                    <div class="friends">
+                        <div class="headname">Friends</div>
+                        <!-- mohammed ismael and  bakr -->
+                        <div class="msgbody" id="users_list">
+                            <div class="userfriend">
+                                <img src="http://www.paulseward.com/downloads/Avatars/cartoon_avatar.png"
+                                    width="50px" alt="" />
+                                <label>Name</label>
+                            </div>
+
+                        </div>
+                        <div class="fotmsg"></div>
+                    </div>
                 </div>
-                <div class="ervice-controls hide-controls">
-                    <button id="muteAll" class="btn">Mute All</button>
-                    <button id="" class="btn">Share Screen</button>
-                    <button id="" class="btn">Allow Chat</button>
-                </div>
-            </section>
-            <!----------------- End Video Section ------------------->
+            </div>
+            <div class="ervice-controls hide-controls">
+                <button id="muteAll" class="btn">Mute All</button>
+                <button id="" class="btn">Share Screen</button>
+                <button id="" class="btn">Allow Chat</button>
+            </div>
+        </section>
+        <!----------------- End Video Section ------------------->
 
-            <!----------------- Start Footer ------------------->
-            <footer class="boxedit foot">
-                <div class="footbtn">
-                    <!-- khiry and ismael -->
-                    <button title="microphone" id="audioControl"
-                        class="btn btns"><i
-                            class="icons fas fa-microphone"></i></button>
-                    <button title="video" id="videoControl" class="btn btns"><i
-                            class="icons fas fa-video"></i></button>
-                </div>
-                <div class="footbtn">
-                    <!-- khiry -->
-                    <button title="share screen" onclick="share()"
-                        id="shareScreen" class="btn btns"><i
-                            class="fas fa-share-square"></i></button>
-                    <!-- khiry -->
-                    <button title="record screen" id="recordScreen"
-                        onclick="record()" class="btn btns"><i
-                            class="icons fas fa-bullseye"></i></button>
-                    <!-- gamal -->
-                    <button title="raise hand" onclick="raiseHand()"
-                        class="btn btns" id="raiseHand_btn"><i
-                            class="icons fas fa-hand-paper"></i></button>
-                </div>
+        <!----------------- Start Footer ------------------->
+        <footer class="boxedit foot">
+            <div class="footbtn">
+                <!-- khiry and ismael -->
+                <button title="microphone" id="audioControl" class="btn btns"><i
+                        class="icons fas fa-microphone"></i></button>
+                <button title="video" id="videoControl" class="btn btns"><i
+                        class="icons fas fa-video"></i></button>
+            </div>
+            <div class="footbtn">
+                <!-- khiry -->
+                <button title="share screen" onclick="share()" id="shareScreen"
+                    class="btn btns"><i
+                        class="fas fa-share-square"></i></button>
+                <!-- khiry -->
+                <button title="record screen" id="recordScreen"
+                    onclick="record()" class="btn btns"><i
+                        class="icons fas fa-bullseye"></i></button>
+                <!-- gamal -->
+                <button title="raise hand" onclick="raiseHand()"
+                    class="btn btns" id="raiseHand_btn"><i
+                        class="icons fas fa-hand-paper"></i></button>
+            </div>
 
-                <div class="footbtn">
+            <div class="footbtn">
 
-                    <button onclick="openOPtion()" type="submit"
-                        class="btn btns btn-danger"><i
-                            class="col icons fas fa-sign-out-alt text-light"></i></button>
-                </div>
-                <div class="selectOptiion dspnoneopt">
+                <button onclick="openOPtion()" type="submit"
+                    class="btn btns btn-danger"><i
+                        class="col icons fas fa-sign-out-alt text-light"></i></button>
+            </div>
+            <div class="selectOptiion dspnoneopt">
 
-                    <button title="leave meeting" id="leave"
-                        onclick="leaveMeeting()"
-                        class="btn btns btn-outline-dark">Leave Meeting</button>
+                <button title="leave meeting" id="leave"
+                    onclick="leaveMeeting()"
+                    class="btn btns btn-outline-dark">Leave Meeting</button>
 
-                    <% if (isHost) { %>
-                        <button id="endForAll"
-                            class="btn btns btn-outline-danger">End For
-                            All</button>
-                        <% }%>
-                </div>
-            </footer>
-            <!----------------- End Footer ------------------->
-        </div>
+                <% if (isHost) { %>
+                <button id="endForAll" class="btn btns btn-outline-danger">End
+                    For
+                    All</button>
+                <% }%>
+            </div>
+        </footer>
+        <!----------------- End Footer ------------------->
+    </div>
 
-        <!-- end new ui -->
+    <!-- end new ui -->
 
-        <script>
-            var socket = io('/')
-        </script>
-        <script src="/js/uploadFile.js"></script>
-        <script>
-            var socket = io('/')
-            $(document).ready(() => {
-                socket.on('file', handleFile);
-            });
+    <script>
+        var socket = io('/')
+    </script>
+    <script src="/js/uploadFile.js"></script>
+    <script>
+        var socket = io('/')
+        $(document).ready(() => {
+            socket.on('file', handleFile);
+        });
 
-        </script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js "
-            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW "
-            crossorigin="anonymous"></script>
-        <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
-        <!-- <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script> -->
-        <script src="/js/mainmeeting/newmeeting.js"></script>
-        <script src="/js/mainmeeting/leave.js"></script>
-        <script src="/js/newroomui/meeting.js"></script>
-        <script src="/js/meetingChat.js"></script>
-        <script src="/js/mainmeeting/recording.js"></script>
-        <!-- <script src="/js/uploadFile.js"></script> -->
+    </script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js "
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW "
+        crossorigin="anonymous"></script>
+    <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+    <!-- <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script> -->
+    <script src="/js/mainmeeting/newmeeting.js"></script>
+    <script src="/js/mainmeeting/leave.js"></script>
+    <script src="/js/newroomui/meeting.js"></script>
+    <script src="/js/meetingChat.js"></script>
+    <script src="/js/mainmeeting/recording.js"></script>
+    <!-- <script src="/js/uploadFile.js"></script> -->
 
-        <!-- <script src="/js/speech_to_text/speech_to_text.js"></script> -->
-        <script src="/js/attendance&participants/attendence.js"></script>
-        <script src="/js/mainmeeting/breackoutrooms.js"></script>
+    <!-- <script src="/js/speech_to_text/speech_to_text.js"></script> -->
+    <script src="/js/attendance&participants/attendence.js"></script>
+    <script src="/js/mainmeeting/breackoutrooms.js"></script>
 
-        <script src="/js/whiteboard/bootstrap.min.js"></script>
-        <script src="/js/whiteboard/canvas.js"></script>
-        <script src="/js/whiteboard/jquery.min.js"></script>
-        <script src="/js/whiteboard/jscolor.min.js"></script>
+    <script src="/js/whiteboard/bootstrap.min.js"></script>
+    <script src="/js/whiteboard/canvas.js"></script>
+    <script src="/js/whiteboard/jquery.min.js"></script>
+    <script src="/js/whiteboard/jscolor.min.js"></script>
 
-        <script src="/js/mainmeeting/timer.js"></script>
-    </body>
+    <script src="/js/mainmeeting/timer.js"></script>
+</body>
 
-    </html>
+</html>

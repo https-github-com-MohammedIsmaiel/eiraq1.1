@@ -68,12 +68,12 @@ const Knex = require('knex');
 const knex = Knex({
     client: 'pg',
     connection: {
-        host: 'ec2-54-152-185-191.compute-1.amazonaws.com',
-        user: 'rcezopoulzyyhl',
-        password:
-            '4e54bf606cfc76caafcc7b056ae5d0f0a6e2b9f68d7b288d902c762a210104a8',
-        port: '5432',
-        database: 'd9t3p362ihaeei',
+       host: 'ec2-107-21-10-179.compute-1.amazonaws.com',
+	user: 'yilybqpvuolpen',
+	password:
+		'b8c8c8d3cf2d77d0b14fe9ca0b33496efa424dc74b693bcfea5f13fb1b089cd7',
+	port: '5432',
+	database: 'd6l3imlttb58vq',
         ssl: {
             rejectUnauthorized: false,
         },
@@ -121,7 +121,7 @@ connection.connect(async function (err) {
         "CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY,username VARCHAR(255), Email VARCHAR(255), password VARCHAR(255),img_url VARCHAR(350) DEFAULT 'default.png', type VARCHAR(20) DEFAULT 'normal')"
     );
     await connection.query(
-        'CREATE TABLE IF NOT EXISTS meeting (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN,user_id INT ,  CONSTRAINT meeting_fk FOREIGN KEY(user_id) REFERENCES accounts(id))'
+        'CREATE TABLE IF NOT EXISTS meetinginfo (id SERIAL  PRIMARY KEY, meeting_id  VARCHAR(255),hostname  VARCHAR(255),meetingpassword VARCHAR(255),URL VARCHAR(255),validity BOOLEAN,user_id INT ,  CONSTRAINT meeting_fk FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
     await connection.query(
         'CREATE TABLE IF NOT EXISTS events (id  BIGSERIAL unique not null PRIMARY KEY,start_date TIMESTAMP,end_date TIMESTAMP, text VARCHAR(255),event_pid VARCHAR(255),event_length VARCHAR(255), rec_type VARCHAR(255),owner_id INT REFERENCES accounts ON DELETE CASCADE, CONSTRAINT event_fk FOREIGN KEY(owner_id) REFERENCES accounts(id))'

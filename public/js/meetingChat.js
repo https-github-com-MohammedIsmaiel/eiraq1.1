@@ -2,8 +2,8 @@
 ///////////////
 let msgIcon = document.getElementById("msg")
 let isChatOpend = false;
-if (document.getElementById("msg") !== null) {
-    document.getElementById("msg").onclick = function (isChatOpend) {
+if (msgIcon !== null) {
+    msgIcon.onclick = function (isChatOpend) {
         checkChatState()
     };
 }

@@ -147,7 +147,7 @@
                 </button>
                 <!-- bakr -->
                 <% if (isHost) { %>
-                    <button id="msg" title="global chat" onclick="" class="btn">
+                    <button id="msg" title="global chat" style="display: block;" onclick="" class="btn">
                         <i id="bordericons" id="bordericons" class="far fa-envelope"></i>
                     </button>
                     <% }else{%>
@@ -431,8 +431,8 @@
                 <div class="footbtn">
                     <!-- khiry -->
                     <% if (isHost) { %>
-                        <button title="share screen" onclick="share()" id="shareScreen" class="btn btns"><i
-                                class="fas fa-share-square"></i></button>
+                        <button title="share screen" style="display: inline-block;" onclick="share()" id="shareScreen"
+                            class="btn btns"><i class="fas fa-share-square"></i></button>
                         <% }else{%>
                             <button title="share screen" style="display: none;" onclick="share()" id="shareScreen"
                                 class="btn btns"><i class="fas fa-share-square"></i></button>

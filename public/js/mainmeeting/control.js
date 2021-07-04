@@ -1,11 +1,14 @@
 
 //screen sharing
-shareScreen.addEventListener('click', () => {
-    connection.addStream({
-        screen: true,
-        oneway: true,
+if (shareScreen !== null) {
+
+    shareScreen.addEventListener('click', () => {
+        connection.addStream({
+            screen: true,
+            oneway: true,
+        });
     });
-});
+}
 //mute and unmute
 audioControl.addEventListener('click', (e) => {
     let firstLocalStream = connection.streamEvents.selectFirst({
@@ -138,8 +141,8 @@ allowShare.addEventListener('click', () => {
     socket.emit('disallowShare')
 })
 socket.on('disallowShare', () => {
-    msg.style.display = 'none'
+    shareScreen.style.display = ''
 })
 socket.on('disallowChat', () => {
-    shareScreen.style.display = 'none'
+    msg.style.display = ''
 })

@@ -146,19 +146,25 @@
                     <i id="bordericons" id="bordericons" class="far fa-clipboard"></i>
                 </button>
                 <!-- bakr -->
-                <button id="msg" title="global chat" onclick="" class="btn">
-                    <i id="bordericons" id="bordericons" class="far fa-envelope"></i>
-                </button>
-                <!-- mohammed ismael -->
-                <button id="users" title="Users" onclick="" class="btn">
-                    <i id="bordericons" id="bordericons" class="fas fa-users"></i>
-                </button>
-                <!-- ismael mute all -->
                 <% if (isHost) { %>
-                    <button title="Security" class="btn" onclick="toggleButt()">
-                        <i id="bordericons" id="bordericons" class="fad fa-shield-alt"></i>
+                    <button id="msg" title="global chat" onclick="" class="btn">
+                        <i id="bordericons" id="bordericons" class="far fa-envelope"></i>
                     </button>
-                    <% }%>
+                    <% }else{%>
+                        <button id="msg" style="display: none;" title="global chat" onclick="" class="btn">
+                            <i id="bordericons" id="bordericons" class="far fa-envelope"></i>
+                        </button>
+                        <%}%>
+                            <!-- mohammed ismael -->
+                            <button id="users" title="Users" onclick="" class="btn">
+                                <i id="bordericons" id="bordericons" class="fas fa-users"></i>
+                            </button>
+                            <!-- ismael mute all -->
+                            <% if (isHost) { %>
+                                <button title="Security" class="btn" onclick="toggleButt()">
+                                    <i id="bordericons" id="bordericons" class="fad fa-shield-alt"></i>
+                                </button>
+                                <% }%>
             </div>
             <!----------------- End Aside ------------------->
 
@@ -408,8 +414,8 @@
                 </div>
                 <div class="ervice-controls hide-controls">
                     <button id="muteAll" class="btn">Mute All</button>
-                    <button id="" class="btn">Share Screen</button>
-                    <button id="" class="btn">Allow Chat</button>
+                    <button id="allowShare" class="btn">Share Screen</button>
+                    <button id="allowChat" class="btn">Allow Chat</button>
                 </div>
             </section>
             <!----------------- End Video Section ------------------->
@@ -424,14 +430,21 @@
                 </div>
                 <div class="footbtn">
                     <!-- khiry -->
-                    <button title="share screen" onclick="share()" id="shareScreen" class="btn btns"><i
-                            class="fas fa-share-square"></i></button>
-                    <!-- khiry -->
-                    <button title="record screen" id="recordScreen" onclick="record()" class="btn btns"><i
-                            class="icons fas fa-bullseye"></i></button>
-                    <!-- gamal -->
-                    <button title="raise hand" onclick="raiseHand()" class="btn btns" id="raiseHand_btn"><i
-                            class="icons fas fa-hand-paper"></i></button>
+                    <% if (isHost) { %>
+                        <button title="share screen" onclick="share()" id="shareScreen" class="btn btns"><i
+                                class="fas fa-share-square"></i></button>
+                        <% }else{%>
+                            <button title="share screen" style="display: none;" onclick="share()" id="shareScreen"
+                                class="btn btns"><i class="fas fa-share-square"></i></button>
+                            <%}%>
+
+
+                                <!-- khiry -->
+                                <button title="record screen" id="recordScreen" onclick="record()" class="btn btns"><i
+                                        class="icons fas fa-bullseye"></i></button>
+                                <!-- gamal -->
+                                <button title="raise hand" onclick="raiseHand()" class="btn btns" id="raiseHand_btn"><i
+                                        class="icons fas fa-hand-paper"></i></button>
                 </div>
 
                 <div class="footbtn">

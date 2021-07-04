@@ -55,8 +55,8 @@
                                                     <div style="display: inline-block; width: 15px;  height: 15px; border-radius: 50%;"
                                                         class="timeLamp colorred">
                                                     </div>
-                                                    <label style=" color: #4700f3;" id="minutes">00</label>
-                                                    <label style=" color: #f36d00;" id="colon">:</label>
+                                                    <label id="minutes">00</label>
+                                                    <label id="colon">:</label>
                                                     <label id="seconds">00</label>
                                                 </div>
                 </div>
@@ -75,8 +75,9 @@
                     </div>
                 </div>
                 <div class="display">
-                    <button onclick="changeseem()" class="btn"><i class="fas fa-th-large"></i></button>
-                    <button onclick="blackmoon()" class="btn"><i id="black" class="fas fa-adjust"></i></button>
+                    <button onclick="changeseem()" class="btn"><i id="bordericons" class="fas fa-th-large"></i></button>
+                    <button onclick="blackmoon()" class="btn"><i id="bordericons" id="black"
+                            class="fas fa-adjust"></i></button>
                 </div>
             </header>
             <!----------------- End header ------------------->
@@ -85,13 +86,15 @@
             <div class="mainrightside">
                 <!-- fatma khaled -->
 
-                <button id="meet-inf" onclick="dispMeetingInfo()"><i class="x far fa-lightbulb"></i></button>
+                <button id="meet-inf" onclick="dispMeetingInfo()"><i id="bordericons"
+                        class="x far fa-lightbulb"></i></button>
 
                 <div class="meeting-info meeting-d-none">
                     <% if(typeof meetinginfo!='undefined' ) { %>
                         <table class="table table-hover table-borderless">
                             <tr>
-                                <td><i class="fas fa-id-card-alt"></i></td>
+                                <td><i id="bordericons" class="fas fa-id-card-alt"></i>
+                                </td>
                                 <td>
                                     <span>
                                         <%= meetinginfo.meetingid%>
@@ -99,7 +102,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-user"></i></td>
+                                <td><i id="bordericons" class="fas fa-user"></i></td>
                                 <td>
                                     <span>
                                         <%= meetinginfo.hostname%>
@@ -107,7 +110,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-key"></i></td>
+                                <td><i id="bordericons" class="fas fa-key"></i></td>
                                 <td>
                                     <span>
                                         <%= meetinginfo.password%>
@@ -115,7 +118,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-link"></i></td>
+                                <td><i id="bordericons" class="fas fa-link"></i></td>
                                 <td>
                                     <input class="form-control" style="border: none; outline: none;" type="text"
                                         name="copyUrl" value="<%= meetinginfo.meetingurl%>" id="Url">
@@ -128,32 +131,32 @@
                 </div>
                 <!-- mohammed ismael -->
                 <button title="beak rooms" id="btnroom" class="btn" onclick="rooms()">
-                    <i class="fad fa-angle-double-right"></i>
+                    <i id="bordericons" id="bordericons" class="fad fa-angle-double-right"></i>
                 </button>
                 <!--mohammed gamal -->
                 <button title="attendance" onclick="fileUpload()" class="btn" id="attendence">
-                    <i class="far fa-file-alt"></i>
+                    <i id="bordericons" id="bordericons" class="far fa-file-alt"></i>
                 </button>
                 <!-- mohammed gamal -->
                 <button title="caption" onclick="caption()" class="btn" id="speech_to_text">
-                    <i class="fas fa-closed-captioning"></i>
+                    <i id="bordericons" id="bordericons" class="fas fa-closed-captioning"></i>
                 </button>
                 <!-- mohammed gamal  white boord-->
                 <button id="whiteBoard" title="white board" class="btn">
-                    <i class="far fa-clipboard"></i>
+                    <i id="bordericons" id="bordericons" class="far fa-clipboard"></i>
                 </button>
                 <!-- bakr -->
                 <button id="msg" title="global chat" onclick="" class="btn">
-                    <i class="far fa-envelope"></i>
+                    <i id="bordericons" id="bordericons" class="far fa-envelope"></i>
                 </button>
                 <!-- mohammed ismael -->
                 <button id="users" title="Users" onclick="" class="btn">
-                    <i class="fas fa-users"></i>
+                    <i id="bordericons" id="bordericons" class="fas fa-users"></i>
                 </button>
                 <!-- ismael mute all -->
                 <% if (isHost) { %>
                     <button title="Security" class="btn" onclick="toggleButt()">
-                        <i class="fad fa-shield-alt"></i>
+                        <i id="bordericons" id="bordericons" class="fad fa-shield-alt"></i>
                     </button>
                     <% }%>
             </div>
@@ -167,28 +170,26 @@
                         BreakOut Rooms
                     </div>
                     <div class="h44">
-                        <h4 id="joinMainRoom" class="btn btn-primary" onclick="">main room</h4>
-                        <!-- <ul class="displayed" id="main">
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                            <li>ahmed</li>
-                        </ul> -->
+                        <h4 id="joinMainRoom" class="btn btn-primary" onclick="">
+                            main room</h4>
+
                     </div>
                     <div class="h44">
                         <h4 id="" class="btn btn-outline-success" onclick="slideOther()">Section</h4>
-                        <h4 class="btn" id="joinSection"><i class="fas fa-plus-square"></i>
+                        <h4 class="btn" id="joinSection"><i id="bordericons" class="fas fa-plus-square"></i>
                         </h4>
                         <ul id="sectionMembers" class="displayed">
+                            <li>mohammed</li>
                         </ul>
                     </div>
                     <div class="h44">
-                        <h4 class="btn btn-outline-success" onclick="slideMain()">Lab</h4>
-                        <h4 class="btn" id="joinLab"><i class="fas fa-plus-square"></i>
+                        <h4 class="btn btn-outline-success" onclick="slideMain()">
+                            Lab</h4>
+                        <h4 class="btn" id="joinLab"><i id="bordericons" class="fas fa-plus-square"></i>
                         </h4>
                         <ul id="labMembers" class="displayed">
+                            <li>mohammed</li>
+
                         </ul>
                     </div>
                 </div>
@@ -199,26 +200,13 @@
                     <!-- mainscreem all-user-normal -->
                     <div id="vid" class="all-user-normal">
                         <div id="prev" class="N-P-button prev disp-none">
-                            <button onclick="scrollMembers(-1)"><i class="fad fa-angle-double-left"></i></button>
+                            <button onclick="scrollMembers(-1)"><i id="bordericons"
+                                    class="fad fa-angle-double-left"></i></button>
                         </div>
                         <div class="uservideo">
                             <!-- TODO@Eng-Muhammed-Samy #2 edit this style for this element only -->
-                            <div id="whiteBoardContainer" style="border-color: #eceaea; display: none;">
+                            <div id="whiteBoardContainer" style="display: none;">
 
-                                <!-- <canvas class="whiteboard" style="width: calc(100% - 250px); height: 640px; z-index: 10;"></canvas>
-
-                                <div class="colors" style="z-index: 30;">
-                                    <div class="color black"></div>
-                                    <div class="color white"></div>
-                                    <div class="color red"></div>
-                                    <div class="color green"></div>
-                                    <div class="color blue"></div>
-                                    <div class="color yellow"></div>
-                                    <div class="btn colorClear">CLEAR</div>
-                                    <div class="slidecontainer">
-                                        <input type="range" min="1" max="30" value="4" class="slider" id="myRange">
-                                      </div>
-                                </div> -->
 
                                 <div class="container">
 
@@ -260,7 +248,8 @@
                                             <select class="form-control" id="draw-text-font-family">
                                                 <option value="Arial">Arial
                                                 </option>
-                                                <option value="Verdana" selected>Verdana</option>
+                                                <option value="Verdana" selected>
+                                                    Verdana</option>
                                                 <option value="Times New Roman">
                                                     Times New Roman</option>
                                                 <option value="Courier New">
@@ -298,12 +287,7 @@
 
                             <video muted id="mainVideo" autoplay
                                 style="width: 99%; height: 77vh; border-color: #eceaea;"></video>
-                            <!-- <div class="user"> -->
                             <div id="shareContainer" class="v-black"></div>
-                            <!-- <video autoplay muted src="./videos/salah.mp4"></video> -->
-                            <!-- <span>Muhammed</span> -->
-                            <!-- <button><i class="fas fa-microphone"></i></button> -->
-                            <!-- </div> -->
                             <!-- mohamed gamal -->
                             <div class="text-speech" id="stt_container">
                                 <p>
@@ -312,16 +296,12 @@
                         </div>
                         <!-- all-users -->
                         <div id="allUser" class="all-users2">
-                            <!-- <div class="user">
-                                <div class="v-black"></div>
-                                <video autoplay muted src=""></video>
-                                <span>Muhammed</span>
-                                <button><i class="fas fa-microphone"></i></button>
-                            </div> -->
+
                         </div>
 
                         <div id="next" class="N-P-button next disp-none">
-                            <button onclick="scrollMembers(1)"><i class="fad fa-angle-double-right"></i></button>
+                            <button onclick="scrollMembers(1)"><i id="bordericons"
+                                    class="fad fa-angle-double-right"></i></button>
                         </div>
                     </div>
                     <div class="otherScreens">
@@ -342,12 +322,14 @@
                                     <input class="room-chat" type="text " placeholder="Type message... " name=" "
                                         id="msgBar">
                                     <!-- mohammed gammal -->
-                                    <button onclick="showEmojies()"><i class="far fa-grin"></i></button>
+                                    <button onclick="showEmojies()"><i id="bordericons"
+                                            class="far fa-grin"></i></button>
                                     <!-- alaa ibrahim -->
                                     <form class="formStyle" id="form">
                                         <input id="files" style="display: none;" type="file" name="file">
-                                        <label for="files"><i class="fas fa-file"></i></label>
-                                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                                        <label for="files"><i id="bordericons" class="fas fa-file"></i></label>
+                                        <button type="submit"><i id="bordericons"
+                                                class="fas fa-paper-plane"></i></button>
                                     </form>
 
 
@@ -426,8 +408,8 @@
                 </div>
                 <div class="ervice-controls hide-controls">
                     <button id="muteAll" class="btn">Mute All</button>
-                    <button id="allowShare" class="btn">Share Screen</button>
-                    <button id="allowChat" class="btn">Allow Chat</button>
+                    <button id="" class="btn">Share Screen</button>
+                    <button id="" class="btn">Allow Chat</button>
                 </div>
             </section>
             <!----------------- End Video Section ------------------->
@@ -463,7 +445,8 @@
                         class="btn btns btn-outline-dark">Leave Meeting</button>
 
                     <% if (isHost) { %>
-                        <button id="endForAll" class="btn btns btn-outline-danger">End For
+                        <button id="endForAll" class="btn btns btn-outline-danger">End
+                            For
                             All</button>
                         <% }%>
                 </div>
@@ -506,7 +489,6 @@
         <script src="/js/whiteboard/jscolor.min.js"></script>
 
         <script src="/js/mainmeeting/timer.js"></script>
-        <script src="/js/mainmeeting/control.js"></script>
     </body>
 
     </html>

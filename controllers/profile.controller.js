@@ -31,12 +31,13 @@ exports.createNewMeeting = (req, res, next) => {
 	const password = generateRandomPassword();
 	const meetingId = uuidv4();
 	const meeting_url = `/meeting/${meetingId}`;
-
+	const user_id=req.session.userId	;
 	MeetingInfoModel.SaveMeetingInfo(
 		meetingId,
 		hostname,
 		password,
 		meeting_url,
+		user_id
 	).then(() => {
 		req.session.meetingid = meetingId;
 		req.session.meetingcreater = true;

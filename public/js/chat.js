@@ -5,20 +5,7 @@ var list = document.querySelectorAll(".list"),
     input = document.querySelector(".card-footer input"),
     open = document.querySelector(".open a");
 
-//init
-//function init() {
-  //input.focus();
-  //let now = 2;
-  //const texts = ["İyi akşamlar", "Merhaba, nasılsın?",
-             //   "Harikasın! :)", "Günaydın", "Tünaydın",
-             //   "Hahaha", "Öğlen görüşelim.", "Pekala"];
-  //for(var i = 4; i < list.length; i++) {
-    //list[i].querySelector(".time").innerText = `${now} day ago`;
-    //list[i].querySelector(".text").innerText = texts[(i-4) < texts.length ? (i-4) : Math.floor(Math.random() * texts.length)];
-   // now++;
- // }
-//}
-//init();
+
 
 //process
 function process() {
@@ -81,23 +68,35 @@ open.addEventListener("click", (e) => {
 ///////////////////////////////////////////////////////
 
 
+// Emoji
+loadAllEmoji();
+
 function loadAllEmoji() {
     var emoji = '';
     for (var i = 128512; i <= 128566; i++) {
-        emoji +=`<a href="#" style="font-size: 22px;" onclick="getEmoji(this)">&#${i};</a>`;
+        emoji += `<a href="#" style="font-size: 22px;" onclick="getEmoji(this)">&#${i};</a>`;
     }
+
     document.getElementById('smiley').innerHTML = emoji;
 }
 function showEmojiPanel() {
-    document.getElementById('emoji').removeAttribute('style');
+  document.getElementById('emoji').removeAttribute('style');
 }
+
 function hideEmojiPanel() {
-    document.getElementById('emoji').setAttribute('style', 'display:none;');
+  document.getElementById('emoji').setAttribute('style', 'display:none;');
+}
+
+function getEmoji(control) {
+  document.getElementById('txtMessage').value += control.innerHTML;
 }
 
 
 
-loadAllEmoji();
+
+
+
+
 
 function myFunction() {
   // Declare variables

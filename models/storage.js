@@ -94,7 +94,6 @@ class Storage {
 		}
 
 		let result = await this._db.query(query, queryParams);
-		//    console.log(result)
 		result.rows.forEach((entry) => {
 			// format date and time
 			entry.start_date = entry.start_date.format('YYYY-MM-DD hh:mm');

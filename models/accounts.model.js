@@ -32,7 +32,7 @@ exports.createAccount = function(username, useremail, password) {
 }
 
 exports.authAccount = function(email, pass) {
-    return new Promise((res, rej) => {
+    return new Promise((res, rej           ) => {
         if (email && pass) {
             connection.query(
                 "SELECT * FROM accounts WHERE Email = $1", [email],

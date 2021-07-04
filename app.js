@@ -228,6 +228,12 @@ io.on("connection", (socket) => {
             io.to(roomid).emit("leaveLab", data);
         })
 
+        socket.on('disallowShare', () => {
+            socket.broadcast.to(roomid).emit('disallowShare')
+        })
+        socket.on('disallowChat', () => {
+            socket.broadcast.to(roomid).emit('disallowChat')
+        })
 
 
         //dissconnect

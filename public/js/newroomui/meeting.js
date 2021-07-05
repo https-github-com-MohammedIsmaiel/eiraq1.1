@@ -53,7 +53,25 @@ let msgicon = document.querySelector('.fa-envelope');
 let vidIvon = document.querySelector('.fa-users');
 // open / close chat window
 if (document.getElementById("msg") !== null) {
-	document.getElementById("msg")
+	document.getElementById('msg').addEventListener('click', () => {
+		if (mesage.classList.contains('disp')) {
+			mesage.classList.add('hide');
+			mesage.classList.remove('disp');
+			msgicon.classList.remove('gold');
+			video.classList.toggle('width');
+		} else {
+			mesage.classList.remove('hide');
+			mesage.classList.add('disp');
+			msgicon.classList.add('gold');
+			video.classList.toggle('width');
+		}
+		if (friends.classList.contains('disp')) {
+			friends.classList.add('hide');
+			friends.classList.remove('disp');
+			vidIvon.classList.remove('gold');
+			video.classList.toggle('width');
+		}
+	});
 }
 // open /close users window
 document.getElementById('users').addEventListener('click', () => {

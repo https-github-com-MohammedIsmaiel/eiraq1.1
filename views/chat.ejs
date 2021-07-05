@@ -180,31 +180,13 @@
       </div>
 
       <div class="card-footer" style="background-color:#ffffff; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0,0,0,0.23) 0px 3px 6px;">
-        <div class="row" style="position:relative;">
-          <div class="col-md-12" id="emoji" style="display:none;">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="click"
-                  href="#smiley" role="click" aria-controls="home"
-                  aria-selected="true">Smiley</a>
-              </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="smiley" role="tabpanel"
-                aria-labelledby="home-tab">
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="row">
           <div class="col-2 col-md-1">
-            <i class="far fa-grin fa-1x" onclick="showEmojiPanel() "
-              style="cursor: pointer; text-decoration: none; font-size:20px; display: flex; margin-top: 10px;"></i>
-          </div>
+            <button id="emoji-btn"> &#127773;</button>
+            </div>
           <div class="col-8 col-md-10">
-            <input type="text" onfocus="hideEmojiPanel()" data-placeholder="Send a message to {0}"
-            id="txtMessage"
-              class="form-control form-rounded" />
+           <input type="text"  data-placeholder="Send a message to {0}"
+            id="txtMessage" class="form-control form-rounded" />
           </div>
           <div class="col-2 col-md-1">
             <i class="fas fa-paper-plane fa-1x"
@@ -215,7 +197,7 @@
     </div>
 
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
   <script src="/js/chat.js"></script>
 </body>
 

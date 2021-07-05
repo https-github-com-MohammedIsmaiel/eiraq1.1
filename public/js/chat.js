@@ -69,27 +69,26 @@ open.addEventListener("click", (e) => {
 
 
 // Emoji
-loadAllEmoji();
+const inputElm = document.querySelector('input');
+const emojiBtn = document.querySelector('#emoji-btn');
+const picker = new EmojiButton();
 
-function loadAllEmoji() {
-    var emoji = '';
-    for (var i = 128512; i <= 128566; i++) {
-        emoji += `<a href="#" style="font-size: 22px;" onclick="getEmoji(this)">&#${i};</a>`;
-    }
 
-    document.getElementById('smiley').innerHTML = emoji;
-}
-function showEmojiPanel() {
-  document.getElementById('emoji').removeAttribute('style');
-}
+// Emoji selection  
+window.addEventListener('DOMContentLoaded', () => {
 
-function hideEmojiPanel() {
-  document.getElementById('emoji').setAttribute('style', 'display:none;');
-}
+    picker.on('emoji', emoji => {
+      document.getElementById('txtMessage').value += emoji;
+    });
+  
+    emojiBtn.addEventListener('click', () => {
+      picker.togglePicker(emojiBtn);
+    });
+  });        
 
-function getEmoji(control) {
-  document.getElementById('txtMessage').value += control.innerHTML;
-}
+
+
+
 
 
 

@@ -18,6 +18,8 @@
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <script src="/socket.io/socket.io.js"></script>
+
 
 </head>
 
@@ -55,7 +57,10 @@
                       <div class="profileinfo">
                         <span class="username">
                           <%= result[i].username%>
-
+                          <script>
+  sender = "<%= result[i].username %>";
+  console.log(sender);
+</script>
                         </span>
                       </div>
         </div>
@@ -107,74 +112,75 @@
         </div>
       </header>
       <div class="message-wrap" style="background-color: white;">
-        <div class="message-list">
-          <div class="msg">
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit
-              minus minima quo corporis.
-            </p>
-          </div>
-          <!-- <div class="time">now</div> -->
-        </div>
-        <div class="message-list me">
-          <div class="msg">
-            <p>
-              Lorem ipsum dolor sit amet.
-            </p>
-          </div>
-          <!-- <div class="time">now</div> -->
-        </div>
-        <div class="message-list">
-          <div class="msg">
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit
-              minus minima quo corporis.
-            </p>
-          </div>
-          <!-- <div class="time">now</div> -->
-        </div>
-        <div class="message-list me">
-          <div class="msg">
-            <p>
-              Lorem ipsum dolor sit amet.
-            </p>
-          </div>
-          <!-- <div class="time">now</div> -->
-        </div>
-        <div class="message-list">
-          <div class="msg">
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit
-              minus minima quo corporis.
-            </p>
-          </div>
-          <!-- <div class="time">now</div> -->
-        </div>
-        <div class="message-list me">
-          <div class="msg">
-            <p>
-              Lorem ipsum dolor sit amet.
-            </p>
-          </div>
-          <!-- <div class="time">now</div> -->
-        </div>
-        <div class="message-list">
-          <div class="msg">
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit
-              minus minima quo corporis.
-            </p>
-          </div>
-          <!-- <div class="time">now</div> -->
-        </div>
-        <div class="message-list me">
-          <div class="msg">
-            <p>
-              Lorem ipsum dolor sit amet.
-            </p>
-          </div>
-          <!-- <div class="time">now</div> -->
-        </div>
+        <ul id="messages"></ul>
+<!--        <div class="message-list">-->
+<!--          <div class="msg">-->
+<!--            <p>-->
+<!--              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit-->
+<!--              minus minima quo corporis.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; <div class="time">now</div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="message-list me">-->
+<!--          <div class="msg">-->
+<!--            <p>-->
+<!--              Lorem ipsum dolor sit amet.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; <div class="time">now</div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="message-list">-->
+<!--          <div class="msg">-->
+<!--            <p>-->
+<!--              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit-->
+<!--              minus minima quo corporis.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; <div class="time">now</div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="message-list me">-->
+<!--          <div class="msg">-->
+<!--            <p>-->
+<!--              Lorem ipsum dolor sit amet.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; <div class="time">now</div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="message-list">-->
+<!--          <div class="msg">-->
+<!--            <p>-->
+<!--              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit-->
+<!--              minus minima quo corporis.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; <div class="time">now</div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="message-list me">-->
+<!--          <div class="msg">-->
+<!--            <p>-->
+<!--              Lorem ipsum dolor sit amet.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; <div class="time">now</div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="message-list">-->
+<!--          <div class="msg">-->
+<!--            <p>-->
+<!--              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit-->
+<!--              minus minima quo corporis.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; <div class="time">now</div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="message-list me">-->
+<!--          <div class="msg">-->
+<!--            <p>-->
+<!--              Lorem ipsum dolor sit amet.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; <div class="time">now</div> &ndash;&gt;-->
+<!--        </div>-->
 
 
       </div>
@@ -189,8 +195,11 @@
             id="txtMessage" class="form-control form-rounded" />
           </div>
           <div class="col-2 col-md-1">
-            <i class="fas fa-paper-plane fa-1x"
-              style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px; color: rgb(100, 164, 236);"></i>
+            <button id="form">
+              <i class="fas fa-paper-plane fa-1x"
+                 style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px; color: rgb(100, 164, 236);">
+              </i></button>
+
           </div>
         </div>
       </div>

@@ -132,7 +132,9 @@ connection.connect(async function (err) {
     await connection.query(
         'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT ,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT files_fk1 FOREIGN KEY(folder_id) REFERENCES folders(id),CONSTRAINT file_fk2 FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
-
+    await connection.query(
+        'CREATE TABLE IF NOT EXISTS messages (id  BIGSERIAL unique not null PRIMARY KEY,sender VARCHAR(255),receiver VARCHAR(255),messages text'
+    );
     console.log('tables created')
 });
 
@@ -159,6 +161,17 @@ app.get("/schedule", (req, res) => res.render("schedule"));
 app.use(cors());
 
 io.on("connection", (socket) => {
+    ////here my modifications
+    console.log('saw user connected');
+    //Alerts us when someone disconnects
+    socket.on('disconnect', () => {
+        console.log('User Disconnected')
+    });
+    socket.on('message', (mes) => {
+        console.log("user : " + mes.user);
+        console.log("Message : "+ mes.message);
+        io.emit('server message',{user:mes.user, message:mes.message});
+    });
     RTCMultiConnectionServer.addSocket(socket)
     socket.on("join-room", (roomid) => {
         socket.join(roomid);

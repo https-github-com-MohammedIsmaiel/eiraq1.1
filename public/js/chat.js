@@ -31,6 +31,7 @@ function process() {
 }
 process();
 
+var receiver;
 //list click
 function click(l, index) {
   list.forEach(x => { x.classList.remove("active"); });
@@ -40,7 +41,7 @@ function click(l, index) {
     open.innerText="UP";
     const img = l.querySelector("img").src,
           user = l.querySelector(".user").innerText;
-       
+    receiver = user;
 
     content.querySelector("img").src = img;
     content.querySelector(".info .user").innerHTML = user;
@@ -117,3 +118,21 @@ function myFunction() {
     }
   }
 }
+
+
+var socket = io();
+$("#form").on( "click", function() {
+  socket.emit('message',{"user":sender,"message":$('#txtMessage').val()});
+  $('#txtMessage').val('');
+});
+socket.on('server message',(msg)=>{
+  console.log(msg.user);
+  console.log(sender+" and "+ receiver);
+
+  if (msg.user == sender)
+  {$('#messages').append($('<li class="me">').text(msg.message));
+    console.log(msg.message);}
+  else
+    $('#messages').append($('<li class="you">').text(msg.message));
+
+});

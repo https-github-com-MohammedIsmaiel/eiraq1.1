@@ -18,7 +18,7 @@ module.exports = function () {
     var today = new Date();
     var tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-
+    
     var dd = String(tomorrow.getDate()).padStart(2, '0');
     var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = tomorrow.getFullYear();

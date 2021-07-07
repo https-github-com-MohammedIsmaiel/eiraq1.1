@@ -13,19 +13,17 @@ var transporter = mailer.createTransport({
   }
 });
 module.exports = function () {
-  // Cron Job to run around 7am Server Time 
+  // Cron Job to run around 1 hour Server Time 
   cron.schedule('0 * * * *', () => {
     var today = new Date();
     var tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-
     var dd = String(tomorrow.getDate()).padStart(2, '0');
     var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = tomorrow.getFullYear();
-
     var current_hour = today.getHours();
-
     today = yyyy + '-' + mm + '-' + dd;
+    
     let query =
       'SELECT events.*, accounts.email,accounts.username FROM events INNER JOIN  accounts ON owner_id= accounts.id WHERE CAST(start_date AS DATE) =$1 AND EXTRACT(HOUR FROM start_date) =$2';
     connection.query(query, [today, current_hour], function (err, result) {

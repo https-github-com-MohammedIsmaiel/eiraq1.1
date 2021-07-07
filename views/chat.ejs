@@ -84,11 +84,14 @@
                       width="50px" alt="user image" srcset="">
 
                     <% } %>
+                    <form action="get_messages" method="GET">
                       <div class="info">
                         <span class="user">
                           <%= result[i].username%>
                         </span>
-                      </div>
+                        <input type="hidden" name="receivername" value="<%= result[i].username%>">                     
+                       </div>
+                      </form>
             </div>
             <% } %>
               <% } %>

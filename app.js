@@ -133,6 +133,7 @@ connection.connect(async function (err) {
         'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT ,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT files_fk1 FOREIGN KEY(folder_id) REFERENCES folders(id),CONSTRAINT file_fk2 FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
 
+
     console.log('tables created')
 });
 

@@ -79,6 +79,7 @@ check("username")
 
 // when press cancel redirect me to profile page
 router.get('/chat', profileController.getChat);
+router.get('/get_messages',profileController.getMessages)
 
 router.get('/returnback', profileController.getBackToMeeting);
 router.get('/exitchat', profileController.getBackToProfile);

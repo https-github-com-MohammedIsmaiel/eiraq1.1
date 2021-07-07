@@ -41,7 +41,8 @@ function click(l, index) {
     open.innerText="UP";
     const img = l.querySelector("img").src,
           user = l.querySelector(".user").innerText;
-    receiver = user;
+          user_id= l.querySelector(".receiver_id").value;
+    receiver_id = user_id;
 
     content.querySelector("img").src = img;
     content.querySelector(".info .user").innerHTML = user;
@@ -122,17 +123,23 @@ function myFunction() {
 
 var socket = io();
 $("#form").on( "click", function() {
-  socket.emit('message',{"user":sender,"message":$('#txtMessage').val()});
+  if($('#txtMessage').val()!=''){
+  socket.emit('message',{"sender_id":sender_id,"receiver_id":receiver_id,"message":$('#txtMessage').val()});
   $('#txtMessage').val('');
+  }else{
+
+  }
 });
 socket.on('server message',(msg)=>{
-  console.log(msg.user);
-  console.log(sender+" and "+ receiver);
 
-  if (msg.user == sender)
-  {$('#messages').append($('<li class="me">').text(msg.message));
-    console.log(msg.message);}
-  else
+  if (msg.sender_id == sender_id)
+  {
+    console.log(sender_id)
+    console.log(msg.sender_id)
+    $('#messages').append($('<li class="me">').text(msg.message));
+  }
+  else{
     $('#messages').append($('<li class="you">').text(msg.message));
-
+  }
 });
+

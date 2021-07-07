@@ -225,6 +225,28 @@ sidebar .list-wrap .list .count {
     align-self: flex-start;
     max-width: 70%;
 }
+#messages { list-style-type: none; margin: 0; padding: 0; }
+.me{
+    background: #78E08F;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, .1);
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: #111;
+    width: fit-content;
+    margin-left: auto;
+}
+.you{
+    background: #82CCDD;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, .1);
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: #111;
+    text-align: right;
+    width: fit-content;
+    margin-right: auto;
+}
 .message-wrap .message-list.me {
     align-self: flex-end;
 }

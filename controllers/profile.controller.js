@@ -5,6 +5,7 @@ const folderfileinfo = require('../models/folderfileinfo.model');
 var path = require('path')
 const GoogleDrive = require('../models/googleDrive');
 const googleDrive = new GoogleDrive();
+const chatmodel = require('../models/chat.model');
 
 
 
@@ -114,8 +115,7 @@ exports.getChat = (req, res) => {
                
 				res.render('chat',{
 					result:result,
-
-					user_id: req.session.userId	
+					user_id: req.session.userId,	
 				});
                 res.end();
             })
@@ -123,6 +123,26 @@ exports.getChat = (req, res) => {
                 res.redirect("/profile");
             });
 };
+exports.getMessages = (req, res) => {
+	var receiver_id = req.params.receiver_id;
+	var sender_id = req.session.userId;
+	chatmodel.getAllMessages(sender_id,receiver_id)
+            .then((result1) => {
+				accountsModel.getAllAccounts()
+				.then((result2) => { 
+					res.render('chat',{
+						result:result2,
+						messages:result1,
+						user_id: req.session.userId	
+					});
+				})
+            })
+            .catch(err => {
+				console.log(err)
+                res.redirect("/chat");
+            });
+};
+
 exports.getData = (req, res) => {
 	folderfileinfo.getAllFolders().then((result1) => {
 		folderfileinfo.getAllGeneralFiles().then((result2) => {

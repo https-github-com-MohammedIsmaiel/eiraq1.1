@@ -1,13 +1,13 @@
 header, .mainrightside, footer,.breakrooms{
-    background-color:#EEEEEE;
-    color: #444;
+    background-color:#FFF;
+    color: #000;
 }
 header span{
     color: #444;
 }
-i{
+/* i{
     color: rgb(65, 63, 63);
-}
+} */
 .logo .block{
     background: #e91e63;
 }
@@ -20,9 +20,9 @@ i{
 .text-speech p{
     color: black;
 }
-footer button i{
-    color: #444;
-}
+/* footer button i{
+    color: rgb(32, 32, 32);
+} */
 .breakrooms{
     background: white;
     border: 1px solid #080;
@@ -71,10 +71,16 @@ button:hover{
     color: white;
 }
 
+#meet-inf {
+    border: none;
+    background: transparent;
+}
 
+.timer label{
+    color: black;
+}
 
-
-
-
-
+#raiseHand{
+    color: #000;
+}
 

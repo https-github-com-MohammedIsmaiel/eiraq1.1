@@ -825,6 +825,7 @@ video {
 
  .msgActions button i{
     font-size: 25px;
+
 } 
 .emoji{
     position: absolute;
@@ -1128,4 +1129,8 @@ table i{
     .logo>span {
         display: none;
     }
+}
+#bordericons{
+    border: none;
+    outline: none;
 }

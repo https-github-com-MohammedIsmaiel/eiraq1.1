@@ -31,6 +31,7 @@ function process() {
 }
 process();
 
+var receiver;
 //list click
 function click(l, index) {
   list.forEach(x => { x.classList.remove("active"); });
@@ -40,7 +41,8 @@ function click(l, index) {
     open.innerText="UP";
     const img = l.querySelector("img").src,
           user = l.querySelector(".user").innerText;
-       
+          user_id= l.querySelector(".receiver_id").value;
+    receiver_id = user_id;
 
     content.querySelector("img").src = img;
     content.querySelector(".info .user").innerHTML = user;
@@ -69,27 +71,26 @@ open.addEventListener("click", (e) => {
 
 
 // Emoji
-loadAllEmoji();
+const inputElm = document.querySelector('input');
+const emojiBtn = document.querySelector('#emoji-btn');
+const picker = new EmojiButton();
 
-function loadAllEmoji() {
-    var emoji = '';
-    for (var i = 128512; i <= 128566; i++) {
-        emoji += `<a href="#" style="font-size: 22px;" onclick="getEmoji(this)">&#${i};</a>`;
-    }
 
-    document.getElementById('smiley').innerHTML = emoji;
-}
-function showEmojiPanel() {
-  document.getElementById('emoji').removeAttribute('style');
-}
+// Emoji selection  
+window.addEventListener('DOMContentLoaded', () => {
 
-function hideEmojiPanel() {
-  document.getElementById('emoji').setAttribute('style', 'display:none;');
-}
+    picker.on('emoji', emoji => {
+      document.getElementById('txtMessage').value += emoji;
+    });
+  
+    emojiBtn.addEventListener('click', () => {
+      picker.togglePicker(emojiBtn);
+    });
+  });        
 
-function getEmoji(control) {
-  document.getElementById('txtMessage').value += control.innerHTML;
-}
+
+
+
 
 
 
@@ -118,3 +119,27 @@ function myFunction() {
     }
   }
 }
+
+
+var socket = io();
+$("#form").on( "click", function() {
+  if($('#txtMessage').val()!=''){
+  socket.emit('message',{"sender_id":sender_id,"receiver_id":receiver_id,"message":$('#txtMessage').val()});
+  $('#txtMessage').val('');
+  }else{
+
+  }
+});
+socket.on('server message',(msg)=>{
+
+  if (msg.sender_id == sender_id)
+  {
+    console.log(sender_id)
+    console.log(msg.sender_id)
+    $('#messages').append($('<li class="me">').text(msg.message));
+  }
+  else{
+    $('#messages').append($('<li class="you">').text(msg.message));
+  }
+});
+

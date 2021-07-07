@@ -2,20 +2,23 @@
 ///////////////
 let msgIcon = document.getElementById("msg")
 let isChatOpend = false;
-document.getElementById("msg").onclick = function (isChatOpend) {
-    checkChatState()
-};
+if (msgIcon !== null) {
+    msgIcon.onclick = function (isChatOpend) {
+        checkChatState()
+    };
+}
+
 
 function checkChatState() {
     if (isChatOpend == true) {
         isChatOpend = false;
-        
+
         msgIcon.innerHTML = '<i class="far fa-envelope"></i>'
 
-    } else{
+    } else {
         isChatOpend = true;
-    msgIcon.innerHTML = '<i class="far fa-envelope " style="color:green"></i>'
-    
+        msgIcon.innerHTML = '<i class="far fa-envelope " style="color:green"></i>'
+
 
     }
 }
@@ -67,7 +70,7 @@ socket.on("createMessage", (message, messagewriter) => {
              <b>${messagewriter} : </b>${message}</li>`,
         );
     }
-    if (isChatOpend == false) {
+    if (isChatOpend == false && msgIcon !== null) {
         msgIcon.innerHTML = '<i class="far fa-envelope gold"></i>'
 
         //

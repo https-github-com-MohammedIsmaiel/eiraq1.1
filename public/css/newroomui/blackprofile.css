@@ -1,17 +1,7 @@
 header, .mainrightside, footer,.breakrooms{
-    border: 1px solid;
-    background-color:#2b2b2b;
-    color: #444;
+    background-color:#141414;
 }
-header{
-    border-radius: 0px 0px 20px 20px;
-}
-footer{
-    border-radius: 20px 20px 0px 0px;
-}
-.cont{
-    background-color:rgb(255, 192, 20);
-}
+
 .mainrightside{
     border: none;
 }
@@ -27,18 +17,13 @@ header span{
 i{
     color: rgb(65, 63, 63);
 }
-.mainrightside button {
-    border: 1px solid rgb(36, 35, 35);
-}
-.footbtn button {
-    border: 1px solid rgb(65, 64, 64);;
-}
+
 footer button i{
-    color: rgb(190, 188, 188);;
+    color: rgb(231, 229, 229);;
 }
 .breakrooms{
     background: #2b2b2b;
-    border: 1px solid #444;
+    /* border: 1px solid #444; */
     color: white;
 }
 .col{
@@ -46,11 +31,11 @@ footer button i{
 }
 .breakrooms .text{
     border-color: #444;
-    color: rgb(190, 188, 188);
+    color: rgb(230, 224, 224);
 }
  .h44 ul{
-     background-color: #2b2b2b;
-     color: rgb(204, 203, 203);
+     background-color: #222222;
+     color: rgb(231, 228, 228);
  }
 
 button i{
@@ -78,7 +63,7 @@ button i{
     color: white;
 }
 .vidAndMessAndFri{
-    background-color: #2b2b2b;
+    background-color: #131313;
 }
 .mesage ,.friends{
     border-color:#2b2b2b;
@@ -87,7 +72,15 @@ button i{
     background-color: #2b2b2b;
 }
 .meeting-info{
-    background-color: #2b2b2b;
+    background-color: #1b1b1b;
+
+}
+.meeting-info tr td, .meeting-info tr td button,  .meeting-info tr td i{
+    background-color: transparent;
+    color :white
+}
+.meeting-info tr td input{
+    background-color: transparent;
     color: white;
 }
 #prev button i,#next button i{
@@ -108,4 +101,27 @@ button i{
     border-color: #444;
     color: white;
 }
+/* .ervice-controls{
+    background-color: transparent;
+} */
+.ervice-controls button{
+    background-color: transparent;
+        color: white;
+}
+.ervice-controls button:hover{
+  color: white;
+}
+.uservideo video{
+    border: 1px solid #363636;
+}
+#meet-inf {
+    border: none;
+    background: transparent;
+}
 
+.timer label{
+    color: #fff;
+}
+#raiseHand{
+    color: #fff;
+}

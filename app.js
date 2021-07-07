@@ -68,12 +68,15 @@ const Knex = require('knex');
 const knex = Knex({
     client: 'pg',
     connection: {
-        host: 'localhost',
-        user: 'postgres',
-        password:
-            '123',
-        port: '5432',
-        database: 'E-app',
+        host: 'ec2-52-5-1-20.compute-1.amazonaws.com',
+          user: 'aeaubsshaayzwa',
+          password:
+            '4a2d34caf8e4d3903b6c7d453014c581abeac214a1f8356b617aaafecc03741e',
+          port: '5432',
+          database: 'd48j1jvrg9tvit',
+          ssl: {
+            rejectUnauthorized: false,
+          },
       
     },
 });
@@ -173,7 +176,6 @@ io.on("connection", (socket) => {
         console.log("Message : "+ mes.message);
         io.to(socket.id).emit("server message", {sender_id:mes.sender_id, message:mes.message});
 
-        // io.emit('server message',{sender_id:mes.sender_id, message:mes.message});
         var query = "INSERT INTO messages (sender_id, receiver_id, messages) VALUES ('" +mes.sender_id+ "', '" +mes.receiver_id + "', '" + mes.message + "')";
         connection.query(query,  function(err, result) {
          if (err)  console.log(err)

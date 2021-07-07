@@ -79,6 +79,7 @@ const knex = Knex({
           },
       
     },
+
 });
 
 const store = new KnexSessionStore({

@@ -181,7 +181,6 @@ io.on("connection", (socket) => {
         connection.query(query,  function(err, result) {
          if (err)  console.log(err)
          console.log('inserted')
-   
      }              
  );
     });

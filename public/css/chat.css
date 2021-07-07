@@ -301,3 +301,11 @@ sidebar .list-wrap .list .count {
         display: block !important;
    }
 }
+a{
+    text-decoration: none;
+    
+
+}
+a:hover{
+    text-decoration: none;
+}

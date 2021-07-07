@@ -75,7 +75,7 @@
       <div class="list-wrap" id="myLists">
         <% for(var i=0; i < result.length; i++) { %>
           <% if(user_id !=result[i].id){ %>
-            <a href="/getmessages/<%=result[i].id%>" >
+            <a href="/getmessages/<%=result[i].id%>">
             <div class="list">
               <% if ( result[i].img_url=='undefined' ) { %>
                 <img src="/upload_images/default.png" alt="user image">

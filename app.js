@@ -68,11 +68,11 @@ const Knex = require('knex');
 const knex = Knex({
     client: 'pg',
     connection: {
-        host: 'localhost',
-        user: 'postgres',
-        password: '123',
+        host: 'ec2-34-204-128-77.compute-1.amazonaws.com',
+        user: 'brbrkkujocwtub',
+        password: 'f5108efcd44932c1cabd2fd4d32b42364d16e2240bc5a62ccf2ce9c95a1b1ad3',
         port: '5432',
-        database: 'E-app',
+        database: 'd47mk01sdco7le',
           
       
     },

@@ -121,25 +121,3 @@ function myFunction() {
 }
 
 
-var socket = io();
-$("#form").on( "click", function() {
-  if($('#txtMessage').val()!=''){
-  socket.emit('message',{"sender_id":sender_id,"receiver_id":receiver_id,"message":$('#txtMessage').val()});
-  $('#txtMessage').val('');
-  }else{
-
-  }
-});
-socket.on('server message',(msg)=>{
-
-  if (msg.sender_id == sender_id)
-  {
-    console.log(sender_id)
-    console.log(msg.sender_id)
-    $('#messages').append($('<li class="me">').text(msg.message));
-  }
-  else if  (msg.receiver_id == sender_id){
-    $('#messages').append($('<li class="you">').text(msg.message));
-  }
-});
-

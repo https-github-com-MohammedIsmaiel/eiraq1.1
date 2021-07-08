@@ -73,7 +73,9 @@ const knex = Knex({
         password: 'f5108efcd44932c1cabd2fd4d32b42364d16e2240bc5a62ccf2ce9c95a1b1ad3',
         port: '5432',
         database: 'd47mk01sdco7le',
-          
+        ssl: {
+            rejectUnauthorized: false,
+          },
       
     },
 
@@ -162,25 +164,7 @@ app.get("/schedule", (req, res) => res.render("schedule"));
 app.use(cors());
 
 io.on("connection", (socket) => {
-    console.log("User connected", socket.id);
-    socket.join(socket.id)
-    ////here my modifications
-    console.log('saw user connected');
-    //Alerts us when someone disconnects
-    socket.on('disconnect', () => {
-        console.log('User Disconnected')
-    });
-    socket.on('message', (mes) => {
-        console.log("user : " + mes.sender_id);
-        console.log("Message : "+ mes.message);
-        io.emit("server message", {sender_id:mes.sender_id, message:mes.message});
-        var query = "INSERT INTO messages (sender_id, receiver_id, messages) VALUES ('" +mes.sender_id+ "', '" +mes.receiver_id + "', '" + mes.message + "')";
-        connection.query(query,  function(err, result) {
-         if (err)  console.log(err)
-         console.log('inserted')
-     }              
- );
-    });
+
     RTCMultiConnectionServer.addSocket(socket)
     socket.on("join-room", (roomid) => {
         socket.join(roomid);

@@ -75,7 +75,7 @@
       <div class="list-wrap" id="myLists">
         <% for(var i=0; i < result.length; i++) { %>
           <% if(user_id !=result[i].id){ %>
-            <a href="/getmessages/<%=result[i].id%>">
+       
             <div class="list">
               <% if ( result[i].img_url=='undefined' ) { %>
                 <img src="/upload_images/default.png" alt="user image">
@@ -97,7 +97,7 @@
                        </div>
                      
             </div>
-          </a>
+       
             <% } %>
               <% } %>
       </div>
@@ -116,15 +116,7 @@
       </header>
       <div class="message-wrap" style="background-color: white;">
         <ul id="messages">
-          <% if(typeof messages!='undefined'){%>
-          <% for(var i=0; i < messages.length; i++) { %>
-            <% if (messages[i].sender_id == user_id)  {%>
-            <li class="me"> <%= messages[i].messages%></li>
-            <% } else{ %>  
-              <li class="you"> <%= messages[i].messages%></li>
-           <% } %>
-            <% } %> 
-          <% } %> 
+         
         </ul>
 
 

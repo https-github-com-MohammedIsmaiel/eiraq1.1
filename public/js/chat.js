@@ -138,7 +138,7 @@ socket.on('server message',(msg)=>{
     console.log(msg.sender_id)
     $('#messages').append($('<li class="me">').text(msg.message));
   }
-  else{
+  else if  (msg.receiver_id == sender_id){
     $('#messages').append($('<li class="you">').text(msg.message));
   }
 });

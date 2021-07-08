@@ -68,14 +68,12 @@ const Knex = require('knex');
 const knex = Knex({
     client: 'pg',
     connection: {
-       host:'ec2-52-5-1-20.compute-1.amazonaws.com',
-database:'da59qub8t2f56t',
-user:'xsmzlhbfflhzji',
-port:'5432',
-password:'975179a5aca6f1d4346d53d68d2b155d8a15dbff5046f90879d62e8bbcc96fec',
-          ssl: {
-            rejectUnauthorized: false,
-          },
+        host: 'localhost',
+        user: 'postgres',
+        password: '123',
+        port: '5432',
+        database: 'E-app',
+          
       
     },
 
@@ -133,11 +131,10 @@ connection.connect(async function (err) {
     await connection.query(
         'CREATE TABLE IF NOT EXISTS files (id  BIGSERIAL unique not null PRIMARY KEY,filename  VARCHAR(255),fileid VARCHAR(255), webViewLink VARCHAR(255), filetype VARCHAR(255),user_id INT ,folder_id INT   DEFAULT NULL REFERENCES folders ON DELETE CASCADE, CONSTRAINT files_fk1 FOREIGN KEY(folder_id) REFERENCES folders(id),CONSTRAINT file_fk2 FOREIGN KEY(user_id) REFERENCES accounts(id))'
     );
-    // await connection.query(
-    //     'CREATE TABLE IF NOT EXISTS messages (id  BIGSERIAL unique not null PRIMARY KEY,sender_id INT,receiver_id INT,messages TEXT,CONSTRAINT messages_fk1 FOREIGN KEY(sender_id) REFERENCES accounts(id),CONSTRAINT messages_fk2 FOREIGN KEY(receiver_id) REFERENCES accounts(id))'
-    //     );
+    await connection.query(
+        'CREATE TABLE IF NOT EXISTS messages (id  BIGSERIAL unique not null PRIMARY KEY,sender_id INT,receiver_id INT,messages TEXT,CONSTRAINT messages_fk1 FOREIGN KEY(sender_id) REFERENCES accounts(id),CONSTRAINT messages_fk2 FOREIGN KEY(receiver_id) REFERENCES accounts(id))'
+        );
       
-
 
     console.log('tables created')
 });
@@ -165,25 +162,25 @@ app.get("/schedule", (req, res) => res.render("schedule"));
 app.use(cors());
 
 io.on("connection", (socket) => {
-//     console.log("User connected", socket.id);
-//     ////here my modifications
-//     console.log('saw user connected');
-//     //Alerts us when someone disconnects
-//     socket.on('disconnect', () => {
-//         console.log('User Disconnected')
-//     });
-//     socket.on('message', (mes) => {
-//         console.log("user : " + mes.sender_id);
-//         console.log("Message : "+ mes.message);
-//         io.to(socket.id).emit("server message", {sender_id:mes.sender_id, message:mes.message});
-
-//         var query = "INSERT INTO messages (sender_id, receiver_id, messages) VALUES ('" +mes.sender_id+ "', '" +mes.receiver_id + "', '" + mes.message + "')";
-//         connection.query(query,  function(err, result) {
-//          if (err)  console.log(err)
-//          console.log('inserted')
-//      }              
-//  );
-//     });
+    console.log("User connected", socket.id);
+    socket.join(socket.id)
+    ////here my modifications
+    console.log('saw user connected');
+    //Alerts us when someone disconnects
+    socket.on('disconnect', () => {
+        console.log('User Disconnected')
+    });
+    socket.on('message', (mes) => {
+        console.log("user : " + mes.sender_id);
+        console.log("Message : "+ mes.message);
+        io.emit("server message", {sender_id:mes.sender_id, message:mes.message});
+        var query = "INSERT INTO messages (sender_id, receiver_id, messages) VALUES ('" +mes.sender_id+ "', '" +mes.receiver_id + "', '" + mes.message + "')";
+        connection.query(query,  function(err, result) {
+         if (err)  console.log(err)
+         console.log('inserted')
+     }              
+ );
+    });
     RTCMultiConnectionServer.addSocket(socket)
     socket.on("join-room", (roomid) => {
         socket.join(roomid);

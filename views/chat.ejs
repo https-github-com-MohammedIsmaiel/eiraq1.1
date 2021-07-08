@@ -38,90 +38,84 @@
       <span class="logo">
         <div class="profile">
           <% for(var i=0; i < result.length; i++) { %>
-          <% if(user_id==result[i].id){ %>
+            <% if(user_id==result[i].id){ %>
 
-          <% if ( result[i].img_url=='undefined' ) { %>
-          <img src="/upload_images/default.png" alt="user image">
+              <% if ( result[i].img_url=='undefined' ) { %>
+                <img src="/upload_images/default.png" alt="user image">
 
-          <% } else if (result[i].img_url.startsWith("https")) { %>
+                <% } else if (result[i].img_url.startsWith("https")) { %>
 
-          <img src="<%= result[i].img_url%>" width="50px" alt="user image"
-            srcset="">
-          <% } else { %>
-          <img src="/upload_images/<%= result[i].img_url%>" width="50px"
-            alt="user image" srcset="">
+                  <img src="<%= result[i].img_url%>" width="50px"
+                    alt="user image" srcset="">
+                  <% } else { %>
+                    <img src="/upload_images/<%= result[i].img_url%>"
+                      width="50px" alt="user image" srcset="">
 
-          <% } %>
+                    <% } %>
 
 
-          <div class="profileinfo">
-            <span class="username">
-              <%= result[i].username%>
-              <script>
-                sender_id = "<%= result[i].id%>";
-              </script>
-            </span>
-          </div>
+                      <div class="profileinfo">
+                        <span class="username">
+                          <%= result[i].username%>
+  <script>
+  sender_id = "<%= result[i].id%>";
+</script>
+                        </span>
+                      </div>
         </div>
         <% } %>
-        <% } %>
+          <% } %>
 
-        <input type="text" id="myInput" onkeyup="myFunction()"
-          placeholder="search in chat" class="form-control form-rounded"
-          style="background-color: white; color: black;" />
+            <input type="text" id="myInput" onkeyup="myFunction()"
+              placeholder="search in chat" class="form-control form-rounded"
+              style="background-color: white; color: black;" />
       </span>
 
 
       <div class="list-wrap" id="myLists">
         <% for(var i=0; i < result.length; i++) { %>
-        <% if(user_id !=result[i].id){ %>
-        <a href="/getmessages/<%=result[i].id%>">
-          <div class="list">
-            <% if ( result[i].img_url=='undefined' ) { %>
-            <img src="/upload_images/default.png" alt="user image">
+          <% if(user_id !=result[i].id){ %>
+            <a href="/getmessages/<%=result[i].id%>">
+            <div class="list">
+              <% if ( result[i].img_url=='undefined' ) { %>
+                <img src="/upload_images/default.png" alt="user image">
 
-            <% } else if (result[i].img_url.startsWith("https")) { %>
+                <% } else if (result[i].img_url.startsWith("https")) { %>
 
-            <img src="<%= result[i].img_url%>" width="50px" alt="user image"
-              srcset="">
-            <% } else { %>
-            <img src="/upload_images/<%= result[i].img_url%>" width="50px"
-              alt="user image" srcset="">
+                  <img src="<%= result[i].img_url%>" width="50px"
+                    alt="user image" srcset="">
+                  <% } else { %>
+                    <img src="/upload_images/<%= result[i].img_url%>"
+                      width="50px" alt="user image" srcset="">
 
+                    <% } %>
+                      <div class="info">
+                        <span class="user">
+                          <%= result[i].username%>
+                        </span>
+                        <input type="hidden"  class="receiver_id" value="<%= result[i].id%>">
+                       </div>
+                     
+            </div>
+          </a>
             <% } %>
-            <form action="get_messages" method="GET">
-              <div class="info">
-                <span class="user">
-                  <%= result[i].username%>
-                </span>
-                <<<<<<< HEAD <input type="hidden" name="receivername"
-                  value="<%= result[i].username%>">
-              </div>
-            </form>
-            =======
-            <input type="hidden" class="receiver_id" value="<%= result[i].id%>">
-          </div>
+              <% } %>
+      </div>
 
-      </div>
-      </a>
-      <% } %>
-      <% } %>
-  </div>
-
-  </sidebar>
-  <div class="content">
-    <header>
-      <img src="" alt="">
-      <div class="info">
-        <span class="user"></span>
-        <!-- <span class="time"></span> -->
-      </div>
-      <div class="open">
-        <a href="javascript:;">UP</a>
-      </div>
-    </header>
-    <div class="message-wrap" style="background-color: white;">
-      <!-- <ul id="messages">
+    </sidebar>
+    <div class="content">
+      <header>
+        <img src="" alt="">
+        <div class="info">
+          <span class="user"></span>
+          <!-- <span class="time"></span> -->
+        </div>
+        <div class="open">
+          <a href="javascript:;">UP</a>
+        </div>
+      </header>
+      <div class="message-wrap" style="background-color: white;">
+        <ul id="messages">
           <% if(typeof messages!='undefined'){%>
           <% for(var i=0; i < messages.length; i++) { %>
             <% if (messages[i].sender_id == user_id)  {%>
@@ -131,36 +125,33 @@
            <% } %>
             <% } %> 
           <% } %> 
-        </ul> -->
+        </ul>
 
 
-    </div>
+      </div>
 
-    <div class="card-footer"
-      style="background-color:#ffffff; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0,0,0,0.23) 0px 3px 6px;">
-      <div class="row">
-        <div class="col-2 col-md-1">
-          <button id="emoji-btn"> &#127773;</button>
-        </div>
-        <div class="col-8 col-md-10">
-          <input type="text" data-placeholder="Send a message to {0}"
-            id="txtMessage" class="form-control form-rounded" name="message"
-            required />
-        </div>
-        <div class="col-2 col-md-1">
-          <button id="form">
-            <i class="fas fa-paper-plane fa-1x"
-              style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px; color: rgb(100, 164, 236);">
-            </i>
-          </button>
+      <div class="card-footer" style="background-color:#ffffff; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0,0,0,0.23) 0px 3px 6px;">
+        <div class="row">
+          <div class="col-2 col-md-1">
+            <button id="emoji-btn"> &#127773;</button>
+            </div>
+          <div class="col-8 col-md-10">
+           <input type="text"  data-placeholder="Send a message to {0}"
+            id="txtMessage" class="form-control form-rounded" name="message" required/>
+          </div>
+          <div class="col-2 col-md-1">
+            <button id="form" >
+              <i class="fas fa-paper-plane fa-1x"
+                 style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px; color: rgb(100, 164, 236);">
+              </i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
   </div>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
   <script src="/js/chat.js"></script>
 </body>
 

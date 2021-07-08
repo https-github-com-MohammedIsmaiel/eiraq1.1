@@ -83,7 +83,7 @@ router.get('/exitchat', profileController.getBackToProfile);
 
 
 router.get('/chat', profileController.getChat);
-router.get('/get_messages',profileController.getMessages)
+router.get('/getmessages/:receiver_id',profileController.getMessages)
 
 router.get('/returnback', profileController.getBackToMeeting);
 

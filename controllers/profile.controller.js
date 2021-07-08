@@ -2,8 +2,6 @@
 
 const MeetingInfoModel = require('../models/meetingInfo.model');
 const folderfileinfo = require('../models/folderfileinfo.model');
-const chatmodel = require('../models/chat.model');
-
 var path = require('path')
 const GoogleDrive = require('../models/googleDrive');
 const googleDrive = new GoogleDrive();
@@ -111,9 +109,6 @@ exports.getScedule = (req, res) => {
 	res.render('scedule');
 	res.end();
 };
-
-
-//chat========================
 exports.getChat = (req, res) => {
 	accountsModel.getAllAccounts()
             .then((result) => {
@@ -129,23 +124,6 @@ exports.getChat = (req, res) => {
             });
 };
 exports.getMessages = (req, res) => {
-<<<<<<< HEAD
-	var receiver = req.query.receivername;
-	var sender = req.session.loggedinuser;
-	chatmodel.getAllMessages(sender,receiver)
-            .then((result) => {
-				res.render('chat',{
-					result:result,
-				});
-                res.end();
-            })
-            .catch(err => {
-                res.redirect("/profile");
-            });
-};
-
-
-=======
 	var receiver_id = req.params.receiver_id;
 	var sender_id = req.session.userId;
 	chatmodel.getAllMessages(sender_id,receiver_id)
@@ -165,7 +143,6 @@ exports.getMessages = (req, res) => {
             });
 };
 
->>>>>>> 033135cbbd72fcdfc10ad46c23c9f5a505f5bc1d
 exports.getData = (req, res) => {
 	folderfileinfo.getAllFolders().then((result1) => {
 		folderfileinfo.getAllGeneralFiles().then((result2) => {

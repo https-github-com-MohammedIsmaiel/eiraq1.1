@@ -1,253 +1,294 @@
 <%- include('parts/header')%>
-    <title>
-        <%=loggedinuser%>|Eiraq
-    </title>
-    <link rel="stylesheet" href="/css/profile.css">
+<title>
+    <%=loggedinuser%>|Eiraq
+</title>
+<link rel="stylesheet" href="/css/profile.css">
 <style>
-    .logout{   background: transparent;
-    outline: none;
-    border: none;
-    cursor: pointer;
+    .logout {
+        background: transparent;
+        outline: none;
+        border: none;
+        cursor: pointer;
     }
-    .logoutbox{
+
+    .logoutbox {
         position: absolute;
         top: 25px;
         left: 10px;
         width: 200px;
     }
-</style>
-    </head>
 
-    <body>
-        <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon bg-dark"></span>
-          </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <div class="container">
-                        <div class="row  ">
-                            <div class="col-1 mt-4" style="position: relative;"><span class="text-primary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+</style>
+</head>
+
+<body>
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler bg-dark" type="button"
+                data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon bg-dark"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <div class="container">
+                    <div class="row  ">
+                        <div class="col-1 mt-4" style="position: relative;">
+                            <span id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-cog"></i>
                             </span>
-                              <div class="dropdown-menu logoutbox" aria-labelledby="dropdownMenuButton">
-                                        <div   class="dropdown-item text-center">
-                                            
-                                            <form action="/logout" method="POST">
-                                              <input type="submit" value="Logout" class="logout">
-                                              </form>
-                                        </div>
-                                    </div>
-                            
-                            
+                            <div class="dropdown-menu logoutbox"
+                                aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-item text-center">
+
+                                    <form action="/logout" method="POST">
+                                        <input type="submit" value="Logout"
+                                            class="logout">
+                                    </form>
+                                </div>
                             </div>
-                            <div class="col-8 d-flex justify-content-center mt-3">
-                                <ul class="navbar-nav ">
-                                   
-                                    <li nav-item>
-                                        <div class="navicon " style="margin: 5px;">
-                                            <i class="fa fa-home"></i>
-                                            <p>Home</p>
-                                        </div>
-                                    </li>
-                                    <li nav-item active>
-                                        <a href="chat" style="text-decoration: none;">
-                                        <div class="navicon" style="margin: 5px; ">
+
+
+                        </div>
+                        <div class="col-8 d-flex justify-content-center mt-3">
+                            <ul class="navbar-nav ">
+
+                                <li nav-item>
+                                    <div class="navicon " style="margin: 5px;">
+                                        <i class="fa fa-home"></i>
+                                        <p>Home</p>
+                                    </div>
+                                </li>
+                                <li nav-item active>
+                                    <a href="chat"
+                                        style="text-decoration: none;">
+                                        <div class="navicon"
+                                            style="margin: 5px; ">
                                             <i class="fa fa-comment-alt"></i>
                                             <p>chat</p>
                                         </div>
-                                        </a>
-                                    </li>
-                                    <li nav-item active>
-                                        <div class="navicon" style="margin: 5px;">
-                                            <i class="fa fa-user-clock"></i>
-                                            <p>meetings</p>
-                                        </div>
-                                    </li>
-                                    <li nav-item active>
-                                        <div class="navicon" style="margin: 5px;">
-                                            <i class="fa fa-users"></i>
-                                            <p>contacts</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-3 mt-3 d-flex flex-column align-items-center " data-toggle="modal" data-target="#exampleModal">
-                             
-                                    <div class="account ">
-                                    <img alt="User Pic"
-                                        src="<%=pro_img.startsWith('https') ? pro_img : ('/upload_images/' + pro_img)%>"
-                                        class="profile_img">
-                        
+                                    </a>
+                                </li>
+                                <li nav-item active>
+                                    <div class="navicon" style="margin: 5px;">
+                                        <i class="fa fa-user-clock"></i>
+                                        <p>meetings</p>
                                     </div>
-                              
-                                <p><%=loggedinuser%></p>
-                                <!-- Modal -->
+                                </li>
+                                <li nav-item active>
+                                    <div class="navicon" style="margin: 5px;">
+                                        <i class="fa fa-users"></i>
+                                        <p>contacts</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-3 mt-3 d-flex flex-column align-items-center "
+                            data-toggle="modal" data-target="#exampleModal">
+
+                            <div class="account ">
+                                <img alt="User Pic"
+                                    src="<%=pro_img.startsWith('https') ? pro_img : ('/upload_images/' + pro_img)%>"
+                                    class="profile_img">
 
                             </div>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+
+                            <p><%=loggedinuser%></p>
+                            <!-- Modal -->
+
+                        </div>
+                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                            role="dialog" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">add profile Image</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                        <h5 class="modal-title"
+                                            id="exampleModalLabel">add profile
+                                            Image</h5>
+                                        <button type="button" class="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span
+                                                aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="cont-pro center">
-                                            <form class="form-horizontal" role="form" method="POST" action="imageprofile" enctype="multipart/form-data">
+                                            <form class="form-horizontal"
+                                                role="form" method="POST"
+                                                action="imageprofile"
+                                                enctype="multipart/form-data">
                                                 <div class="form-group">
-                                                 
-                                                    <div >
-                                                        <input class="form-control" type="file" name="uploaded_image" accept=""/>
+
+                                                    <div>
+                                                        <input
+                                                            class="form-control"
+                                                            type="file"
+                                                            name="uploaded_image"
+                                                            accept="" />
                                                         <% if(typeof validationErrors!='undefined'){%>
-                                                            <% let imageError = validationErrors.find(err => err.param === 'uploaded_image') %>
-                                                                <% if (imageError) { %>
-                                                                    <p class="mt-1 alert alert-danger backerror">
-                                                                        <%= imageError.msg %>
-                                                                    </p>
-                                                                <% } %>
-                                                            <% } %>
-                                                       
+                                                        <% let imageError = validationErrors.find(err => err.param === 'uploaded_image') %>
+                                                        <% if (imageError) { %>
+                                                        <p
+                                                            class="mt-1 alert alert-danger backerror">
+                                                            <%= imageError.msg %>
+                                                        </p>
+                                                        <% } %>
+                                                        <% } %>
+
                                                     </div>
-                                                
-                                                </div> 
-                                                <button type="submit" class="mt-1 btn btn-primary" style="width: 466px;" >Save changes</button>
-                                                </form>
-                                         </div>
+
+                                                </div>
+                                                <button type="submit"
+                                                    class="mt-1 btn btn-primary"
+                                                    style="width: 466px;">Save
+                                                    changes</button>
+                                            </form>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  
+                                        <button type="button"
+                                            class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        </div>
                     </div>
                 </div>
-            </nav>
-        </div>
-        <div class="container">
-            <div class="row d-flex align-items-center justify-content-center">
-                <div class="col-sm-12 col-lg-5  mb-5 order-lg-2 divdate" style="margin-top:130px;">
-                    <div class="clock">
-                        <div class="center"></div>
-                        <div class="h-hand"></div>
-                        <div class="m-hand"></div>
-                        <div class="s-hand"></div>
-                    </div>
-                    <p id="spanDate"></p>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-sm-12 col-lg-5  mb-5 order-lg-2 divdate"
+                style="margin-top:130px;">
+                <div class="clock">
+                    <div class="center"></div>
+                    <div class="h-hand"></div>
+                    <div class="m-hand"></div>
+                    <div class="s-hand"></div>
                 </div>
-                <div class="col-sm-12 col-lg-7 pt-5">
-                    <div class="row  d-flex align-items-center justify-content-center mb-3">
-                        <div class="col-sm-4 col-md-4  align-content-center d-flex align-items-center flex-column ">
-                           <a href="newmeeting">
+                <p id="spanDate"></p>
+            </div>
+            <div class="col-sm-12 col-lg-7 pt-5">
+                <div
+                    class="row  d-flex align-items-center justify-content-center mb-3">
+                    <div
+                        class="col-sm-4 col-md-4  align-content-center d-flex align-items-center flex-column ">
+                        <a href="newmeeting">
                             <div class="videomeeting">
                                 <i class="fas fa-video"></i>
                             </div>
-                          </a>
-                            <div class="textunder mt-2">
-                                <h5>New Meeting</h5>
-                            </div>
-                       
+                        </a>
+                        <div class="textunder mt-2">
+                            <h5>New Meeting</h5>
                         </div>
 
-                        <div class="col-sm-4  align-content-center d-flex align-items-center flex-column text-center" data-toggle="modal" data-target="#mymodal">
-                           
-                            <div class="joinmeeting">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                                
-                           
-                            <div class="textunder mt-2">
-                                <h5>Join</h5>
-                            </div>
-                        </div>
-                        <div class="modal" id="mymodal" >
-                             <div class="modal-dialog modal-dialog-centered">
-                                 <div class="modal-content bg-dark">
-                                     <div class="modal-header" style="height: 30px; padding: 2px;" >
-                                       <h6 class="text-light"><i class="far fa-play-circle"></i>  Join a Meeting</h6>
-                                             <label class="close pt-0 text-light" aria-hidden="true" data-dismiss="modal" style="font-size: 20px; font-weight: bold; cursor: pointer; margin-top: 0;">&times;</label>
-                                     </div>
-                                     <div class="modal-body" >
-                                        <form method="POST" action="/roomvideo" id="myForm">
-                                            <div class="form-group">
-                                                <label class="text-danger " style="font-weight:bold;font-size: 20px; font-family: 'Times New Roman', Times, serif;"><i class="fas fa-user-lock"></i>  Password:</label>
-                                                <br>
-                                                <input class="text-light" style="width: 400px; border: none; background: transparent; border-bottom: 1px solid #fff; background: transparent; outline: none;" type="text" name="meetingpassword"   placeholder="Enter Meeting Password">
-                                                  <% if(typeof validationRoomErrors!='undefined' ){%>
-                                                  <% let meetingpasswordError=validationRoomErrors.find(err=> err.param === 'meetingpassword') %>
-                                                  <% if (meetingpasswordError ) { %>
-                                                    <p class="mt-1 alert alert-danger backerror">
-                                                        <%= meetingpasswordError.msg %>
-                                                    </p>
-                                                <% } %>
-                                            <% } %>
-                                                  <% if (authError ) { %>
-                                                    <p class="mt-1 alert alert-danger backerror">
-                                            
-                                                  <%= authError%>
-                                                 </p>
-                                                 <% } %>
-                                                <br>
-                                                <br>
-                                                <label  class="text-danger " style="font-weight: bold; font-size: 20px; font-family: 'Times New Roman', Times, serif;"><i class="fas fa-user"></i>  Username:</label>
-                                                <br>
-                                                <input class="bg-transparent text-light" style="width: 400px; border: none; border-bottom: 1px solid #fff; outline: none;" name="username" type="text" placeholder="Enter Your Name" >
-                                                <% if(typeof validationRoomErrors!='undefined' ){%>
-                                                    <% let usernameError=validationRoomErrors.find(err=> err.param === 'username') %>
-                                                    <% if (usernameError) { %>
-                                                      <p class="mt-1 alert alert-danger backerror">
-                                                          <%= usernameError.msg %>
-                                                      </p>
-                                                  <% } %>
-                                              <% } %>
-                                                <br>
-                                                <br>
-                                                <input class="btn btns"  id="audioControl" type="checkbox"/>
-                                                <label  class="text-light" for="audioControl">Turn Off my Audio</label>
-                                                 
-                                                 <toggle-switch toggle-state="false"></toggle-switch>
-                                                  <br>
-                                                  <input class="btn btns" id="videoControl" type="checkbox"/>
-                                                 <label class="text-light" for="videoControl">Turn off my Camera</label>
-                                                 
-                                                 <toggle-switch toggle-state="false"></toggle-switch>
-                                            </div>
-                                            <div class="modal-footer " >
-                                                <button class="btn btn-danger w-25" type="submit" style="float: left;" >Join</button>
-                                                <button class="btn btn-danger w-25" data-dismiss="modal" >Cancel</button>
-
-                                            </div>
-                                        </form>
-                                    </div>
-                                            
-                                        </div>
-                                    </div>
                     </div>
-                    <div class="row d-flex align-items-center justify-content-center mb-3">
-                        <div class="col-sm-4  align-content-center d-flex align-items-center flex-column ">
-                            <a href="/schedule">
-                            <div class="Schedulingmeeting">
-                                <i class="fa fa-calendar-alt"></i>
+
+                    <div class="col-sm-4  align-content-center d-flex align-items-center flex-column text-center"
+                        data-toggle="modal" data-target="#mymodal">
+
+                        <div class="joinmeeting">
+                            <i class="fas fa-plus"></i>
+                        </div>
+
+
+                        <div class="textunder mt-2">
+                            <h5>Join</h5>
+                        </div>
+                    </div>
+                    <div class="modal" id="mymodal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content bg-light">
+                                <div class="modal-header">
+                                    <h4
+                                        class="w-100 text-center text-dark py-3">
+                                        Join
+                                        Meeting</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" action="/roomvideo"
+                                        id="myForm">
+                                        <div class="form-group my-3">
+                                            <input
+                                                class="text-dark form-control mb-3"
+                                                style="border: none; border-bottom: 1px solid rgb(180, 180, 180); outline: none;"
+                                                type="text"
+                                                name="meetingpassword"
+                                                placeholder="Enter Meeting Passcode">
+                                            <% if(typeof validationRoomErrors!='undefined' ){%>
+                                            <% let meetingpasswordError=validationRoomErrors.find(err=> err.param === 'meetingpassword') %>
+                                            <% if (meetingpasswordError ) { %>
+                                            <p
+                                                class="mt-1 alert alert-danger backerror">
+                                                <%= meetingpasswordError.msg %>
+                                            </p>
+                                            <% } %>
+                                            <% } %>
+                                            <% if (authError ) { %>
+                                            <p
+                                                class="mt-1 alert alert-danger backerror">
+
+                                                <%= authError%>
+                                            </p>
+                                            <% } %>
+                                            <input
+                                                class="bg-transparent mb-3 form-control text-dark"
+                                                style="border: none; border-bottom: 1px solid rgb(180, 180, 180); outline: none;"
+                                                name="username" type="text"
+                                                placeholder="Enter Your Name">
+                                            <% if(typeof validationRoomErrors!='undefined' ){%>
+                                            <% let usernameError=validationRoomErrors.find(err=> err.param === 'username') %>
+                                            <% if (usernameError) { %>
+                                            <p
+                                                class="mt-1 alert alert-danger backerror">
+                                                <%= usernameError.msg %>
+                                            </p>
+                                            <% } %>
+                                            <% } %>
+                                        </div>
+                                        <div class="modal-footer ">
+                                            <button class="btn btn-primary w-25"
+                                                type="submit"
+                                                style="float: left;">Join</button>
+                                            <button class="btn btn-warning w-25"
+                                                data-dismiss="modal">Cancel</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row d-flex align-items-center justify-content-center mb-3">
+                        <div
+                            class="col-sm-4  align-content-center d-flex align-items-center flex-column ">
+                            <a href="/schedule">
+                                <div class="Schedulingmeeting">
+                                    <i class="fa fa-calendar-alt"></i>
+                                </div>
                             </a>
                             <div class="textunder mt-2">
                                 <h5>Scheduling</h5>
                             </div>
-                        
+
                         </div>
 
-                        <div class="col-sm-4  align-content-center d-flex align-items-center flex-column ">
+                        <div
+                            class="col-sm-4  align-content-center d-flex align-items-center flex-column ">
                             <a href="profile/folders">
-                            
-                            <div class="sharemeeting">
-                                <i class="fab fa-google-drive"></i>
-                            </div>
+
+                                <div class="sharemeeting">
+                                    <i class="fab fa-google-drive"></i>
+                                </div>
                             </a>
                             <div class="textunder mt-2">
                                 <h5>My Data</h5>
@@ -260,13 +301,21 @@
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
 
         <script src="/js/clock.js"></script>
-        
 
-    </body>
 
-    </html>
+</body>
+
+</html>

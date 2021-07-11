@@ -1,26 +1,26 @@
 /** @format */
 
-const recordScreen = document.getElementById('recordScreen');
+const recordScreen = document.getElementById("recordScreen");
 let isRecording = false;
 
 var options = {
-	disableLogs: true,
-	frameInterval: 1,
-	mimeType: 'video/webm',
+  disableLogs: true,
+  frameInterval: 1,
+  mimeType: "video/mp4",
 };
 
 var recorder = new MultiStreamRecorder(allStreams, options);
 
-recordScreen.addEventListener('click', () => {
-	if (isRecording === true) {
-		recorder.stop(function (blob) {
-			// video.src = URL.createObjectURL(blob);
-			invokeSaveAsDialog(blob, '*.webm');
-		});
+recordScreen.addEventListener("click", () => {
+  if (isRecording === true) {
+    recorder.stop(function (blob) {
+      // video.src = URL.createObjectURL(blob);
+      invokeSaveAsDialog(blob, "*.mp4");
+    });
 
-		isRecording = false;
-	} else {
-		recorder.record();
-		isRecording = true;
-	}
+    isRecording = false;
+  } else {
+    recorder.record();
+    isRecording = true;
+  }
 });

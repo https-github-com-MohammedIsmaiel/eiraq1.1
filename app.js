@@ -91,7 +91,7 @@ app.use(
         secret: 'keyboard cat',
         cookie: {
             maxAge: 365 * 24 * 60 * 60 * 1000,
-            expires: false,// ten seconds, for testing
+            expires: false,
             resave: false,
             saveUninitialized: true,
         },

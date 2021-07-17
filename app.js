@@ -12,8 +12,6 @@ var cors = require('cors');
 
 const bodyParser = require('body-parser');
 const path = require('path');
-// var mysql = require('mysql');
-// const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 const { v4: uuidv4 } = require('uuid');
 dotenv.config({ path: './.env' });
@@ -28,13 +26,7 @@ const twitterRoutes = require('./routes/twitter.router');
 const fs = require('fs');
 const logger = require('morgan');
 const flash = require('connect-flash');
-// const sessionPool = require('pg').Pool;
-// const pgSession = require('connect-pg-simple')(session);
 var busboy = require('connect-busboy');
-//...
-
-//...
-
 /**
  * App Variables
  */
@@ -131,8 +123,6 @@ connection.connect(async function (err) {
 	await connection.query(
 		'CREATE TABLE IF NOT EXISTS messages (id  BIGSERIAL unique not null PRIMARY KEY,sender_id INT,receiver_id INT,messages TEXT,CONSTRAINT messages_fk1 FOREIGN KEY(sender_id) REFERENCES accounts(id),CONSTRAINT messages_fk2 FOREIGN KEY(receiver_id) REFERENCES accounts(id))',
 	);
-
-	console.log('tables created');
 });
 
 const router = require('./routes/router');
@@ -172,7 +162,6 @@ io.on('connection', (socket) => {
 
 		//FileUploading
 		socket.on('file', (f, messagewriter) => {
-			console.log(`File by: ${messagewriter}`);
 			io.to(roomid).emit('file', f);
 		});
 		// io.to(roomid).emit('file', f);
@@ -246,7 +235,7 @@ reminder();
  * Server running
  */
 server.listen(port, () => {
-	console.log(`running on port : ${port}`);
+	console.log();
 });
 
 module.exports.db = connection;

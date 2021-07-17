@@ -4,6 +4,7 @@
 <head>
     <title>Sсheduler</title>
     <meta charset="utf-8">
+    <link rel="icon" href="/img/icon.png" />
     <!-- scheduler -->
     <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"
         charset="utf-8"></script>
@@ -66,7 +67,6 @@
         src="https://cdn.dhtmlx.com/scheduler/edge/ext/dhtmlxscheduler_recurring.js"></script>
 
     <script>
-
         scheduler.config.xml_date = "%Y-%m-%d %H:%i";
         scheduler.init("scheduler_here", new Date(2021, 0, 20), "week");
         scheduler.setLoadMode("day");
@@ -74,15 +74,10 @@
         // load data from the backend
         scheduler.load("/events", "json");
 
-
-
-
         var dp = new dataProcessor("/events");
         dp.init(scheduler);
         // use RESTful API on the backend
         dp.setTransactionMode("REST");
-
-
         dp.attachEvent("onAfterUpdate", function (id, action, tid, response) {
             if (action == "error") {
                 // do something here

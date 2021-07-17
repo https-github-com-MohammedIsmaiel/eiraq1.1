@@ -15,8 +15,6 @@
 
   <link rel="stylesheet" href="/css/uploadfiles.css">
 
-
-
 </head>
 
 <body>
@@ -59,7 +57,7 @@
       </div>
       <div class="col-sm-12 col-md-3 col-lg-3 align-self-center">
         <a href="files/return">
-        <button class="btn btn-outline-dark">Return</button>
+          <button class="btn btn-outline-dark">Return</button>
         </a>
       </div>
     </div>
@@ -72,81 +70,73 @@
   <div class="container">
     <div class="row mt-5">
       <% for(var i=0; i < files.length; i++) { %>
-        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-          <% if( files[i].user_id==user_id){%>
-            <div>
-              <a
-                href="files/delete/<%=files[i].id%>/<%=files[i].fileid%>/<%=folderid%>/<%=foldername%>">
-                <div> <span class="deleteicon"><i
-                      class="fa fa-trash"></i></span>
-                </div>
-              </a>
+      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <% if( files[i].user_id==user_id){%>
+        <div>
+          <a
+            href="files/delete/<%=files[i].id%>/<%=files[i].fileid%>/<%=folderid%>/<%=foldername%>">
+            <div> <span class="deleteicon"><i class="fa fa-trash"></i></span>
             </div>
-            <% } %>
-              <div>
-                <a href="<%=files[i].webviewlink %>" target="_blank">
-                  <div class="thumbnail">
-                    <span class="folder">
-                      <% if( files[i].filetype=='.jpg' ){%>
-                        <img
-                          src="https://image.flaticon.com/icons/svg/136/136524.svg"
-                          class="fileicon">
-                        <% } %>
-                          <% if( files[i].filetype=='.rar' ){%>
-                            <img
-                              src="https://www.flaticon.com/svg/vstatic/svg/202/202311.svg?token=exp=1619877715~hmac=9e9d886d16826797afd9fc1f1dae455f"
-                              class="fileicon">
-                            <% } %>
-                              <% if( files[i].filetype=='.pdf' ){%>
-                                <img
-                                  src="https://image.flaticon.com/icons/svg/179/179483.svg"
-                                  class="fileicon">
-                                <% } %>
-                                  <% if( files[i].filetype=='.docx' ){%>
-                                    <img
-                                      src="https://image.flaticon.com/icons/svg/281/281760.svg"
-                                      class="fileicon">
-                                    <% } %>
-                                      <% if( files[i].filetype=='.rtf' ){%>
-                                        <img
-                                          src="https://image.flaticon.com/icons/svg/136/136539.svg"
-                                          class="fileicon">
-                                        <% } %>
-                                          <% if( files[i].filetype=='.png' ){%>
-                                            <img
-                                              src="https://image.flaticon.com/icons/svg/136/136523.svg"
-                                              class="fileicon">
-                                            <% } %>
-                                              <% if( files[i].filetype=='.jpeg'
-                                                ){%>
-                                                <img
-                                                  src="https://image.flaticon.com/icons/svg/136/136524.svg"
-                                                  class="fileicon">
-                                                <% } %>
-                                                  <% if(
-                                                    files[i].filetype=='.txt'
-                                                    ){%>
-                                                    <img
-                                                      src="https://image.flaticon.com/icons/svg/136/136538.svg"
-                                                      class="fileicon">
-                                                    <% } %>
-                                                      <% if(
-                                                        files[i].filetype=='.zip'
-                                                        ){%>
-                                                        <img
-                                                          src="https://www.flaticon.com/svg/vstatic/svg/2306/2306214.svg?token=exp=1619878277~hmac=878e351caa52333921da51737fd42c0a"
-                                                          class="fileicon">
-                                                        <% } %>
-                    </span>
-                    <div class="title">
-                      <%= files[i].filename%>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
+          </a>
         </div>
         <% } %>
+        <div>
+          <a href="<%=files[i].webviewlink %>" target="_blank">
+            <div class="thumbnail">
+              <span class="folder">
+                <% if( files[i].filetype=='.jpg' ){%>
+                <img src="https://image.flaticon.com/icons/svg/136/136524.svg"
+                  class="fileicon">
+                <% } %>
+                <% if( files[i].filetype=='.rar' ){%>
+                <img
+                  src="https://www.flaticon.com/svg/vstatic/svg/202/202311.svg?token=exp=1619877715~hmac=9e9d886d16826797afd9fc1f1dae455f"
+                  class="fileicon">
+                <% } %>
+                <% if( files[i].filetype=='.pdf' ){%>
+                <img src="https://image.flaticon.com/icons/svg/179/179483.svg"
+                  class="fileicon">
+                <% } %>
+                <% if( files[i].filetype=='.docx' ){%>
+                <img src="https://image.flaticon.com/icons/svg/281/281760.svg"
+                  class="fileicon">
+                <% } %>
+                <% if( files[i].filetype=='.rtf' ){%>
+                <img src="https://image.flaticon.com/icons/svg/136/136539.svg"
+                  class="fileicon">
+                <% } %>
+                <% if( files[i].filetype=='.png' ){%>
+                <img src="https://image.flaticon.com/icons/svg/136/136523.svg"
+                  class="fileicon">
+                <% } %>
+                <% if( files[i].filetype=='.jpeg'
+                                                ){%>
+                <img src="https://image.flaticon.com/icons/svg/136/136524.svg"
+                  class="fileicon">
+                <% } %>
+                <% if(
+                                                    files[i].filetype=='.txt'
+                                                    ){%>
+                <img src="https://image.flaticon.com/icons/svg/136/136538.svg"
+                  class="fileicon">
+                <% } %>
+                <% if(
+                                                        files[i].filetype=='.zip'
+                                                        ){%>
+                <img
+                  src="https://www.flaticon.com/svg/vstatic/svg/2306/2306214.svg?token=exp=1619878277~hmac=878e351caa52333921da51737fd42c0a"
+                  class="fileicon">
+                <% } %>
+              </span>
+              <div class="title">
+                <%= files[i].filename%>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+      <% } %>
     </div>
   </div>
 

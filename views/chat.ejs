@@ -7,15 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="/css/chat.css">
-
+  <link rel="icon" href="/img/icon.png" />
   <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
   <link rel="stylesheet"
     href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-  <script
-    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <script src="/js/jquery.min.js"></script>
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <script src="/socket.io/socket.io.js"></script>
@@ -38,68 +40,68 @@
       <span class="logo">
         <div class="profile">
           <% for(var i=0; i < result.length; i++) { %>
-            <% if(user_id==result[i].id){ %>
+          <% if(user_id==result[i].id){ %>
 
-              <% if ( result[i].img_url=='undefined' ) { %>
-                <img src="/upload_images/default.png" alt="user image">
+          <% if ( result[i].img_url=='undefined' ) { %>
+          <img src="/upload_images/default.png" alt="user image">
 
-                <% } else if (result[i].img_url.startsWith("https")) { %>
+          <% } else if (result[i].img_url.startsWith("https")) { %>
 
-                  <img src="<%= result[i].img_url%>" width="50px"
-                    alt="user image" srcset="">
-                  <% } else { %>
-                    <img src="/upload_images/<%= result[i].img_url%>"
-                      width="50px" alt="user image" srcset="">
+          <img src="<%= result[i].img_url%>" width="50px" alt="user image"
+            srcset="">
+          <% } else { %>
+          <img src="/upload_images/<%= result[i].img_url%>" width="50px"
+            alt="user image" srcset="">
 
-                    <% } %>
-
-
-                      <div class="profileinfo">
-                        <span class="username">
-                          <%= result[i].username%>
-  <script>
-  sender_id = "<%= result[i].id%>";
-</script>
-                        </span>
-                      </div>
-        </div>
-        <% } %>
           <% } %>
 
-            <input type="text" id="myInput" onkeyup="myFunction()"
-              placeholder="search in chat" class="form-control form-rounded"
-              style="background-color: white; color: black;" />
+
+          <div class="profileinfo">
+            <span class="username">
+              <%= result[i].username%>
+              <script>
+                sender_id = "<%= result[i].id%>";
+              </script>
+            </span>
+          </div>
+        </div>
+        <% } %>
+        <% } %>
+
+        <input type="text" id="myInput" onkeyup="myFunction()"
+          placeholder="search in chat" class="form-control form-rounded"
+          style="background-color: white; color: black;" />
       </span>
 
 
       <div class="list-wrap" id="myLists">
         <% for(var i=0; i < result.length; i++) { %>
-          <% if(user_id !=result[i].id){ %>
-       
-            <div class="list">
-              <% if ( result[i].img_url=='undefined' ) { %>
-                <img src="/upload_images/default.png" alt="user image">
+        <% if(user_id !=result[i].id){ %>
 
-                <% } else if (result[i].img_url.startsWith("https")) { %>
+        <div class="list">
+          <% if ( result[i].img_url=='undefined' ) { %>
+          <img src="/upload_images/default.png" alt="user image">
 
-                  <img src="<%= result[i].img_url%>" width="50px"
-                    alt="user image" srcset="">
-                  <% } else { %>
-                    <img src="/upload_images/<%= result[i].img_url%>"
-                      width="50px" alt="user image" srcset="">
+          <% } else if (result[i].img_url.startsWith("https")) { %>
 
-                    <% } %>
-                      <div class="info">
-                        <span class="user">
-                          <%= result[i].username%>
-                        </span>
-                        <input type="hidden"  class="receiver_id" value="<%= result[i].id%>">
-                       </div>
-                     
-            </div>
-       
-            <% } %>
-              <% } %>
+          <img src="<%= result[i].img_url%>" width="50px" alt="user image"
+            srcset="">
+          <% } else { %>
+          <img src="/upload_images/<%= result[i].img_url%>" width="50px"
+            alt="user image" srcset="">
+
+          <% } %>
+          <div class="info">
+            <span class="user">
+              <%= result[i].username%>
+            </span>
+            <input type="hidden" class="receiver_id" value="<%= result[i].id%>">
+          </div>
+
+        </div>
+
+        <% } %>
+        <% } %>
       </div>
 
     </sidebar>
@@ -116,25 +118,27 @@
       </header>
       <div class="message-wrap" style="background-color: white;">
         <ul id="messages">
-         
+
         </ul>
 
 
       </div>
 
-      <div class="card-footer" style="background-color:#ffffff; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0,0,0,0.23) 0px 3px 6px;">
+      <div class="card-footer"
+        style="background-color:#ffffff; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0,0,0,0.23) 0px 3px 6px;">
         <div class="row">
           <div class="col-2 col-md-1">
             <button id="emoji-btn"> &#127773;</button>
-            </div>
+          </div>
           <div class="col-8 col-md-10">
-           <input type="text"  data-placeholder="Send a message to {0}"
-            id="txtMessage" class="form-control form-rounded" name="message" required/>
+            <input type="text" data-placeholder="Send a message to {0}"
+              id="txtMessage" class="form-control form-rounded" name="message"
+              required />
           </div>
           <div class="col-2 col-md-1">
-            <button id="form" >
+            <button id="form">
               <i class="fas fa-paper-plane fa-1x"
-                 style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px; color: rgb(100, 164, 236);">
+                style="cursor: pointer; font-size:20px; display: flex; margin-top: 10px; color: rgb(100, 164, 236);">
               </i>
             </button>
           </div>
@@ -143,7 +147,8 @@
     </div>
 
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
   <script src="/js/chat.js"></script>
 </body>
 

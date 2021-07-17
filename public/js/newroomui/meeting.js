@@ -15,36 +15,36 @@ function rooms() {
 
 	s3.classList.contains('breakroomsdisplayed')
 		? setTimeout(() => {
-			document.getElementById('btnroom').innerHTML =
-				'<i style = "color:#ff6a00" class="fad fa-angle-double-left"></i>';
-		}, 400)
+				document.getElementById('btnroom').innerHTML =
+					'<i style = "color:#ff6a00" class="fad fa-angle-double-left"></i>';
+		  }, 400)
 		: setTimeout(() => {
-			document.getElementById('btnroom').innerHTML =
-				'<i class="fad fa-angle-double-right"></i>';
-		}, 300);
+				document.getElementById('btnroom').innerHTML =
+					'<i class="fad fa-angle-double-right"></i>';
+		  }, 300);
 }
 
-function rotate() {
-	let card = document.querySelector('.cards');
-	card.classList.add('cardrotate');
-	card.classList.remove('cardrotatex');
-}
+// function rotate() {
+// 	let card = document.querySelector('.cards');
+// 	card.classList.add('cardrotate');
+// 	card.classList.remove('cardrotatex');
+// }
 
-function rotatex() {
-	let card = document.querySelector('.cards');
-	card.classList.add('cardrotatex');
-	card.classList.remove('cardrotate');
-}
-function colorRed() {
-	let color = document.getElementById('x');
-	color.classList.toggle('gold');
-}
-function vote() {
-	let card = document.querySelector('.cards');
-	let color = document.getElementById('votebtn');
-	color.classList.toggle('gold');
-	card.classList.toggle('cardshow');
-}
+// function rotatex() {
+// 	let card = document.querySelector('.cards');
+// 	card.classList.add('cardrotatex');
+// 	card.classList.remove('cardrotate');
+// }
+// function colorRed() {
+// 	let color = document.getElementById('x');
+// 	color.classList.toggle('gold');
+// }
+// function vote() {
+// 	let card = document.querySelector('.cards');
+// 	let color = document.getElementById('votebtn');
+// 	color.classList.toggle('gold');
+// 	card.classList.toggle('cardshow');
+// }
 
 let video = document.getElementById('vid');
 let mesage = document.querySelector('.mesage');
@@ -52,17 +52,17 @@ let friends = document.querySelector('.friends');
 let msgicon = document.querySelector('.fa-envelope');
 let vidIvon = document.querySelector('.fa-users');
 // open / close chat window
-if (document.getElementById("msg") !== null) {
+if (document.getElementById('msg') !== null) {
 	document.getElementById('msg').addEventListener('click', () => {
 		if (mesage.classList.contains('disp')) {
 			mesage.classList.add('hide');
 			mesage.classList.remove('disp');
-			msgicon.classList.remove('gold');
+			msgicon.classList.add('gold');
 			video.classList.toggle('width');
 		} else {
 			mesage.classList.remove('hide');
 			mesage.classList.add('disp');
-			msgicon.classList.add('gold');
+			msgicon.classList.remove('gold');
 			video.classList.toggle('width');
 		}
 		if (friends.classList.contains('disp')) {
@@ -174,10 +174,14 @@ function raiseHand() {
 	let handIcon = document.querySelector('.fa-hand-paper');
 	handIcon.classList.toggle('gold');
 }
-function fileUpload() {
-	let file = document.querySelector('.fa-file-alt');
-	file.classList.toggle('gold');
-}
+// function fileUpload() {
+// 	let file = document.querySelector('.fa-file-alt');
+// 	file.classList.toggle('gold');
+
+// 	setTimeout(() => {
+// 		file.classList.toggle('gold');
+// 	}, 1000);
+// }
 function caption() {
 	let caption = document.querySelector('.fa-closed-captioning');
 	caption.classList.toggle('gold');

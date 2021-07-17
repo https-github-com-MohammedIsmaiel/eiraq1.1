@@ -19,11 +19,11 @@
     crossorigin="anonymous">
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
-<link rel="stylesheet" href="/css/newroomui/meeting.css">
-<link rel="stylesheet" href="/css/newroomui/logo.css">
+
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" id="light" href="/css/newroomui/lightprofile.css">
 <link rel="stylesheet" href="/css/timer.css">
+<link rel="stylesheet" href="/css/newroomui/meeting.css">
 </head>
 
 
@@ -70,18 +70,7 @@
                 </div>
             </div>
             <div class="logo">
-                <div class="contain">
-                    <div class="box">
-                        <div class="title">
-                            <span class="block"></span>
-                            <h1>Eiraq<span></span></h1>
-                        </div>
-                        <div class="role">
-                            <div class="block"></div>
-                            <p>Conference App</p>
-                        </div>
-                    </div>
-                </div>
+                <h1>Eiraq<span></span></h1>
             </div>
             <div class="display">
                 <button onclick="changeseem()" class="btn"><i id="bordericons"
@@ -148,8 +137,7 @@
                     class="fad fa-angle-double-right"></i>
             </button>
             <!--mohammed gamal -->
-            <button title="attendance" onclick="fileUpload()" class="btn"
-                id="attendence">
+            <button title="attendance" class="btn" id="attendence">
                 <i id="bordericons" id="bordericons"
                     class="far fa-file-alt"></i>
             </button>
@@ -524,24 +512,26 @@
                                         class="icons fas fa-hand-paper"></i></button>
                 </div>
 
-                <div class="footbtn">
+                <div class="footbtn fooot">
 
                     <button onclick="openOPtion()" type="submit" class="btn btns btn-danger"><i
                             class="col icons fas fa-sign-out-alt text-light"></i></button>
-                </div>
-                <div class="selectOptiion dspnoneopt">
-
-                    <button title="leave meeting" id="leave" onclick="leaveMeeting()"
-                        class="btn btns btn-outline-dark">Leave Meeting</button>
-
-                    <% if (isHost) { %>
-                <button id="endForAll" class="btn btns btn-outline-danger">End
+                                            <div class="selectOptiion dspnoneopt">
+                                            
+                                                <button title="leave meeting" id="leave" onclick="leaveMeeting()"
+                                                    class="btn btns btn-outline-dark form-control">Leave Meeting</button>
+                                            
+                                                <% if (isHost) { %>
+                <button id="endForAll"
+                    class="btn btns btn-outline-danger form-control">End
                     For
                     All</button>
                 <% }%>
             </div>
-        </footer>
-        <!----------------- End Footer ------------------->
+    </div>
+
+    </footer>
+    <!----------------- End Footer ------------------->
     </div>
 
     <!-- end new ui -->

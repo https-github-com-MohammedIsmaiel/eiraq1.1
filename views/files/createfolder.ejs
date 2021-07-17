@@ -6,16 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="icon" href="/img/icon.png" />
   <link rel="stylesheet" href="/css/uploadfiles.css">
 
   <link rel="stylesheet" href="/css/createfolder.css">
   <!-- Latest compiled and minified CSS -->
   <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-  rel="stylesheet">
-<link
-  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-  rel="stylesheet">
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+  <link
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+    rel="stylesheet">
 
   <!-- jQuery library -->
   <script
@@ -80,7 +82,7 @@
 
       <div class="col-sm-12 col-md-2 align-self-center">
         <a href="folders/return">
-        <button class="btn btn-outline-dark">Return</button>
+          <button class="btn btn-outline-dark">Return</button>
         </a>
       </div>
 
@@ -90,120 +92,111 @@
   <div class="container">
     <div class="row justify-content-around align-items-center">
       <% for(var i=0; i < folders.length; i++) { %>
-        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-          <form method="GET" action="folders/files">
+      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <form method="GET" action="folders/files">
 
-            <input type="hidden" name="folderName"
-              value="<%= folders[i].foldername%>">
-            <input type="hidden" name="folderid" value="<%= folders[i].id%>">
-            <% if( folders[i].user_id==user_id){%>
-              <a href="folders/delete/<%= folders[i].id%>">
-                <div> <span class="deleteicon"><i
-                  class="fa fa-trash"></i></span>
-                </div>
-              </a>
+          <input type="hidden" name="folderName"
+            value="<%= folders[i].foldername%>">
+          <input type="hidden" name="folderid" value="<%= folders[i].id%>">
+          <% if( folders[i].user_id==user_id){%>
+          <a href="folders/delete/<%= folders[i].id%>">
+            <div> <span class="deleteicon"><i class="fa fa-trash"></i></span>
+            </div>
+          </a>
+          <% } %>
+          <button class="thumbnailbtn" type="submit">
+
+            <div class="thumbnail">
+              <span class="folder"><span class="file"></span></span>
+              <div class="title">
+                <%= folders[i].foldername %>
+              </div>
+            </div>
+          </button>
+        </form>
+
+      </div>
+      <% } %>
+
+      <% for(var i=0; i < files.length; i++) { %>
+      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <% if( files[i].user_id==user_id){%>
+        <div class="thumbnail" style="position: relative;">
+          <div style="position: absolute; left: 0; top: 0;">
+            <a href="folders/delete/<%=files[i].id%>/<%=files[i].fileid%>">
+              <div> <span class="deleteicon"><i class="fa fa-trash"></i></span>
+              </div>
+            </a>
+          </div>
+          <% } %>
+
+          <div style="width: 75px;">
+            <a href="<%=files[i].webviewlink %>" target="_blank">
+
+              <% if( files[i].filetype=='.jpg' ){%>
+              <img src="https://image.flaticon.com/icons/svg/136/136524.svg"
+                class="">
               <% } %>
-                <button class="thumbnailbtn" type="submit">
+              <% if( files[i].filetype=='.rar' ){%>
+              <img
+                src="https://cdn.iconscout.com/icon/free/png-512/winrar-3-569260.png"
+                width="80px" class="">
+              <% } %>
+              <% if( files[i].filetype=='.xls' ){%>
+              <img
+                src="https://cdn.iconscout.com/icon/free/png-512/microsoft-excel-4-722715.png"
+                width="80px" class="">
+              <% } %>
 
-                  <div class="thumbnail">
-                    <span class="folder"><span class="file"></span></span>
-                    <div class="title">
-                      <%= folders[i].foldername %>
-                    </div>
-                  </div>
-                </button>
-          </form>
-
-        </div>
-        <% } %>
-
-          <% for(var i=0; i < files.length; i++) { %>
-            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <% if( files[i].user_id==user_id){%>
-                <div class="thumbnail" style="position: relative;">
-                  <div style="position: absolute; left: 0; top: 0;">
-                    <a
-                      href="folders/delete/<%=files[i].id%>/<%=files[i].fileid%>">
-                      <div> <span class="deleteicon"><i
-                            class="fa fa-trash"></i></span>
-                      </div>
-                    </a>
-                  </div>
-                  <% } %>
-
-                    <div style="width: 75px;">
-                      <a href="<%=files[i].webviewlink %>" target="_blank">
-
-                        <% if( files[i].filetype=='.jpg' ){%>
-                          <img
-                            src="https://image.flaticon.com/icons/svg/136/136524.svg"
-                            class="">
-                          <% } %>
-                            <% if( files[i].filetype=='.rar' ){%>
-                              <img
-                                src="https://cdn.iconscout.com/icon/free/png-512/winrar-3-569260.png"
-                                width="80px" class="">
-                              <% } %>
-                                <% if( files[i].filetype=='.xls' ){%>
-                                  <img
-                                    src="https://cdn.iconscout.com/icon/free/png-512/microsoft-excel-4-722715.png"
-                                    width="80px" class="">
-                                  <% } %>
-
-                                    <% if( files[i].filetype=='.pdf' ){%>
-                                      <img
-                                        src="https://image.flaticon.com/icons/svg/179/179483.svg"
-                                        class="">
-                                      <% } %>
-                                        <% if( files[i].filetype=='.docx' ){%>
-                                          <img
-                                            src="https://image.flaticon.com/icons/svg/281/281760.svg"
-                                            class="">
-                                          <% } %>
-                                            <% if( files[i].filetype=='.rtf'
+              <% if( files[i].filetype=='.pdf' ){%>
+              <img src="https://image.flaticon.com/icons/svg/179/179483.svg"
+                class="">
+              <% } %>
+              <% if( files[i].filetype=='.docx' ){%>
+              <img src="https://image.flaticon.com/icons/svg/281/281760.svg"
+                class="">
+              <% } %>
+              <% if( files[i].filetype=='.rtf'
                                               ){%>
-                                              <img
-                                                src="https://icons-for-free.com/iconfiles/png/512/file+page+rtf+icon-1320167293854946367.png"
-                                                width="80px" class="">
-                                              <% } %>
-                                                <% if( files[i].filetype=='.png'
+              <img
+                src="https://icons-for-free.com/iconfiles/png/512/file+page+rtf+icon-1320167293854946367.png"
+                width="80px" class="">
+              <% } %>
+              <% if( files[i].filetype=='.png'
                                                   ){%>
-                                                  <img
-                                                    src="https://image.flaticon.com/icons/svg/136/136523.svg"
-                                                    class="">
-                                                  <% } %>
-                                                    <% if(
+              <img src="https://image.flaticon.com/icons/svg/136/136523.svg"
+                class="">
+              <% } %>
+              <% if(
                                                       files[i].filetype=='.jpeg'
                                                       ){%>
-                                                      <img
-                                                        src="https://image.flaticon.com/icons/svg/136/136524.svg"
-                                                        class="">
-                                                      <% } %>
-                                                        <% if(
+              <img src="https://image.flaticon.com/icons/svg/136/136524.svg"
+                class="">
+              <% } %>
+              <% if(
                                                           files[i].filetype=='.txt'
                                                           ){%>
-                                                          <img
-                                                            src="https://image.flaticon.com/icons/svg/136/136538.svg"
-                                                            class="">
-                                                          <% } %>
-                                                            <% if(
+              <img src="https://image.flaticon.com/icons/svg/136/136538.svg"
+                class="">
+              <% } %>
+              <% if(
                                                               files[i].filetype=='.zip'
                                                               ){%>
-                                                              <img
-                                                                src="https://www.flaticon.com/svg/vstatic/svg/2306/2306214.svg?token=exp=1619878277~hmac=878e351caa52333921da51737fd42c0a"
-                                                                class="">
-                                                              <% } %>
+              <img
+                src="https://www.flaticon.com/svg/vstatic/svg/2306/2306214.svg?token=exp=1619878277~hmac=878e351caa52333921da51737fd42c0a"
+                class="">
+              <% } %>
 
 
-                      </a>
-                    </div>
+            </a>
+          </div>
 
-                    <span>
-                      <%= files[i].filename%>
-                    </span>
-                </div>
-            </div>
-            <% } %>
+          <span>
+            <%= files[i].filename%>
+          </span>
+        </div>
+      </div>
+      <% } %>
     </div>
   </div>
 

@@ -1,195 +1,183 @@
-@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+/** @format */
+
+@import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
 
-    width: 100vw;
-    height: 100vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
+	width: 100vw;
+	height: 100vh;
+	overflow-y: hidden;
+	overflow-x: hidden;
 }
 
 header {
-    background-image: url('/img/images.png');
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 100vh;
-    overflow-x: hidden;
-    background-position: center;
+	background-image: url('https://i.pinimg.com/originals/fa/38/31/fa3831976bbbcdbefac1a336b91246c1.jpg');
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height: 100vh;
+	overflow-x: hidden;
+	background-position: center;
 }
 
 .login-box {
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-
-
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #fff;
 }
 
 .login-box h1 {
-    float: left;
-    font-size: 40px;
+	float: left;
+	font-size: 40px;
 
-    margin-bottom: 40px;
-    padding: 13px 0;
+	margin-bottom: 40px;
+	padding: 13px 0;
 }
 
 .text-box {
-    width: 100%;
-    overflow: hidden;
-    font-size: 20px;
-    padding: 8px 0;
-    margin: 10px 0;
-
-
+	width: 100%;
+	overflow: hidden;
+	font-size: 20px;
+	padding: 8px 0;
+	margin: 10px 0;
 }
 
 .text-box i {
-    width: 26px;
-    float: left;
-    text-align: center;
+	width: 26px;
+	float: left;
+	text-align: center;
 }
 
 .text-box input {
-    border: none;
-    outline: none;
-    background: none;
-    color: #fff;
-    font-size: 18px;
-    width: 80%;
-    float: left;
-    margin: 0 10px;
-
+	border: none;
+	outline: none;
+	background: none;
+	color: #fff;
+	font-size: 18px;
+	width: 80%;
+	float: left;
+	margin: 0 10px;
 }
-
+.text-box input::placeholder {
+	color: rgb(190, 190, 190);
+}
 .btn {
-    outline: none;
-    padding: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    max-width: 70px;
-    background: none;
-    border: none;
-    color: #fff;
+	outline: none;
+	padding: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	text-align: center;
+	max-width: 70px;
+	background: none;
+	border: none;
+	color: #fff;
 }
 
 .span1 {
-    position: absolute;
-    top: 100px;
-    left: 0;
-    width: 109px;
-    height: 6px;
-    background: linear-gradient(to right, #0c002b, #ff0526);
+	position: absolute;
+	top: 100px;
+	left: 0;
+	width: 109px;
+	height: 6px;
+	background: linear-gradient(to right, #0c002b, #ff0526);
 }
 
 .span2 {
-    position: absolute;
-    top: 170px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(to right, #0c002b, #ff0526);
+	position: absolute;
+	top: 170px;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: linear-gradient(to right, #0c002b, #ff0526);
 }
 
 .span3 {
-    position: absolute;
-    top: 218px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(to right, #0c002b, #ff0c2c);
+	position: absolute;
+	top: 218px;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: linear-gradient(to right, #0c002b, #ff0c2c);
 }
 
 .span4 {
-    position: absolute;
-    top: 222px;
-    right: 0px;
-    color: red;
-    font-size: 18px;
-
-
+	position: absolute;
+	top: 222px;
+	right: 0px;
+	color: red;
+	font-size: 18px;
 }
 
 .span5 {
-    position: absolute;
-    top: 173px;
-    right: 0px;
-    color: red;
-    font-size: 18px;
-
+	position: absolute;
+	top: 173px;
+	right: 0px;
+	color: red;
+	font-size: 18px;
 }
 
 .btn-box {
-    margin-top: 20px;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 41px;
-    display: flex;
-
-
+	margin-top: 20px;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 41px;
+	display: flex;
 }
 
 .btn1 {
-    position: absolute;
-    left: 6%;
-    padding: 10px;
-    text-align: center;
-    padding-right: 72px;
-    border: 1px solid #2501c7;
-
-
-
+	position: absolute;
+	left: 6%;
+	padding: 10px;
+	text-align: center;
+	padding-right: 72px;
+	border: 1px solid #2501c7;
 }
 
 .btn2 {
-    position: absolute;
-    left: 70%;
-    padding: 10px;
-    border: 1px solid #ff0c2c;
-    text-decoration: none;
-
+	position: absolute;
+	left: 70%;
+	padding: 10px;
+	border: 1px solid #ff0c2c;
+	text-decoration: none;
 }
 
 /* iphone */
-@media only screen and (min-device-width : 280px) and (max-device-width : 653px) {
-    .login-box {
-        width: 280px;
-    }
+@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+	.login-box {
+		width: 280px;
+	}
 }
 
 /* iphone */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    .login-box {
-        width: 300px;
-    }
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+	.login-box {
+		width: 300px;
+	}
 }
 
 /* ipad */
-@media only screen and (min-device-width : 540px) and (max-device-width : 720px) {
-    .login-box {
-        width: 320px;
-
-    }
+@media only screen and (min-device-width: 540px) and (max-device-width: 720px) {
+	.login-box {
+		width: 320px;
+	}
 }
 
 /* ipad */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-    .login-box {
-        width: 400px;
-    }
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	.login-box {
+		width: 400px;
+	}
 }
 
 /* ipad */
-@media only screen and (min-device-width : 1024px) and (max-device-width : 1366px) {
-    .login-box {
-        width: 450px;
-    }
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+	.login-box {
+		width: 450px;
+	}
 }

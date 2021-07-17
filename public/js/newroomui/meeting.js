@@ -17,34 +17,12 @@ function rooms() {
 		? setTimeout(() => {
 				document.getElementById('btnroom').innerHTML =
 					'<i style = "color:#ff6a00" class="fad fa-angle-double-left"></i>';
-		  }, 400)
+		  }, 200)
 		: setTimeout(() => {
 				document.getElementById('btnroom').innerHTML =
 					'<i class="fad fa-angle-double-right"></i>';
-		  }, 300);
+		  }, 200);
 }
-
-// function rotate() {
-// 	let card = document.querySelector('.cards');
-// 	card.classList.add('cardrotate');
-// 	card.classList.remove('cardrotatex');
-// }
-
-// function rotatex() {
-// 	let card = document.querySelector('.cards');
-// 	card.classList.add('cardrotatex');
-// 	card.classList.remove('cardrotate');
-// }
-// function colorRed() {
-// 	let color = document.getElementById('x');
-// 	color.classList.toggle('gold');
-// }
-// function vote() {
-// 	let card = document.querySelector('.cards');
-// 	let color = document.getElementById('votebtn');
-// 	color.classList.toggle('gold');
-// 	card.classList.toggle('cardshow');
-// }
 
 let video = document.getElementById('vid');
 let mesage = document.querySelector('.mesage');

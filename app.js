@@ -79,16 +79,18 @@ const store = new KnexSessionStore({
 });
 
 app.use(
-	session({
-		secret: 'keyboard cat',
-		cookie: {
-			maxAge: 365 * 24 * 60 * 60 * 1000,
-			expires: false, // ten seconds, for testing
-			resave: false,
-			saveUninitialized: true,
-		},
-		store,
-	}),
+
+    session({
+        secret: 'keyboard cat',
+        cookie: {
+            maxAge: 365 * 24 * 60 * 60 * 1000,
+            expires: false,
+            resave: false,
+            saveUninitialized: true,
+        },
+        store,
+    }),
+
 );
 
 app.use(flash());

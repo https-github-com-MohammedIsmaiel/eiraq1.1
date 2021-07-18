@@ -21,6 +21,8 @@ class Storage {
 			data.rec_type, //!
 			owner_id,
 		]);
+	
+
 
 		// delete a single occurrence from a recurring series
 		let action = 'inserted';
@@ -47,7 +49,6 @@ class Storage {
 				id,
 			],
 		);
-
 		return {
 			action: 'updated',
 		};

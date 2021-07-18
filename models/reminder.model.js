@@ -29,18 +29,19 @@ module.exports = function () {
     connection.query(query, [today, current_hour], function (err, result) {
       if (err) console.log(err);
       if (result.rows.length > 0) {
-             result.rows.forEach((element) => {
-         
+             result.rows.forEach((element) => { 
           const mailOptions = {
             from: 'eiraqapp@gmail.com',
             to: element.email,
             subject: `Hello ${element.username} `,
             html: `<div style : "font-size : 20px ;"><strong style = "color:#080; font-size:24px; ">
-                             Happy day 😉😂 </strong>,thank you for using <strong style : "color: #a00; font-size:26px;"> Eiraq App </strong> you have an event tomorrow 
-                             <p style = "color:blue; font-size:30px; padding:5px ;border:1px solid blue; border-radius:10px;>
-                             ( ${element.text} ) 
-                             </p> \n at 
+                             Happy day 😉😂 </strong>,thank you for using <strong style : "color: #a00; font-size:26px;"> Eiraq App </strong> you have an  event tomorrow 
+                             \n at 
                              <table border = "1px" width = "100%">
+                             <tr>
+                             <td style = "color: "black" ; font-size:"25px"; font-style:"bold";>Description</td>
+                             <td style = "color: "blue" ; font-size:"24px"; font-style:"italic";>${element.text}</td>
+                            </tr>
                              <tr>
                                 <td style = "color: "black" ; font-size:"25px"; font-style:"bold";>Day</td>
                                 <td style = "color: "blue" ; font-size:"24px"; font-style:"italic";>${today}</td>
